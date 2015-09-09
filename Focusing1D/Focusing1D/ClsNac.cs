@@ -1726,17 +1726,7 @@ namespace ClsNac
 
     namespace Mirror1D
     {
-        //public interface ICoord
-        //{
-        //    double[] x { get; set; }
-        //    double[] y { get; set; }
-
-        //    Complex[] u { get; set; }
-        //    double[] Intensitiy { get; set; }
-        //    double[] Phase { get; set; }
-
-        //    int div { get; set; }
-        //}
+        //前ミラーが平面の場合は，前ミラー焦点が後ろミラーの中心
 
         public class Coord
         {
@@ -1848,39 +1838,78 @@ namespace ClsNac
                 public double theta_s { get; set; }
                 public double theta_f { get; set; }
 
+                public double a { get; set; }
+                public double b { get; set; }
+                public double f { get; set; } = 0.0;
+
+                #region Source
+                public double SW { get; set; }
+                public int divSW { get; set; } = 0;
+                #endregion
+
+                #region Mirror
                 public enum Pos { upper = 1, lower = -1 }
                 public Pos pos { get; set; }
 
                 public double ML { get; set; }
-                public int div { get; set; }
+                public int divML { get; set; } = 0;
 
-                public double a { get; set; }
-                public double b { get; set; }
-                public double f { get; set; }
+                //public double MW { get; set; }
+                //public int divMW { get; set; }=0;
+                #endregion
+                
+                #region Focus
+                public double FL { get; set; }
+                public int divFL { get; set; } = 0;
+
+                public double FW { get; set; }
+                public int divFW { get; set; } = 0;
+                #endregion
+
+                public double theta_all { get; set; }
             }
 
-            public Mirror1D m0;
             public Parameter pm;
             public Coord m;
-            Coord s0;
-            Coord f0;
+            double m_xc, m_yc;
             public Coord s;
+            double s_xc, s_yc;
             public Coord[] f;
+            double f_xc, f_yc;
 
-            public Mirror1D(Parameter _pm,Mirror1D _m0=null)
+            public Mirror1D(Parameter _pm)
             {
-                Init(_pm, m0);
+                Init(_pm);
             }
 
-            public void Init(Parameter _pm, Mirror1D _m0 = null)
+            public void Init(Parameter _pm)
             {
                 pm = _pm;
-                m0 = _m0;
 
-                s0 = new Coord(1);
-                f0 = new Coord(1);
-                m = new Coord(pm.div);
+                //ミラー
+                m = new Coord(pm.divML);
+                switch(pm.mirrorType)
+                {
+                    case Parameter.MirrorType.Ellipse:
+                        Ellipse();
+                        break;
+                    case Parameter.MirrorType.Parabolic:
+                        break;
+                    case Parameter.MirrorType.Plane:
+                        Plane();
+                        break;
+                }
 
+                //光源
+                if (pm.divSW != 0)
+                    s = new Coord(pm.divSW);
+                //焦点
+                if (pm.divFL != 0 && pm.divFW != 0)
+                {
+                    f = new Coord[pm.divFL];
+                    for (int i = 0; i < pm.divFL; i++)
+                        f[i] = new Coord(pm.divFW);
+                }
             }
 
             /// <summary>
@@ -1888,15 +1917,30 @@ namespace ClsNac
             /// </summary>
             void Plane()
             {
-
+                
                 pm.theta_s = (double)pm.pos * Math.Abs(Math.Atan(pm.L2 * Math.Sin(2.0 * pm.theta_i) / (pm.L1 + pm.L2 * Math.Cos(2.0 * pm.theta_i))));
                 pm.theta_f = Math.Abs((double)pm.pos * pm.theta_s - 2.0 * pm.theta_i);
 
-                pm.a = 0.0;
-                pm.b = 0.0;
-                pm.f = 0.0;
 
+                //光源中心座標
+                s_xc = 0.0;
+                s_yc = 0.0;
+                //焦点中心座標
+                f_xc = pm.L1 * Math.Cos(pm.theta_s) + pm.L2 * Math.Cos(pm.theta_f);
+                f_yc = 0.0;
+                //ミラー中心座標
+                m_xc = pm.L1 * Math.Cos(pm.theta_s);
+                m_yc = pm.L1 * Math.Sin(pm.theta_s);
 
+                //ミラーの一次方程式
+                pm.a = (double)pm.pos * Math.Tan((pm.theta_f + pm.theta_s) / 2.0); //(f-s)/2+s
+                pm.b = m_yc - pm.a * m_xc;
+
+                for(int i=0;i<pm.divML;i++)
+                {
+                    m.x[i] = m_xc - pm.ML / 2.0 + pm.ML / (pm.divML - 1.0) * i;
+                    m.y[i] = x2y(m.x[i]);
+                }
             }
 
             void Ellipse()
@@ -1908,22 +1952,19 @@ namespace ClsNac
                 pm.f = (pm.L1 * Math.Cos(pm.theta_s) + pm.L2 * Math.Cos(pm.theta_f)) / 2.0;
                 pm.b = Math.Sqrt(pm.a * pm.a - pm.f * pm.f);
 
-                double m_xc = pm.L1 * Math.Cos(pm.theta_s) - pm.f;
-                double m_yc = (double)pm.pos * pm.b * Math.Sqrt(1 - Math.Pow((m_xc / pm.a), 2.0));
+                //光源中心座標
+                s_xc = -pm.f;
+                s_yc = 0.0;
+                //焦点中心座標
+                f_xc = pm.f;
+                f_yc = 0.0;
+                //ミラー中心座標
+                m_xc = pm.L1 * Math.Cos(pm.theta_s) - pm.f;
+                m_yc = (double)pm.pos * pm.b * Math.Sqrt(1 - Math.Pow((m_xc / pm.a), 2.0));
 
-                even();
-            }
-
-
-            #region subroutin
-
-            void even()
-            {
-                double m_xc = pm.L1 * Math.Cos(pm.theta_s) - pm.f;
-
-                for (int i = 0; i < pm.div; i++)
+                for (int i = 0; i < pm.divML; i++)
                 {
-                    m.x[i] = m_xc - pm.ML / 2.0 + pm.ML / (pm.div - 1.0) * i;
+                    m.x[i] = m_xc - pm.ML / 2.0 + pm.ML / (pm.divML - 1.0) * i;
                     m.y[i] = x2y(m.x[i]);
                 }
                 //curvature
@@ -1932,10 +1973,11 @@ namespace ClsNac
                 //incidence angle
                 theta = IncAngle(m.x);
 
+                
             }
 
-
-
+            
+            #region subroutin
 
             /// <summary>
             /// x座標to楕円のy
@@ -1949,10 +1991,10 @@ namespace ClsNac
                 switch (pm.mirrorType)
                 {
                     case Parameter.MirrorType.Plane:
-                        y= (double)pm.pos * pm.a * x + pm.b;
+                        y = (double)pm.pos * pm.a * x + pm.b;
                         break;
                     case Parameter.MirrorType.Ellipse:
-                        y= (double)pm.pos * pm.b * Math.Sqrt(1.0 - Math.Pow(x / pm.a, 2.0));
+                        y = (double)pm.pos * pm.b * Math.Sqrt(1.0 - Math.Pow(x / pm.a, 2.0));
                         break;
                     case Parameter.MirrorType.Parabolic:
                         break;
@@ -1962,10 +2004,10 @@ namespace ClsNac
             }
 
             /// <summary>
-            /// x座標to楕円のy
+            /// X座標toY座標
             /// </summary>
-            /// <param name="x">x座標</param>
-            /// <returns>楕円のy</returns>
+            /// <param name="x">X座標</param>
+            /// <returns>Y座標</returns>
             double[] x2y(double[] x)
             {
                 double[] y = new double[x.Length];
@@ -1978,63 +2020,127 @@ namespace ClsNac
             }
 
             /// <summary>
-            /// 一次方程式と楕円の交点
-            /// </summary>
-            /// <param name="al">傾き</param>
-            /// <param name="be">切片</param>
-            /// <returns>x座標</returns>
-            double albe2x(double al, double be)
-            {
-                return (-al * be * pm.a * pm.a + pm.a * pm.b *
-                    Math.Sqrt(-be * be + al * al * pm.a * pm.a + pm.b * pm.b))
-                    / (al * al * pm.a * pm.a + pm.b * pm.b);
-            }
-
-
-            /// <summary>
-            /// x座標to楕円の曲率
+            /// x座標to曲率
             /// </summary>
             /// <param name="x">x座標</param>
             /// <returns>楕円の曲率</returns>
             double Curvature(double x)
             {
-                double a2x2 = Math.Pow(pm.a, 2.0) - Math.Pow(x, 2.0);
-                return pm.a / (pm.b * (-x * x / Math.Pow(a2x2, 3.0 / 2.0) - 1.0 / Math.Sqrt(a2x2)));
+                double c = 0.0;
+
+                switch (pm.mirrorType)
+                {
+                    case Parameter.MirrorType.Plane:
+                        double a2x2 = Math.Pow(pm.a, 2.0) - Math.Pow(x, 2.0);
+                        c = pm.a / (pm.b * (-x * x / Math.Pow(a2x2, 3.0 / 2.0) - 1.0 / Math.Sqrt(a2x2)));
+                        break;
+                    case Parameter.MirrorType.Ellipse:
+                        break;
+                    case Parameter.MirrorType.Parabolic:
+                        break;
+                }
+
+                return c;
             }
 
             /// <summary>
-            /// x座標to楕円の曲率
+            /// x座標to曲率
             /// </summary>
             /// <param name="x">x座標</param>
             /// <returns>楕円の曲率</returns>
             double[] Curvature(double[] x)
             {
                 double[] c = new double[x.Length];
-                for(int i=0;i<x.Length;i++)
+                for (int i = 0; i < x.Length; i++)
                 {
                     c[i] = Curvature(x[i]);
                 }
                 return c;
             }
 
+            /// <summary>
+            /// X座標to入射角
+            /// </summary>
+            /// <param name="x">X座標</param>
+            /// <returns>入射角</returns>
+            double IncAngle(double x)
+            {
+                double t = 0.0;
+
+                switch(pm.mirrorType)
+                {
+                    case Parameter.MirrorType.Plane:
+                        break;
+                    case Parameter.MirrorType.Ellipse:
+                        t = pm.b * x / (pm.a * Math.Sqrt(pm.a * pm.a - x * x));
+                        break;
+                    case Parameter.MirrorType.Parabolic:
+                        break;
+
+                }
+
+                return t;
+            }
+
+            /// <summary>
+            /// X座標to入射角
+            /// </summary>
+            /// <param name="x">X座標</param>
+            /// <returns>入射角</returns>
             double[] IncAngle(double[] x)
             {
-                if (x.Length != pm.div) { }
+                if (x.Length != pm.divML) { }
 
-                double[] angle = new double[pm.div];
-                for(int i=0;i<pm.div;i++)
+                double[] t = new double[pm.divML];
+                for (int i = 0; i < pm.divML; i++)
                 {
-                    angle[i] = pm.b * x[i] / (pm.a * Math.Sqrt(pm.a * pm.a - x[i] * x[i]));
+                    t[i] = IncAngle(x[i]);
                 }
-                double inc_c = angle[pm.div / 2];
-                for (int i = 0; i < pm.div; i++)
-                    angle[i] -= inc_c - pm.theta_i;
-                return angle;
+
+                double inc_c = t[pm.divML / 2];
+                for (int i = 0; i < pm.divML; i++)
+                    t[i] -= inc_c - pm.theta_i;
+
+                return t;
+            }
+
+            /// <summary>
+            /// 一次方程式とミラー形状方程式のX交点
+            /// </summary>
+            /// <param name="al">一次方程式の傾き</param>
+            /// <param name="be">一次方程式の切片</param>
+            /// <returns>X座標</returns>
+            double albe2x(double al, double be)
+            {
+                double x = 0.0;
+
+                switch (pm.mirrorType)
+                {
+                    case Parameter.MirrorType.Plane:
+
+                        break;
+                    case Parameter.MirrorType.Ellipse:
+                        x = (-al * be * pm.a * pm.a + pm.a * pm.b * Math.Sqrt(-be * be + al * al * pm.a * pm.a + pm.b * pm.b)) / (al * al * pm.a * pm.a + pm.b * pm.b);
+                        break;
+                    case Parameter.MirrorType.Parabolic:
+                        break;
+                }
+
+                return x;
             }
 
             #endregion
 
 
+            public void rotXY(double _theta_all, double x0, double y0)
+            {
+                //ミラーの回転
+                m.Rot(_theta_all, x0, y0);
+                //光源の回転
+                s.Rot(_theta_all, x0, y0);
+                //焦点の回転
+                foreach (var _f in f) _f.Rot(_theta_all, x0, y0);
+            }
         }
     }
 
