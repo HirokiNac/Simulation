@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.rB_PhaseCompensator = new System.Windows.Forms.RadioButton();
+            this.rB_DoubleFocus = new System.Windows.Forms.RadioButton();
+            this.rB_SingleFocus = new System.Windows.Forms.RadioButton();
             this.checkBox_MirrorPosition = new System.Windows.Forms.CheckBox();
             this.groupBox_M1 = new System.Windows.Forms.GroupBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -188,6 +191,7 @@
             this.zgc_F2 = new ZedGraph.ZedGraphControl();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.rB_FigError = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.zgc_PbsF2Med = new ZedGraph.ZedGraphControl();
@@ -201,9 +205,6 @@
             this.ofd_EM1 = new System.Windows.Forms.OpenFileDialog();
             this.ofd_EM2 = new System.Windows.Forms.OpenFileDialog();
             this.fbd_Detector = new System.Windows.Forms.FolderBrowserDialog();
-            this.rB_SingleFocus = new System.Windows.Forms.RadioButton();
-            this.rB_DoubleFocus = new System.Windows.Forms.RadioButton();
-            this.rB_PhaseCompensator = new System.Windows.Forms.RadioButton();
             this.groupBox5.SuspendLayout();
             this.groupBox_M1.SuspendLayout();
             this.groupBox_M2.SuspendLayout();
@@ -249,9 +250,44 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "ミラー形状";
             // 
+            // rB_PhaseCompensator
+            // 
+            this.rB_PhaseCompensator.AutoSize = true;
+            this.rB_PhaseCompensator.Location = new System.Drawing.Point(196, 18);
+            this.rB_PhaseCompensator.Name = "rB_PhaseCompensator";
+            this.rB_PhaseCompensator.Size = new System.Drawing.Size(125, 16);
+            this.rB_PhaseCompensator.TabIndex = 75;
+            this.rB_PhaseCompensator.Text = "Phase Compensator";
+            this.rB_PhaseCompensator.UseVisualStyleBackColor = true;
+            this.rB_PhaseCompensator.CheckedChanged += new System.EventHandler(this.rB_PhaseCompensator_CheckedChanged);
+            // 
+            // rB_DoubleFocus
+            // 
+            this.rB_DoubleFocus.AutoSize = true;
+            this.rB_DoubleFocus.Location = new System.Drawing.Point(97, 18);
+            this.rB_DoubleFocus.Name = "rB_DoubleFocus";
+            this.rB_DoubleFocus.Size = new System.Drawing.Size(93, 16);
+            this.rB_DoubleFocus.TabIndex = 74;
+            this.rB_DoubleFocus.Text = "Double Focus";
+            this.rB_DoubleFocus.UseVisualStyleBackColor = true;
+            this.rB_DoubleFocus.CheckedChanged += new System.EventHandler(this.rB_DoubleFocus_CheckedChanged);
+            // 
+            // rB_SingleFocus
+            // 
+            this.rB_SingleFocus.AutoSize = true;
+            this.rB_SingleFocus.Location = new System.Drawing.Point(6, 18);
+            this.rB_SingleFocus.Name = "rB_SingleFocus";
+            this.rB_SingleFocus.Size = new System.Drawing.Size(89, 16);
+            this.rB_SingleFocus.TabIndex = 73;
+            this.rB_SingleFocus.Text = "Single Focus";
+            this.rB_SingleFocus.UseVisualStyleBackColor = true;
+            this.rB_SingleFocus.CheckedChanged += new System.EventHandler(this.rB_SingleFocus_CheckedChanged);
+            // 
             // checkBox_MirrorPosition
             // 
             this.checkBox_MirrorPosition.AutoSize = true;
+            this.checkBox_MirrorPosition.Checked = true;
+            this.checkBox_MirrorPosition.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_MirrorPosition.Location = new System.Drawing.Point(108, 40);
             this.checkBox_MirrorPosition.Name = "checkBox_MirrorPosition";
             this.checkBox_MirrorPosition.Size = new System.Drawing.Size(73, 16);
@@ -333,7 +369,7 @@
             this.textBox_LSM1.Name = "textBox_LSM1";
             this.textBox_LSM1.Size = new System.Drawing.Size(60, 19);
             this.textBox_LSM1.TabIndex = 0;
-            this.textBox_LSM1.Text = "1000";
+            this.textBox_LSM1.Text = "77";
             this.textBox_LSM1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_DivM1
@@ -378,7 +414,7 @@
             this.textBox_M1L.Name = "textBox_M1L";
             this.textBox_M1L.Size = new System.Drawing.Size(60, 19);
             this.textBox_M1L.TabIndex = 2;
-            this.textBox_M1L.Text = "40e-3";
+            this.textBox_M1L.Text = "0.04";
             this.textBox_M1L.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -396,7 +432,7 @@
             this.textBox_LM1F1.Name = "textBox_LM1F1";
             this.textBox_LM1F1.Size = new System.Drawing.Size(60, 19);
             this.textBox_LM1F1.TabIndex = 1;
-            this.textBox_LM1F1.Text = "40";
+            this.textBox_LM1F1.Text = "0.04";
             this.textBox_LM1F1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label11
@@ -559,7 +595,7 @@
             this.textBox_DivM2.Name = "textBox_DivM2";
             this.textBox_DivM2.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivM2.TabIndex = 14;
-            this.textBox_DivM2.Text = "1001";
+            this.textBox_DivM2.Text = "2001";
             this.textBox_DivM2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
@@ -650,7 +686,7 @@
             this.button_M2E_Fig.TabIndex = 17;
             this.button_M2E_Fig.Text = "...";
             this.button_M2E_Fig.UseVisualStyleBackColor = true;
-            this.button_M2E_Fig.Click += new System.EventHandler(this.button_EM2_Fig_Click);
+            this.button_M2E_Fig.Click += new System.EventHandler(this.button_M2E_Fig_Click);
             // 
             // label26
             // 
@@ -722,7 +758,7 @@
             this.button_M1E_Fig.TabIndex = 17;
             this.button_M1E_Fig.Text = "...";
             this.button_M1E_Fig.UseVisualStyleBackColor = true;
-            this.button_M1E_Fig.Click += new System.EventHandler(this.button_EM1_Fig_Click);
+            this.button_M1E_Fig.Click += new System.EventHandler(this.button_M1E_Fig_Click);
             // 
             // label37
             // 
@@ -783,7 +819,6 @@
             this.toolStripButton_SettingSave.Name = "toolStripButton_SettingSave";
             this.toolStripButton_SettingSave.Size = new System.Drawing.Size(60, 22);
             this.toolStripButton_SettingSave.Text = "設定保存";
-            this.toolStripButton_SettingSave.Click += new System.EventHandler(this.toolStripButton_SettingSave_Click);
             // 
             // groupBox1
             // 
@@ -991,7 +1026,7 @@
             this.textBox_Detector1ny.Name = "textBox_Detector1ny";
             this.textBox_Detector1ny.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector1ny.TabIndex = 46;
-            this.textBox_Detector1ny.Text = "10001";
+            this.textBox_Detector1ny.Text = "1001";
             this.textBox_Detector1ny.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label32
@@ -1163,7 +1198,7 @@
             this.textBox_Detector2dy.Name = "textBox_Detector2dy";
             this.textBox_Detector2dy.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector2dy.TabIndex = 49;
-            this.textBox_Detector2dy.Text = "1e-9";
+            this.textBox_Detector2dy.Text = "10e-9";
             this.textBox_Detector2dy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Detector2ny
@@ -1172,7 +1207,7 @@
             this.textBox_Detector2ny.Name = "textBox_Detector2ny";
             this.textBox_Detector2ny.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector2ny.TabIndex = 51;
-            this.textBox_Detector2ny.Text = "5001";
+            this.textBox_Detector2ny.Text = "1001";
             this.textBox_Detector2ny.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Detector2nx
@@ -1596,12 +1631,10 @@
             // radioButton_GaussSource
             // 
             this.radioButton_GaussSource.AutoSize = true;
-            this.radioButton_GaussSource.Checked = true;
             this.radioButton_GaussSource.Location = new System.Drawing.Point(124, 44);
             this.radioButton_GaussSource.Name = "radioButton_GaussSource";
             this.radioButton_GaussSource.Size = new System.Drawing.Size(55, 16);
             this.radioButton_GaussSource.TabIndex = 54;
-            this.radioButton_GaussSource.TabStop = true;
             this.radioButton_GaussSource.Text = "Gauss";
             this.radioButton_GaussSource.UseVisualStyleBackColor = true;
             // 
@@ -1631,7 +1664,7 @@
             this.textBox_WavelengthEnergy.Name = "textBox_WavelengthEnergy";
             this.textBox_WavelengthEnergy.Size = new System.Drawing.Size(50, 19);
             this.textBox_WavelengthEnergy.TabIndex = 1;
-            this.textBox_WavelengthEnergy.Text = "1.2525";
+            this.textBox_WavelengthEnergy.Text = "20";
             this.textBox_WavelengthEnergy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // comboBox_LambdaEnergy
@@ -1639,6 +1672,7 @@
             this.comboBox_LambdaEnergy.AutoCompleteCustomSource.AddRange(new string[] {
             "Energy",
             "Wavelength"});
+            this.comboBox_LambdaEnergy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_LambdaEnergy.FormattingEnabled = true;
             this.comboBox_LambdaEnergy.Items.AddRange(new object[] {
             "波長",
@@ -1868,6 +1902,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.rB_FigError);
             this.tabPage1.Controls.Add(this.zgc_M1);
             this.tabPage1.Controls.Add(this.rB_IncAngle);
             this.tabPage1.Controls.Add(this.zgc_M2);
@@ -1881,6 +1916,18 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "ミラー";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // rB_FigError
+            // 
+            this.rB_FigError.AutoSize = true;
+            this.rB_FigError.Location = new System.Drawing.Point(124, 6);
+            this.rB_FigError.Name = "rB_FigError";
+            this.rB_FigError.Size = new System.Drawing.Size(71, 16);
+            this.rB_FigError.TabIndex = 76;
+            this.rB_FigError.TabStop = true;
+            this.rB_FigError.Text = "形状誤差";
+            this.rB_FigError.UseVisualStyleBackColor = true;
+            this.rB_FigError.CheckedChanged += new System.EventHandler(this.rB_FigError_CheckedChanged);
             // 
             // tabPage2
             // 
@@ -1991,41 +2038,6 @@
             // ofd_EM2
             // 
             this.ofd_EM2.FileName = "openFileDialog1";
-            // 
-            // rB_SingleFocus
-            // 
-            this.rB_SingleFocus.AutoSize = true;
-            this.rB_SingleFocus.Checked = true;
-            this.rB_SingleFocus.Location = new System.Drawing.Point(6, 18);
-            this.rB_SingleFocus.Name = "rB_SingleFocus";
-            this.rB_SingleFocus.Size = new System.Drawing.Size(89, 16);
-            this.rB_SingleFocus.TabIndex = 73;
-            this.rB_SingleFocus.TabStop = true;
-            this.rB_SingleFocus.Text = "Single Focus";
-            this.rB_SingleFocus.UseVisualStyleBackColor = true;
-            this.rB_SingleFocus.CheckedChanged += new System.EventHandler(this.rB_SingleFocus_CheckedChanged);
-            // 
-            // rB_DoubleFocus
-            // 
-            this.rB_DoubleFocus.AutoSize = true;
-            this.rB_DoubleFocus.Location = new System.Drawing.Point(97, 18);
-            this.rB_DoubleFocus.Name = "rB_DoubleFocus";
-            this.rB_DoubleFocus.Size = new System.Drawing.Size(93, 16);
-            this.rB_DoubleFocus.TabIndex = 74;
-            this.rB_DoubleFocus.Text = "Double Focus";
-            this.rB_DoubleFocus.UseVisualStyleBackColor = true;
-            this.rB_DoubleFocus.CheckedChanged += new System.EventHandler(this.rB_DoubleFocus_CheckedChanged);
-            // 
-            // rB_PhaseCompensator
-            // 
-            this.rB_PhaseCompensator.AutoSize = true;
-            this.rB_PhaseCompensator.Location = new System.Drawing.Point(196, 18);
-            this.rB_PhaseCompensator.Name = "rB_PhaseCompensator";
-            this.rB_PhaseCompensator.Size = new System.Drawing.Size(125, 16);
-            this.rB_PhaseCompensator.TabIndex = 75;
-            this.rB_PhaseCompensator.Text = "Phase Compensator";
-            this.rB_PhaseCompensator.UseVisualStyleBackColor = true;
-            this.rB_PhaseCompensator.CheckedChanged += new System.EventHandler(this.rB_PhaseCompensator_CheckedChanged);
             // 
             // Form1
             // 
@@ -2257,6 +2269,7 @@
         private System.Windows.Forms.RadioButton rB_PhaseCompensator;
         private System.Windows.Forms.RadioButton rB_DoubleFocus;
         private System.Windows.Forms.RadioButton rB_SingleFocus;
+        private System.Windows.Forms.RadioButton rB_FigError;
     }
 }
 
