@@ -32,7 +32,8 @@ namespace Focusing1D
             this.nud_coreNum.Maximum = Environment.ProcessorCount;
             this.nud_coreNum.Value = this.nud_coreNum.Maximum;
 
-            this.rB_SingleFocus.Checked = true;
+            //this.rB_SingleFocus.Checked = true;
+            this.rB_DoubleFocus.Checked = true;
             this.radioButton_PointSource.Checked = true;
         }
 
@@ -201,7 +202,7 @@ namespace Focusing1D
             {
                 for (int i = 0; i < M1.pm.Fnx; i++)
                     wF.ForwardPropagation(M1.m, ref M1.f[i]);
-
+                GraphWaveF(this.zgc_F1, M1);
                 //graph
                 PlotFocus(this.pictureBox_F1, M1);
             }
@@ -226,9 +227,10 @@ namespace Focusing1D
 
                 //graph
                 GraphWaveM(this.zgc_M2w, M2.m);
-
+                
                 PlotFocus(this.pictureBox_F2, M2);
 
+                GraphWaveF(this.zgc_F2, M2);
             }
             else
             {
@@ -694,7 +696,7 @@ namespace Focusing1D
                     myPane.Y2Axis.Title.Text = "Curvature(m)";
                     break;
                 case AngleCurv.FigError:
-                    myLineSub = myPane.AddCurve("FigError", Mirror.m.x_mod, Mirror.Error, Color.Blue, SymbolType.None);
+                    myLineSub = myPane.AddCurve("FigError", Mirror.m.x_mod, Mirror.FigError, Color.Blue, SymbolType.None);
                     myPane.Y2Axis.Scale.Mag = -9;
                     myPane.Y2Axis.Title.Text = "Figure error(nm)";
                     break;
@@ -817,12 +819,18 @@ namespace Focusing1D
         /// <param name="_CoordF"></param>
         private void GraphWaveF(ZedGraphControl zgc, Mirror1D m, int i = 0)
         {
+            double[] x = new double[m.pm.Fny];
+            for(int j=0;j<m.pm.Fny;j++)
+            {
+                x[j] = m.pm.Fdy * (j - m.pm.Fny/2);
+            }
+
             GraphPane myPane = zgc.GraphPane;
             myPane.CurveList.Clear();
-            LineItem lineIntens = myPane.AddCurve("Intensity", m.f[i].y_mod, m.f[i].Intensity, Color.Red);
+            LineItem lineIntens = myPane.AddCurve("Intensity", x, m.f[i].Intensity, Color.Red);
 
-            myPane.XAxis.Scale.Min = m.f[i].y_mod[0];
-            myPane.XAxis.Scale.Max = m.f[i].y_mod[m.pm.Fny - 1];
+            myPane.XAxis.Scale.Min = x[0];
+            myPane.XAxis.Scale.Max = x[m.pm.Fny - 1];
             myPane.XAxis.Title.Text = "Position (µm)";
             myPane.XAxis.Scale.Mag = -6;
             myPane.XAxis.Title.IsOmitMag = true;
@@ -830,7 +838,7 @@ namespace Focusing1D
             myPane.YAxis.Title.Text = "Intensity (a.u.)";
 
             //myPane.Title.Text = (1e9 * m.FWHM1[i]).ToString("F0") + " (nm) 焦点ずれ: " + (1e6 * m.dx * (i - (m.n - 1) / 2.0)).ToString("F0") + " (um)";
-
+            myPane.Title.Text = (1e9 * ClsNac.WaveField.WaveField.FWHM(m.f[m.pm.Fnx / 2])).ToString("F0");
             zgc.AxisChange();
             zgc.Refresh();
         }
@@ -857,6 +865,7 @@ namespace Focusing1D
                 ClsNac.FileIO.FileIO.writeFile(this.fbd_FigOutput.SelectedPath + "\\Mirror1_Fig.txt", M1.m.x_mod, M1.m.y_mod);
                 ClsNac.FileIO.FileIO.writeFile(this.fbd_FigOutput.SelectedPath + "\\Mirror1_inc.txt", M1.m.x_mod, M1.theta);
                 ClsNac.FileIO.FileIO.writeFile(this.fbd_FigOutput.SelectedPath + "\\Mirror1_FigRaw.txt", M1.m.x, M1.m.y);
+                ClsNac.FileIO.FileIO.writeFile(this.fbd_FigOutput.SelectedPath + "\\Mirror1_Curv.txt", M1.m.x_mod, M1.curv);
 
                 if (this.flagM2)
                 {

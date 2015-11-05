@@ -9,6 +9,7 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections.Generic;
+using static System.Math;
 
 namespace ClsNac
 {
@@ -123,8 +124,8 @@ namespace ClsNac
                 {
                     double x_buf = x[i] - x0;
                     double y_buf = y[i] - y0;
-                    x[i] = x_buf * Math.Cos(rotTheta) - y_buf * Math.Sin(rotTheta) + x0;
-                    y[i] = x_buf * Math.Sin(rotTheta) + y_buf * Math.Cos(rotTheta) + y0;
+                    x[i] = x_buf * Math.Cos(rotTheta) - y_buf * Sin(rotTheta) + x0;
+                    y[i] = x_buf * Sin(rotTheta) + y_buf * Math.Cos(rotTheta) + y0;
                 }
             }
 
@@ -200,7 +201,8 @@ namespace ClsNac
             public Parameter pm;
             public Coord m;
             double m_xc, m_yc;
-            public double[] Error { get; private set; }
+            public double[] FigError { get; private set; }
+            public double[] PhaseError { get; private set; }
             public Coord s;
             double s_xc, s_yc;
             public Coord[] f;
@@ -233,7 +235,7 @@ namespace ClsNac
 
                 curv = new double[pm.divML];
                 theta = new double[pm.divML];
-                Error = new double[pm.divML];
+                FigError = new double[pm.divML];
 
                 //ミラー
                 m = new Coord(pm.divML);
@@ -269,7 +271,7 @@ namespace ClsNac
             void Plane()
             {
                 
-                pm.theta_s = (double)pm.pos * Math.Abs(Math.Atan(pm.L2 * Math.Sin(2.0 * pm.theta_i) / (pm.L1 + pm.L2 * Math.Cos(2.0 * pm.theta_i))));
+                pm.theta_s = (double)pm.pos * Math.Abs(Math.Atan(pm.L2 * Sin(2.0 * pm.theta_i) / (pm.L1 + pm.L2 * Math.Cos(2.0 * pm.theta_i))));
                 pm.theta_f = Math.Abs((double)pm.pos * pm.theta_s - 2.0 * pm.theta_i);
 
 
@@ -281,7 +283,7 @@ namespace ClsNac
                 f_yc = 0.0;
                 //ミラー中心座標
                 m_xc = pm.L1 * Math.Cos(pm.theta_s);
-                m_yc = pm.L1 * Math.Sin(pm.theta_s);
+                m_yc = pm.L1 * Sin(pm.theta_s);
 
                 //ミラーの一次方程式
                 pm.a =Math.Tan( pm.theta_s + pm.theta_i);
@@ -297,7 +299,7 @@ namespace ClsNac
             void Ellipse()
             {
                 pm.a = (pm.L1 + pm.L2) / 2.0;
-                pm.theta_s = (double)pm.pos * Math.Abs(Math.Atan(pm.L2 * Math.Sin(2.0 * pm.theta_i) / (pm.L1 + pm.L2 * Math.Cos(2.0 * pm.theta_i))));
+                pm.theta_s = (double)pm.pos * Abs(Atan(pm.L2 * Sin(2.0 * pm.theta_i) / (pm.L1 + pm.L2 * Math.Cos(2.0 * pm.theta_i))));
                 pm.theta_f = Math.Abs((double)pm.pos * pm.theta_s - 2.0 * pm.theta_i);
 
                 pm.f = (pm.L1 * Math.Cos(pm.theta_s) + pm.L2 * Math.Cos(pm.theta_f)) / 2.0;
@@ -585,8 +587,8 @@ namespace ClsNac
             {
                 double x_buf = x - x0;
                 double y_buf = y - y0;
-                x = x_buf * Math.Cos(theta) - y_buf * Math.Sin(theta) + x0;
-                y = x_buf * Math.Sin(theta) + y_buf * Math.Cos(theta) + y0;
+                x = x_buf * Math.Cos(theta) - y_buf * Sin(theta) + x0;
+                y = x_buf * Sin(theta) + y_buf * Math.Cos(theta) + y0;
 
             }
 
@@ -594,7 +596,7 @@ namespace ClsNac
             {
 
                 double[] subError = new double[pm.divML];
-                Error.CopyTo(subError, 0);
+                FigError.CopyTo(subError, 0);
 
                 if (pm.divML != _Ey.Length)
                 {
@@ -607,17 +609,18 @@ namespace ClsNac
                     }
 
                     for (int i = 0; i < pm.divML; i++)
-                        Error[i] = Interpolate.CubicSpline(_Ex, _Ey).Interpolate(_Ey.Length / (double)pm.divML * i);
+                        FigError[i] = Interpolate.CubicSpline(_Ex, _Ey).Interpolate(_Ey.Length / (double)pm.divML * i);
                 }
                 else
-                    Error = _Ey;
+                    FigError = _Ey;
 
                 for (int i = 0; i < pm.divML; i++)
                 {
-                    m.y[i] += Error[i];
-                    Error[i] += subError[i];
+                    m.y[i] += FigError[i];
+                    FigError[i] += subError[i];
                 }
             }
+
         }
     }
 
@@ -648,7 +651,7 @@ namespace ClsNac
                 set
                 {
                     _lambda = value;
-                    k = 2.0 * Math.PI / value;
+                    k = 2.0 * PI / value;
                 }
             }
 

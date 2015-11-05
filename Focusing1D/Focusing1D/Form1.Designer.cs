@@ -351,7 +351,7 @@
             this.textBox_M1theta.Name = "textBox_M1theta";
             this.textBox_M1theta.Size = new System.Drawing.Size(60, 19);
             this.textBox_M1theta.TabIndex = 3;
-            this.textBox_M1theta.Text = "10.5e-3";
+            this.textBox_M1theta.Text = "1.5e-3";
             this.textBox_M1theta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
@@ -369,7 +369,7 @@
             this.textBox_LSM1.Name = "textBox_LSM1";
             this.textBox_LSM1.Size = new System.Drawing.Size(60, 19);
             this.textBox_LSM1.TabIndex = 0;
-            this.textBox_LSM1.Text = "77";
+            this.textBox_LSM1.Text = "120";
             this.textBox_LSM1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_DivM1
@@ -414,7 +414,7 @@
             this.textBox_M1L.Name = "textBox_M1L";
             this.textBox_M1L.Size = new System.Drawing.Size(60, 19);
             this.textBox_M1L.TabIndex = 2;
-            this.textBox_M1L.Text = "0.04";
+            this.textBox_M1L.Text = "0.4";
             this.textBox_M1L.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -432,7 +432,7 @@
             this.textBox_LM1F1.Name = "textBox_LM1F1";
             this.textBox_LM1F1.Size = new System.Drawing.Size(60, 19);
             this.textBox_LM1F1.TabIndex = 1;
-            this.textBox_LM1F1.Text = "0.04";
+            this.textBox_LM1F1.Text = "6.52";
             this.textBox_LM1F1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label11
@@ -505,7 +505,7 @@
             this.textBox_LM1M2.Name = "textBox_LM1M2";
             this.textBox_LM1M2.Size = new System.Drawing.Size(60, 19);
             this.textBox_LM1M2.TabIndex = 26;
-            this.textBox_LM1M2.Text = "1";
+            this.textBox_LM1M2.Text = "79.3";
             this.textBox_LM1M2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label16
@@ -577,7 +577,7 @@
             this.textBox_M2theta.Name = "textBox_M2theta";
             this.textBox_M2theta.Size = new System.Drawing.Size(60, 19);
             this.textBox_M2theta.TabIndex = 16;
-            this.textBox_M2theta.Text = "2.8e-3";
+            this.textBox_M2theta.Text = "5e-3";
             this.textBox_M2theta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label8
@@ -595,7 +595,7 @@
             this.textBox_DivM2.Name = "textBox_DivM2";
             this.textBox_DivM2.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivM2.TabIndex = 14;
-            this.textBox_DivM2.Text = "2001";
+            this.textBox_DivM2.Text = "1001";
             this.textBox_DivM2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label9
@@ -613,7 +613,7 @@
             this.textBox_M2L.Name = "textBox_M2L";
             this.textBox_M2L.Size = new System.Drawing.Size(60, 19);
             this.textBox_M2L.TabIndex = 12;
-            this.textBox_M2L.Text = "150e-3";
+            this.textBox_M2L.Text = "0.5";
             this.textBox_M2L.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label10
