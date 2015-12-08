@@ -3,6 +3,7 @@
 #pragma once
 
 using namespace System;
+using namespace System::Numerics;
 
 namespace cppWaveField {
 
@@ -10,7 +11,6 @@ namespace cppWaveField {
 	{
 		// TODO: このクラスの、ユーザーのメソッドをここに追加してください。
 	public:
-		void fProp(array<double>^x1, array<double>^y1, array<double>^real1, array<double>^imag1,
-			array<double>^x2, array<double>^y2, array<double>^real2, array<double>^imag2);
+		static void fProp(array<double>^x1, array<double>^y1, array<Complex>^u1, array<double>^x2, array<double>^y2, array<Complex>^u2);
 	};
 }
