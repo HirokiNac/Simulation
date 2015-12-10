@@ -20,7 +20,7 @@ void cppWaveField::WF::fProp(double lambda,
 	int div1 = u1->Length;
 	int div2 = u2->Length;
 
-#pragma omp parallel for
+#pragma omp parallel for schedule(static)
 	for (int i=0; i < div2; i++)
 	{
 		for (int j = 0; j < div1; j++)
