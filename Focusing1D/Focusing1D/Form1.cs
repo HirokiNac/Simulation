@@ -45,6 +45,9 @@ namespace Focusing1D
             {
                 FigCalc();
 
+                int num = 0;
+                cppWaveField.WF.getProcessor(ref num);
+                this.toolStripStatusLabel.Text = num.ToString();
             }
             catch (Exception ex)
             {
@@ -188,6 +191,8 @@ namespace Focusing1D
             #endregion
 
 
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
 
             //光源からミラー1
             var wF = new ClsNac.WaveField.WaveField();
@@ -237,87 +242,8 @@ namespace Focusing1D
                 GraphClear(this.zgc_M2);
                 this.pictureBox_F2.Image = null;
             }
-
-            //try
-            //{
-            //    #region cancel
-            //    if (this._cts == null)
-            //    {
-            //        this._cts = new CancellationTokenSource();
-            //    }
-            //    else
-            //    {
-            //        this._cts.Cancel(true);
-            //        return;
-            //    }
-            //    #endregion
-
-            //    var progress = new Progress<ProgressInfo>(this.ProgressReport);
-
-            //    if (this.tabControl_WO.SelectedIndex == 0)
-            //    {
-
-            //        if (M1 == null || (flagM2 && M2 == null))
-            //            return;
-
-            //        this.button_WaveOptCalc.Text = "停止";
-
-            //        wMO1 = new WaveField1D();
-            //        wMO2 = new WaveField1D();
-
-            //        if (this.comboBox_LambdaEnergy.Text == "波長")
-            //        {
-            //            wMO1.lambda = 1e-10 * Convert.ToDouble(this.textBox_WavelengthEnergy.Text);
-            //            wMO2.lambda = 1e-10 * Convert.ToDouble(this.textBox_WavelengthEnergy.Text);
-            //        }
-            //        else
-            //        {
-            //            wMO1.Energy = 1e3 * Convert.ToDouble(this.textBox_WavelengthEnergy.Text);
-            //            wMO2.Energy = 1e3 * Convert.ToDouble(this.textBox_WavelengthEnergy.Text);
-            //        }
-
-
-            //        wMO1.ct = this._cts.Token;
-            //        wMO2.ct = this._cts.Token;
-            //        await Task.Run(() => WaveOptics(Convert.ToInt32(this.nud_coreNum.Value), progress)).ContinueWith(t =>
-            //        {
-            //            this._cts.Dispose();
-            //            this._cts = null;
-            //            return;
-            //        });
-
-            //        this.GraphWaveM(this.zgc_M1w, M1.m);
-            //        this.PlotFocus(this.pictureBox_F1, M1.fw);
-            //        this.GraphWaveF(this.zgc_F1, M1.fw, M1.fw.iMinFWHM1);
-
-            //        if (flagM2)
-            //        {
-            //            this.GraphWaveM(this.zgc_M2w, M2.m);
-            //            this.PlotFocus(this.pictureBox_F2, M2.fw);
-            //            this.GraphWaveF(this.zgc_F2, M2.fw, M2.fw.iMinFWHM1);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        ExecutePBS(Convert.ToInt32(this.nud_coreNum.Value), progress);
-            //        //await Task.Run(() => ExecutePBS(Convert.ToInt32(this.nud_coreNum.Value), progress)).ContinueWith(t =>
-            //        //{
-            //        //    this._cts.Dispose();
-            //        //    this._cts = null;
-            //        //    return;
-            //        //});
-            //        this._cts = null;
-            //    }
-
-
-
-
-            //}
-            //finally
-            //{
-
-            //    this.button_WaveOptCalc.Text = "波動光学計算";
-            //}
+            sw.Stop();
+            MessageBox.Show(sw.ElapsedMilliseconds.ToString());
         }
 
         /*void WaveOptics(int _core, IProgress<ProgressInfo> progress)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define CPP
+
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
@@ -782,21 +784,22 @@ namespace ClsNac
                 #region 伝播計算
                 Complex[] _u2 = new Complex[div2];
 
+#if CPP
                 cppWaveField.WF.fProp(lambda, x1, y1, u1, x2, y2,_u2);
-
-                //Parallel.For(0, div2, i =>
-                //{
-                //    _u2[i] = new Complex(0.0, 0.0);
-                //    for (int j = 0; j < div1; j++)
-                //    {
-                //        _u2[i] += u1[j] * Complex.Exp(-Complex.ImaginaryOne * k * Math.Sqrt(Math.Pow(x2[i] - x1[j], 2.0) + Math.Pow(y2[i] - y1[j], 2.0)))
-                //                        / Math.Sqrt(Math.Pow(x2[i] - x1[j], 2.0) + Math.Pow(y2[i] - y1[j], 2.0)) * ds[j];
-                //    }
-                //});
-
+#else
+                Parallel.For(0, div2, i =>
+                {
+                    _u2[i] = new Complex(0.0, 0.0);
+                    for (int j = 0; j < div1; j++)
+                    {
+                        _u2[i] += u1[j] * Complex.Exp(-Complex.ImaginaryOne * k * Math.Sqrt(Math.Pow(x2[i] - x1[j], 2.0) + Math.Pow(y2[i] - y1[j], 2.0)))
+                                        / Math.Sqrt(Math.Pow(x2[i] - x1[j], 2.0) + Math.Pow(y2[i] - y1[j], 2.0)) * ds[j];
+                    }
+                });
+#endif
                 u2 = _u2;
 
-                #endregion
+#endregion
 
             }
 
@@ -822,7 +825,7 @@ namespace ClsNac
                     Phase[i] = u[i].Phase;
                 }
             }
-            #endregion
+#endregion
         }
 
     }
