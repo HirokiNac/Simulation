@@ -31,7 +31,7 @@ void cppWaveField::WF::fProp(double lambda,
 	}
 }
 
-void cppWaveField::WF::getProcessor(int% num)
+int cppWaveField::WF::getProcessor()
 {
-	num = omp_get_max_threads();
+	return omp_get_max_threads();
 }

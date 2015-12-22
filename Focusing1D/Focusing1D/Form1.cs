@@ -44,10 +44,6 @@ namespace Focusing1D
             try
             {
                 FigCalc();
-
-                int num = 0;
-                cppWaveField.WF.getProcessor(ref num);
-                this.toolStripStatusLabel.Text = num.ToString();
             }
             catch (Exception ex)
             {

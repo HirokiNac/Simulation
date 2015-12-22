@@ -15,6 +15,6 @@ namespace cppWaveField {
 			array<double>^x1, array<double>^y1, array<Complex>^u1, 
 			array<double>^x2, array<double>^y2, array<Complex>^u2);
 
-		static void getProcessor(int% num);
+		static int getProcessor();
 	};
 }
