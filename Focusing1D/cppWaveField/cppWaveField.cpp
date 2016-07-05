@@ -10,12 +10,11 @@
 using namespace System::Numerics;
 
 
-void cppWaveField::WF::fProp(double lambda, 
+void ClsNac::WF1D::fProp(const double lambda, 
 	array<double>^ x1, array<double>^ y1, array<Complex>^ u1, 
 	array<double>^ x2, array<double>^ y2, array<Complex>^ u2)
 {
-	double k = 2.0*3.141592 / lambda;
-	//u2 = gcnew array<Complex>(x2->Length);
+	double k = 2.0*PI / lambda;
 
 	int div1 = u1->Length;
 	int div2 = u2->Length;
@@ -31,7 +30,7 @@ void cppWaveField::WF::fProp(double lambda,
 	}
 }
 
-int cppWaveField::WF::getProcessor()
+int ClsNac::WF1D::getProcessor()
 {
 	return omp_get_max_threads();
 }

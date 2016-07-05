@@ -783,9 +783,8 @@ namespace ClsNac
 
                 #region 伝播計算
                 Complex[] _u2 = new Complex[div2];
-
 #if CPP
-                cppWaveField.WF.fProp(lambda, x1, y1, u1, x2, y2,_u2);
+                ClsNac.WF1D.fProp(lambda, x1, y1, u1, x2, y2, _u2);
 #else
                 Parallel.For(0, div2, i =>
                 {
@@ -798,7 +797,6 @@ namespace ClsNac
                 });
 #endif
                 u2 = _u2;
-
 #endregion
 
             }
