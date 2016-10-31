@@ -1,4 +1,4 @@
-﻿#define CPP
+﻿//#define CPP
 
 using System;
 using System.Text;
@@ -20,7 +20,7 @@ namespace ClsNac
     {
         //前ミラーが平面の場合は，前ミラー焦点が後ろミラーの中心
 
-        public class Coord
+        public class Coord1D
         {
             int div { get; set; }
 
@@ -95,7 +95,7 @@ namespace ClsNac
             /// Constructor
             /// </summary>
             /// <param name="_div"></param>
-            public Coord(int _div)
+            public Coord1D(int _div)
             {
                 Init(_div);
             }
@@ -201,13 +201,13 @@ namespace ClsNac
             }
 
             public Parameter pm;
-            public Coord m;
+            public Coord1D m;
             double m_xc, m_yc;
             public double[] FigError { get; private set; }
             public double[] PhaseError { get; private set; }
-            public Coord s;
+            public Coord1D s;
             double s_xc, s_yc;
-            public Coord[] f;
+            public Coord1D[] f;
             double f_xc, f_yc;
             public double[,] fIntensity
             {
@@ -240,7 +240,7 @@ namespace ClsNac
                 FigError = new double[pm.divML];
 
                 //ミラー
-                m = new Coord(pm.divML);
+                m = new Coord1D(pm.divML);
                 switch(pm.mirrorType)
                 {
                     case Parameter.MirrorType.Ellipse:
@@ -255,13 +255,13 @@ namespace ClsNac
 
                 //光源
                 if (pm.divSW != 0)
-                    s = new Coord(pm.divSW);
+                    s = new Coord1D(pm.divSW);
                 //焦点
                 if (pm.Fnx != 0 && pm.Fny != 0)
                 {
-                    f = new Coord[pm.Fnx];
+                    f = new Coord1D[pm.Fnx];
                     for (int i = 0; i < pm.Fnx; i++)
-                        f[i] = new Coord(pm.Fny);
+                        f[i] = new Coord1D(pm.Fny);
                 }
 
                 Move(-s_xc, -s_yc);
@@ -335,7 +335,7 @@ namespace ClsNac
             {
                 pm.SW = _SW;
 
-                s = new Coord(div);
+                s = new Coord1D(div);
 
 
                 if (sType==Parameter.SourceType.Gaussian)
@@ -359,7 +359,7 @@ namespace ClsNac
                 }
                 else
                 {
-                    s = new Coord(1);
+                    s = new Coord1D(1);
                     s.x[0]= s_xc;
                     s.y[0] = s_yc;
                     s.u[0] = new Complex(1.0, 0.0);
@@ -377,12 +377,12 @@ namespace ClsNac
                 pm.Fbx = Fbx;
                 pm.Fby = Fby;
 
-                f = new Coord[pm.Fnx];
+                f = new Coord1D[pm.Fnx];
 
                 //まず回転していない座標で設定
                 for (int i = 0; i < pm.Fnx; i++)
                 {
-                    f[i] = new Coord(pm.Fny);
+                    f[i] = new Coord1D(pm.Fny);
                     for (int j = 0; j < pm.Fny; j++)
                     {
                         f[i].x[j] = f_xc + (-pm.Fnx / 2 + i) * pm.Fdx + pm.Fbx;
@@ -699,7 +699,7 @@ namespace ClsNac
             { }
 
             //FWHM計算
-            public static double FWHM(Mirror1D.Coord f)
+            public static double FWHM(Mirror1D.Coord1D f)
             {
                 int div = f.Intensity.Length;
                 double[] PosX = new double[div];
@@ -735,7 +735,7 @@ namespace ClsNac
 
             #region 並列計算ver
 
-            public void ForwardPropagation(Mirror1D.Coord Opt1,ref Mirror1D.Coord Opt2)
+            public void ForwardPropagation(Mirror1D.Coord1D Opt1,ref Mirror1D.Coord1D Opt2)
             {
                 Complex[] _u;
                 ForwardPropagation(Opt1.x, Opt1.y, Opt1.u, Opt2.x, Opt2.y, out _u);
@@ -801,7 +801,7 @@ namespace ClsNac
 
             }
 
-            public static void InP(ref Mirror1D.Coord coord)
+            public static void InP(ref Mirror1D.Coord1D coord)
             {
                 double[] _Intensity;
                 double[] _Phase;

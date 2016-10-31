@@ -275,10 +275,12 @@
             // rB_SingleFocus
             // 
             this.rB_SingleFocus.AutoSize = true;
+            this.rB_SingleFocus.Checked = true;
             this.rB_SingleFocus.Location = new System.Drawing.Point(6, 18);
             this.rB_SingleFocus.Name = "rB_SingleFocus";
             this.rB_SingleFocus.Size = new System.Drawing.Size(89, 16);
             this.rB_SingleFocus.TabIndex = 73;
+            this.rB_SingleFocus.TabStop = true;
             this.rB_SingleFocus.Text = "Single Focus";
             this.rB_SingleFocus.UseVisualStyleBackColor = true;
             this.rB_SingleFocus.CheckedChanged += new System.EventHandler(this.rB_SingleFocus_CheckedChanged);
@@ -351,7 +353,7 @@
             this.textBox_M1theta.Name = "textBox_M1theta";
             this.textBox_M1theta.Size = new System.Drawing.Size(60, 19);
             this.textBox_M1theta.TabIndex = 3;
-            this.textBox_M1theta.Text = "1.5e-3";
+            this.textBox_M1theta.Text = "4e-3";
             this.textBox_M1theta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label3
@@ -369,7 +371,7 @@
             this.textBox_LSM1.Name = "textBox_LSM1";
             this.textBox_LSM1.Size = new System.Drawing.Size(60, 19);
             this.textBox_LSM1.TabIndex = 0;
-            this.textBox_LSM1.Text = "120";
+            this.textBox_LSM1.Text = "45";
             this.textBox_LSM1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_DivM1
@@ -414,7 +416,7 @@
             this.textBox_M1L.Name = "textBox_M1L";
             this.textBox_M1L.Size = new System.Drawing.Size(60, 19);
             this.textBox_M1L.TabIndex = 2;
-            this.textBox_M1L.Text = "0.4";
+            this.textBox_M1L.Text = "100e-3";
             this.textBox_M1L.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -432,7 +434,7 @@
             this.textBox_LM1F1.Name = "textBox_LM1F1";
             this.textBox_LM1F1.Size = new System.Drawing.Size(60, 19);
             this.textBox_LM1F1.TabIndex = 1;
-            this.textBox_LM1F1.Text = "6.52";
+            this.textBox_LM1F1.Text = "750e-3";
             this.textBox_LM1F1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label11
@@ -763,7 +765,6 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Enabled = false;
             this.label37.Location = new System.Drawing.Point(131, 50);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(29, 12);
@@ -772,7 +773,6 @@
             // 
             // textBox_M1E_Theta
             // 
-            this.textBox_M1E_Theta.Enabled = false;
             this.textBox_M1E_Theta.Location = new System.Drawing.Point(77, 47);
             this.textBox_M1E_Theta.Name = "textBox_M1E_Theta";
             this.textBox_M1E_Theta.Size = new System.Drawing.Size(48, 19);
@@ -783,7 +783,6 @@
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Enabled = false;
             this.label38.Location = new System.Drawing.Point(6, 50);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(65, 12);
@@ -807,7 +806,7 @@
             this.toolStripButton_SettingLoad.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_SettingLoad.Image")));
             this.toolStripButton_SettingLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_SettingLoad.Name = "toolStripButton_SettingLoad";
-            this.toolStripButton_SettingLoad.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton_SettingLoad.Size = new System.Drawing.Size(59, 22);
             this.toolStripButton_SettingLoad.Text = "設定読込";
             this.toolStripButton_SettingLoad.Click += new System.EventHandler(this.toolStripButton_SettingLoad_Click);
             // 
@@ -817,7 +816,7 @@
             this.toolStripButton_SettingSave.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_SettingSave.Image")));
             this.toolStripButton_SettingSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton_SettingSave.Name = "toolStripButton_SettingSave";
-            this.toolStripButton_SettingSave.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton_SettingSave.Size = new System.Drawing.Size(59, 22);
             this.toolStripButton_SettingSave.Text = "設定保存";
             // 
             // groupBox1
@@ -904,7 +903,6 @@
             // checkBox_Detector1Auto
             // 
             this.checkBox_Detector1Auto.AutoSize = true;
-            this.checkBox_Detector1Auto.Enabled = false;
             this.checkBox_Detector1Auto.Location = new System.Drawing.Point(12, 118);
             this.checkBox_Detector1Auto.Name = "checkBox_Detector1Auto";
             this.checkBox_Detector1Auto.Size = new System.Drawing.Size(143, 16);
@@ -2032,7 +2030,7 @@
             // toolStripStatusLabel
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
-            this.toolStripStatusLabel.Size = new System.Drawing.Size(134, 18);
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(118, 18);
             this.toolStripStatusLabel.Text = "toolStripStatusLabel1";
             // 
             // ofd_EM2

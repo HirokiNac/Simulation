@@ -32,8 +32,8 @@ namespace Focusing1D
             this.nud_coreNum.Maximum = Environment.ProcessorCount;
             this.nud_coreNum.Value = this.nud_coreNum.Maximum;
 
-            //this.rB_SingleFocus.Checked = true;
-            this.rB_DoubleFocus.Checked = true;
+            this.rB_SingleFocus.Checked = true;
+            //this.rB_DoubleFocus.Checked = true;
             this.radioButton_PointSource.Checked = true;
         }
 
@@ -158,6 +158,15 @@ namespace Focusing1D
 
         private async void button_WaveOptCalc_Click(object sender, EventArgs e)
         {
+            #region 入射角誤差
+            //ミラー1回転
+            double theta1e = Convert.ToDouble(textBox_M1E_Theta.Text);
+            M1.m.Rot(theta1e, M1.m.xc, M1.m.yc);
+
+
+            #endregion
+
+
             #region 光源設定
             Mirror1D.Parameter.SourceType sType;
             if (this.radioButton_GaussSource.Checked)
@@ -203,7 +212,27 @@ namespace Focusing1D
             {
                 for (int i = 0; i < M1.pm.Fnx; i++)
                     wF.ForwardPropagation(M1.m, ref M1.f[i]);
-                GraphWaveF(this.zgc_F1, M1);
+
+                //探索
+                double Max = double.MinValue;
+                int imax = 0, jmax = 0;
+                for (int i = 0; i < M1.pm.Fnx; i++)
+                {
+                    for (int j = 0; j < M1.pm.Fny; j++)
+                    {
+                        if (Max < M1.fIntensity[i, j])
+                        {
+                            Max = M1.fIntensity[i, j];
+                            imax = i;
+                            jmax = j;
+                        }
+                    }
+                }
+                //textBox_Detector1bx.Text = Convert.ToString(M1.pm.Fbx + M1.pm.Fdx * (imax - M1.pm.Fnx / 2));
+                textBox_Detector1by.Text = Convert.ToString(M1.pm.Fby + M1.pm.Fdy * (jmax - M1.pm.Fny / 2));
+                //探索
+
+                GraphWaveF(this.zgc_F1, M1, imax);
                 //graph
                 PlotFocus(this.pictureBox_F1, M1);
             }
@@ -239,6 +268,10 @@ namespace Focusing1D
                 this.pictureBox_F2.Image = null;
             }
             sw.Stop();
+
+            //FigCalc();
+
+
             MessageBox.Show(sw.ElapsedMilliseconds.ToString());
         }
 
@@ -700,7 +733,7 @@ namespace Focusing1D
         /// </summary>
         /// <param name="zgc"></param>
         /// <param name="_CoordM"></param>
-        private void GraphWaveM(ZedGraph.ZedGraphControl zgc,Coord coord)
+        private void GraphWaveM(ZedGraph.ZedGraphControl zgc,Coord1D coord)
         {
             GraphPane myPane = zgc.GraphPane;
             myPane.CurveList.Clear();
