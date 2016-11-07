@@ -956,6 +956,7 @@ namespace Focusing1D
             {
                 double[] subError = null;
                 ClsNac.FileIO.FileIO.readFile(this.ofd_EM1.FileName, ref subError);
+                textBox_EM1_Fig.Text = ofd_EM1.FileName;
                 if (this.rB_PhaseCompensator.Checked)
                     M2.PlusError(subError);
                 else
@@ -976,6 +977,7 @@ namespace Focusing1D
             {
                 double[] subError = null;
                 ClsNac.FileIO.FileIO.readFile(this.ofd_EM1.FileName, ref subError);
+                textBox_M2E_Fig.Text = ofd_EM1.FileName;
                 if (this.rB_PhaseCompensator.Checked)
                     M1.PlusError(subError);
                 else
