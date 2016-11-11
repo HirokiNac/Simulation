@@ -448,6 +448,22 @@ namespace ClsNac.WaveOptics
             }
         }
 
+        public static void Propagation2(WaveField2D _wf1, ref WaveField2D _wf2, MODE _MODE = MODE.CPU, DIRECTION _DIRECTION = DIRECTION.FORWARD)
+        {
+            switch (_MODE)
+            {
+                case MODE.CPU:
+                    ClsNac.WaveOpticsCLR.Prop1D(
+                        _wf1.lambda, (int)_DIRECTION,
+                        _wf1.x, _wf1.y, _wf1.u,
+                        _wf2.x, _wf2.y, _wf2.u);
+                    break;
+                case MODE.CUDA:
+                    PropFw2dCuda2(_wf1, ref _wf2);
+                    break;
+            }
+        }
+
         public void Execute(int _start = 0, MODE _MODE = MODE.CPU, DIRECTION _DIRECTION = DIRECTION.FORWARD)
         {
             for (int n = _start; n < n_wfs - 1; n++)

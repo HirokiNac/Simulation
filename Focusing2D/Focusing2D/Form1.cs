@@ -165,13 +165,25 @@ namespace Focusing2D
                 wf_focus.z = m1v.f[0].z;
                 wf_focus.lambda = lambda;
 
+                if (radioButton_WO_double.Checked)
+                {
+                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_source, ref wf_m1h, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                    wf_m1h.CpyReImToComplex();
+                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1h, ref wf_m1v, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                    wf_m1v.CpyReImToComplex();
+                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1v, ref wf_focus, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                    wf_focus.CpyReImToComplex();
 
-                ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_source, ref wf_m1h,ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
-                wf_m1h.CpyReImToComplex();
-                ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1h, ref wf_m1v, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
-                wf_m1v.CpyReImToComplex();
-                ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1v, ref wf_focus, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
-                wf_focus.CpyReImToComplex();
+                }
+                else
+                {
+                    ClsNac.WaveOptics.FresnelKirchhoff2Df.Propagation(wf_source, ref wf_m1h, ClsNac.WaveOptics.FresnelKirchhoff2Df.MODE.CUDA);
+                    wf_m1h.CpyReImToComplex();
+                    ClsNac.WaveOptics.FresnelKirchhoff2Df.Propagation(wf_m1h, ref wf_m1v, ClsNac.WaveOptics.FresnelKirchhoff2Df.MODE.CUDA);
+                    wf_m1v.CpyReImToComplex();
+                    ClsNac.WaveOptics.FresnelKirchhoff2Df.Propagation(wf_m1v, ref wf_focus, ClsNac.WaveOptics.FresnelKirchhoff2Df.MODE.CUDA);
+                    wf_focus.CpyReImToComplex();
+                }
 
                 ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m1h_Intensity.txt", wf_m1h.Intensity());
                 ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m1v_Intensity.txt", wf_m1v.Intensity());

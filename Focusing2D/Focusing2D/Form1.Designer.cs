@@ -249,6 +249,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel_Message = new System.Windows.Forms.ToolStripStatusLabel();
+            this.radioButton_WO_double = new System.Windows.Forms.RadioButton();
+            this.radioButton_WO_float = new System.Windows.Forms.RadioButton();
             this.groupBox_M1v.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -1727,6 +1729,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.radioButton_WO_double);
+            this.groupBox1.Controls.Add(this.radioButton_WO_float);
             this.groupBox1.Controls.Add(this.button_DetectorOutput);
             this.groupBox1.Controls.Add(this.groupBox_Focus2);
             this.groupBox1.Controls.Add(this.groupBox3);
@@ -2506,6 +2510,28 @@
             this.toolStripStatusLabel_Message.Size = new System.Drawing.Size(118, 18);
             this.toolStripStatusLabel_Message.Text = "toolStripStatusLabel1";
             // 
+            // radioButton_WO_double
+            // 
+            this.radioButton_WO_double.AutoSize = true;
+            this.radioButton_WO_double.Checked = true;
+            this.radioButton_WO_double.Location = new System.Drawing.Point(6, 387);
+            this.radioButton_WO_double.Name = "radioButton_WO_double";
+            this.radioButton_WO_double.Size = new System.Drawing.Size(56, 16);
+            this.radioButton_WO_double.TabIndex = 66;
+            this.radioButton_WO_double.TabStop = true;
+            this.radioButton_WO_double.Text = "double";
+            this.radioButton_WO_double.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_WO_float
+            // 
+            this.radioButton_WO_float.AutoSize = true;
+            this.radioButton_WO_float.Location = new System.Drawing.Point(6, 406);
+            this.radioButton_WO_float.Name = "radioButton_WO_float";
+            this.radioButton_WO_float.Size = new System.Drawing.Size(46, 16);
+            this.radioButton_WO_float.TabIndex = 67;
+            this.radioButton_WO_float.Text = "float";
+            this.radioButton_WO_float.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2537,6 +2563,7 @@
             this.groupBox_Mirror2Tuning.ResumeLayout(false);
             this.groupBox_Mirror2Tuning.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.groupBox_Focus2.ResumeLayout(false);
             this.groupBox_Focus2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -2776,6 +2803,8 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Message;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
+        private System.Windows.Forms.RadioButton radioButton_WO_double;
+        private System.Windows.Forms.RadioButton radioButton_WO_float;
     }
 }
 
