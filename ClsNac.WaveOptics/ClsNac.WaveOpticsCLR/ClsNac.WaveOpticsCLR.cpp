@@ -86,3 +86,37 @@ void ClsNac::WaveOpticsCLR::Prop2D(double _lambda,
 
 }
 
+void ClsNac::WaveOpticsCLR::Prop2Df(float _lambda,
+	array<float>^ _x1, array<float>^ _y1, array<float>^_z1, array<float>^ _u1re, array<float>^_u1im,
+	array<float>^ _x2, array<float>^ _y2, array<float>^_z2, array<float>^ _u2re, array<float>^_u2im)
+{
+	double k = 2.0*PI / _lambda;
+
+	int div1 = _x1->Length;
+	int div2 = _x2->Length;
+
+#pragma omp parallel for schedule(static)
+	for (int i = 0; i < div2; i++)
+	{
+		double ur = 0.0, ui = 0.0;
+		for (int j = 0; j < div1; j++)
+		{
+			double r = Math::Sqrt(
+				Math::Pow(_x2[i] - _x1[j], 2.0) +
+				Math::Pow(_y2[i] - _y1[j], 2.0) +
+				Math::Pow(_z2[i] - _z1[j], 2.0));
+			double rr = 1 / r;
+
+			double tr = Math::Cos(-k*r)*rr;
+			double ti = Math::Sin(-k*r)*rr;
+
+			double tur = _u1re[j];
+			double tui = _u1im[j];
+			ur += tur * tr - tui * ti;
+			ui += tur * tr + tui * ti;
+		}
+		_u2re[i] += ur;
+		_u2im[i] += ui;
+	}
+
+}

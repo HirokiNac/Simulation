@@ -26,5 +26,9 @@ namespace ClsNac {
 		static void Prop2D(double _lambda,
 			array<double>^ _x1, array<double>^ _y1, array<double>^ _z1, array<Complex>^ _u1,
 			array<double>^ _x2, array<double>^ _y2, array<double>^ _z2, array<Complex>^ _u2);
+
+		static void Prop2Df(float _lambda,
+			array<float>^ _x1, array<float>^ _y1, array<float>^ _z1, array<float>^ _u1re, array<float>^_u1im,
+			array<float>^ _x2, array<float>^ _y2, array<float>^ _z2, array<float>^ _u2re, array<float>^_u2im);
 	};
 }

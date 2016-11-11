@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClsNac.WaveOpticsAF", "ClsN
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClsNac.WaveOpticsCUDA", "ClsNac.WaveOpticsCUDA\ClsNac.WaveOpticsCUDA.vcxproj", "{5B1C1801-7AD7-4A62-9088-63BE14FD0B60}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClsNac.WaveOpticsAMP", "ClsNac.WaveOpticsAMP\ClsNac.WaveOpticsAMP.vcxproj", "{9EED282C-81A5-4817-A271-72FD02A40CA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,18 @@ Global
 		{5B1C1801-7AD7-4A62-9088-63BE14FD0B60}.Release|Win32.Build.0 = Release|Win32
 		{5B1C1801-7AD7-4A62-9088-63BE14FD0B60}.Release|x64.ActiveCfg = Release|x64
 		{5B1C1801-7AD7-4A62-9088-63BE14FD0B60}.Release|x64.Build.0 = Release|x64
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Debug|Win32.Build.0 = Debug|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Debug|x64.ActiveCfg = Debug|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Release|Any CPU.ActiveCfg = Release|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Release|Win32.ActiveCfg = Release|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Release|Win32.Build.0 = Release|Win32
+		{9EED282C-81A5-4817-A271-72FD02A40CA1}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
