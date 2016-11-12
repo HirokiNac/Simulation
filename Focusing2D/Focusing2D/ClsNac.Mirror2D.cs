@@ -43,9 +43,9 @@ namespace ClsNac.Mirror2D
         public double[] y;
         public double[] z;
 
-        public double xc { get { return x[divL / 2]; } }
-        public double yc { get { return y[divL / 2]; } }
-        public double zc { get { return z[divL / 2]; } }
+        public double xc { get { return x[divW / 2 * divL + divL / 2]; } }
+        public double yc { get { return y[divW / 2 * divL + divL / 2]; } }
+        public double zc { get { return z[divW / 2 * divL + divL / 2]; } }
 
         public int div { get { return divW * divL; } }
         public int divW { get;  set; }
@@ -267,7 +267,7 @@ namespace ClsNac.Mirror2D
             //s.Rot(Coord.RotAxis.rotY, pm.theta_s, s_xc, s_yc, s_zc);
         }
 
-        public void Focus(int divX,int divY, int divZ, double dx,double dy, double dz)
+        public void Focus(int divX,int divY, int divZ, double dx,double dy, double dz,double bx,double by,double bz)
         {
             f = new Coord[1];
             f[0] = new Coord(divY, divZ);
@@ -276,9 +276,9 @@ namespace ClsNac.Mirror2D
             {
                 for (int j = 0; j < divZ; j++)
                 {
-                    f[0].x[i * divZ + j] = f0.xc;
-                    f[0].y[i * divZ + j] = f0.yc + (-divY / 2 + i) * dy;
-                    f[0].z[i * divZ + j] = f0.zc + (-divZ / 2 + j) * dz;
+                    f[0].x[i * divZ + j] = f0.xc + bx;
+                    f[0].y[i * divZ + j] = f0.yc + (-divY / 2 + i) * dy + by;
+                    f[0].z[i * divZ + j] = f0.zc + (-divZ / 2 + j) * dz + bz;
                 }
             }
 

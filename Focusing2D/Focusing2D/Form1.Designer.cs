@@ -175,6 +175,8 @@
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton_WO_double = new System.Windows.Forms.RadioButton();
+            this.radioButton_WO_float = new System.Windows.Forms.RadioButton();
             this.button_DetectorOutput = new System.Windows.Forms.Button();
             this.groupBox_Focus2 = new System.Windows.Forms.GroupBox();
             this.label24 = new System.Windows.Forms.Label();
@@ -249,8 +251,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel_Message = new System.Windows.Forms.ToolStripStatusLabel();
-            this.radioButton_WO_double = new System.Windows.Forms.RadioButton();
-            this.radioButton_WO_float = new System.Windows.Forms.RadioButton();
             this.groupBox_M1v.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -1743,6 +1743,28 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "波動光学計算";
             // 
+            // radioButton_WO_double
+            // 
+            this.radioButton_WO_double.AutoSize = true;
+            this.radioButton_WO_double.Checked = true;
+            this.radioButton_WO_double.Location = new System.Drawing.Point(6, 387);
+            this.radioButton_WO_double.Name = "radioButton_WO_double";
+            this.radioButton_WO_double.Size = new System.Drawing.Size(56, 16);
+            this.radioButton_WO_double.TabIndex = 66;
+            this.radioButton_WO_double.TabStop = true;
+            this.radioButton_WO_double.Text = "double";
+            this.radioButton_WO_double.UseVisualStyleBackColor = true;
+            // 
+            // radioButton_WO_float
+            // 
+            this.radioButton_WO_float.AutoSize = true;
+            this.radioButton_WO_float.Location = new System.Drawing.Point(6, 406);
+            this.radioButton_WO_float.Name = "radioButton_WO_float";
+            this.radioButton_WO_float.Size = new System.Drawing.Size(46, 16);
+            this.radioButton_WO_float.TabIndex = 67;
+            this.radioButton_WO_float.Text = "float";
+            this.radioButton_WO_float.UseVisualStyleBackColor = true;
+            // 
             // button_DetectorOutput
             // 
             this.button_DetectorOutput.Location = new System.Drawing.Point(218, 387);
@@ -2049,7 +2071,6 @@
             // 
             // textBox_Detector1bz
             // 
-            this.textBox_Detector1bz.Enabled = false;
             this.textBox_Detector1bz.Location = new System.Drawing.Point(59, 240);
             this.textBox_Detector1bz.Name = "textBox_Detector1bz";
             this.textBox_Detector1bz.Size = new System.Drawing.Size(60, 19);
@@ -2060,7 +2081,6 @@
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Enabled = false;
             this.label59.Location = new System.Drawing.Point(17, 243);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(36, 12);
@@ -2070,7 +2090,6 @@
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Enabled = false;
             this.label60.Location = new System.Drawing.Point(125, 243);
             this.label60.Name = "label60";
             this.label60.Size = new System.Drawing.Size(22, 12);
@@ -2135,7 +2154,6 @@
             // 
             // textBox_Detector1by
             // 
-            this.textBox_Detector1by.Enabled = false;
             this.textBox_Detector1by.Location = new System.Drawing.Point(59, 215);
             this.textBox_Detector1by.Name = "textBox_Detector1by";
             this.textBox_Detector1by.Size = new System.Drawing.Size(60, 19);
@@ -2146,7 +2164,6 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Enabled = false;
             this.label41.Location = new System.Drawing.Point(17, 218);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(36, 12);
@@ -2174,7 +2191,6 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Enabled = false;
             this.label42.Location = new System.Drawing.Point(125, 218);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(22, 12);
@@ -2192,7 +2208,6 @@
             // 
             // textBox_Detector1bx
             // 
-            this.textBox_Detector1bx.Enabled = false;
             this.textBox_Detector1bx.Location = new System.Drawing.Point(59, 190);
             this.textBox_Detector1bx.Name = "textBox_Detector1bx";
             this.textBox_Detector1bx.Size = new System.Drawing.Size(60, 19);
@@ -2203,7 +2218,6 @@
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Enabled = false;
             this.label39.Location = new System.Drawing.Point(17, 193);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(36, 12);
@@ -2213,7 +2227,6 @@
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Enabled = false;
             this.label40.Location = new System.Drawing.Point(125, 193);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(22, 12);
@@ -2507,30 +2520,8 @@
             // toolStripStatusLabel_Message
             // 
             this.toolStripStatusLabel_Message.Name = "toolStripStatusLabel_Message";
-            this.toolStripStatusLabel_Message.Size = new System.Drawing.Size(118, 18);
+            this.toolStripStatusLabel_Message.Size = new System.Drawing.Size(134, 18);
             this.toolStripStatusLabel_Message.Text = "toolStripStatusLabel1";
-            // 
-            // radioButton_WO_double
-            // 
-            this.radioButton_WO_double.AutoSize = true;
-            this.radioButton_WO_double.Checked = true;
-            this.radioButton_WO_double.Location = new System.Drawing.Point(6, 387);
-            this.radioButton_WO_double.Name = "radioButton_WO_double";
-            this.radioButton_WO_double.Size = new System.Drawing.Size(56, 16);
-            this.radioButton_WO_double.TabIndex = 66;
-            this.radioButton_WO_double.TabStop = true;
-            this.radioButton_WO_double.Text = "double";
-            this.radioButton_WO_double.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_WO_float
-            // 
-            this.radioButton_WO_float.AutoSize = true;
-            this.radioButton_WO_float.Location = new System.Drawing.Point(6, 406);
-            this.radioButton_WO_float.Name = "radioButton_WO_float";
-            this.radioButton_WO_float.Size = new System.Drawing.Size(46, 16);
-            this.radioButton_WO_float.TabIndex = 67;
-            this.radioButton_WO_float.Text = "float";
-            this.radioButton_WO_float.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 

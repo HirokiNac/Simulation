@@ -129,13 +129,14 @@ namespace Focusing2D
                 m1h.Source(1, 1);
 
                 m1v.Focus(Convert.ToInt32(this.textBox_Detector1nx.Text), Convert.ToInt32(this.textBox_Detector1ny.Text), Convert.ToInt32(this.textBox_Detector1nz.Text),
-                    Convert.ToDouble(this.textBox_Detector1dx.Text), Convert.ToDouble(this.textBox_Detector1dy.Text), Convert.ToDouble(this.textBox_Detector1dz.Text));
+                    Convert.ToDouble(this.textBox_Detector1dx.Text), Convert.ToDouble(this.textBox_Detector1dy.Text), Convert.ToDouble(this.textBox_Detector1dz.Text),
+                    Convert.ToDouble(this.textBox_Detector1bx.Text),Convert.ToDouble(this.textBox_Detector1by.Text),Convert.ToDouble(this.textBox_Detector1bz.Text));
                 
                 m1h.m.RotCoord(0.0, Convert.ToDouble(this.textBox_ErrM1h_Incident.Text), 0.0, m1h.m.xc, m1h.m.yc, m1h.m.zc);
                 m1v.m.RotCoord(0.0, Convert.ToDouble(this.textBox_ErrM1v_Incident.Text), 0.0, m1v.m.xc, m1v.m.yc, m1v.m.zc);
 
 
-                var progress = new Progress<ClsNac.Mirror2D.WaveField.ProgressInfo>(this.ProgressReport);
+                //var progress = new Progress<ClsNac.Mirror2D.WaveField.ProgressInfo>(this.ProgressReport);
                 #if CL
 
                 ClsNac.WaveOptics.WaveField2D wf_source = new ClsNac.WaveOptics.WaveField2D(m1h.s.divL, m1h.s.divW);
@@ -222,12 +223,12 @@ namespace Focusing2D
         }
 
 
-        string strProp;
-        void ProgressReport(ClsNac.Mirror2D.WaveField.ProgressInfo info)
-        {
-            this.toolStripProgressBar.Value = info.Value;
-            this.toolStripStatusLabel_Message.Text = info.Message + " " + strProp + " " + Convert.ToString(this.sw.ElapsedMilliseconds/1000)+" sec経過";
+        //string strProp;
+        //void ProgressReport(ClsNac.Mirror2D.WaveField.ProgressInfo info)
+        //{
+        //    this.toolStripProgressBar.Value = info.Value;
+        //    this.toolStripStatusLabel_Message.Text = info.Message + " " + strProp + " " + Convert.ToString(this.sw.ElapsedMilliseconds/1000)+" sec経過";
  
-        }
+        //}
     }
 }

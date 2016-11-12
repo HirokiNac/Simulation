@@ -8,7 +8,7 @@
 
 const int threads = 16;
 const int numBlock = 16;
-const dim3 threadsPerBlock = dim3(512, 512);
+const dim3 threadsPerBlock = dim3(512);
 
 dim3 calcBlock(dim3 thread, int x, int y)
 {
@@ -418,8 +418,8 @@ int _n2, double* _x2, double* _y2, double* _z2, double* &_u2re, double* &_u2im)
 	double *du2im = 0;
 	cudaMalloc((void**)&du2im, memsize2);
 	//cudaMemcpy(du2im, _u2im, memsize2, cudaMemcpyHostToDevice);
-	dim3 b = calcBlock(threadsPerBlock, _n2, 1);
-	PropFw2D << <_n2/512,512 /*calcBlock(threadsPerBlock,_n2,1), threadsPerBlock*/ >> >(_k, _n1, dx1, dy1, dz1, du1re, du1im, _n2, dx2, dy2, dz2, du2re, du2im);
+	//dim3 b = calcBlock(threadsPerBlock, _n2, 1);
+	PropFw2D << <calcBlock(threadsPerBlock, _n2, 1), threadsPerBlock >> >(_k, _n1, dx1, dy1, dz1, du1re, du1im, _n2, dx2, dy2, dz2, du2re, du2im);
 
 	cudaDeviceSynchronize();
 
