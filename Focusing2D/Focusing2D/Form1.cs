@@ -81,18 +81,7 @@ namespace Focusing2D
             //n枚目ミラー座標系をn-1枚目ミラーに合わせる
 
             if (this.checkBox_TwoStage.Checked)
-            {
-                //2nd水平
-                paraH2.L1 = Convert.ToDouble(this.textBox_LM1hM2h.Text) - paraH1.L2;
-                paraH2.L2 = Convert.ToDouble(this.textBox_LM2hF2.Text);
-                paraH2.ML = Convert.ToDouble(this.textBox_LM1h.Text);
-                paraH2.MW = Convert.ToDouble(this.textBox_WM1h.Text);
-                paraH2.theta_i = Convert.ToDouble(this.textBox_ThetaM1h.Text);
-                paraH2.divL = Convert.ToInt32(this.textBox_DivLM1h.Text);
-                paraH2.divW = Convert.ToInt32(this.textBox_DivWM1h.Text);
-                paraH2.dir = Mirror2D.Dir.Horizontal;
-                paraH2.pos = this.checkBox_PosM2h.Checked ? Mirror2D.Pos.lower : Mirror2D.Pos.upper;
-                m2h = new Mirror2D(paraH2);
+            {       
                 //2nd垂直
                 paraV2.L1 = Convert.ToDouble(this.textBox_LM1vM2v.Text) - paraV1.L2;
                 paraV2.L2 = Convert.ToDouble(this.textBox_LM2vF2.Text);
@@ -104,6 +93,28 @@ namespace Focusing2D
                 paraV2.dir = Mirror2D.Dir.Vertical;
                 paraV2.pos = this.checkBox_PosM2v.Checked ? Mirror2D.Pos.lower : Mirror2D.Pos.upper;
                 m2v = new Mirror2D(paraV2);
+
+                //2nd水平
+                paraH2.L1 = Convert.ToDouble(this.textBox_LM1hM2h.Text) - paraH1.L2;
+                paraH2.L2 = Convert.ToDouble(this.textBox_LM2hF2.Text);
+                paraH2.ML = Convert.ToDouble(this.textBox_LM1h.Text);
+                paraH2.MW = Convert.ToDouble(this.textBox_WM1h.Text);
+                paraH2.theta_i = Convert.ToDouble(this.textBox_ThetaM1h.Text);
+                paraH2.divL = Convert.ToInt32(this.textBox_DivLM1h.Text);
+                paraH2.divW = Convert.ToInt32(this.textBox_DivWM1h.Text);
+                paraH2.dir = Mirror2D.Dir.Horizontal;
+                paraH2.pos = this.checkBox_PosM2h.Checked ? Mirror2D.Pos.lower : Mirror2D.Pos.upper;
+                m2h = new Mirror2D(paraH2, m2v);
+
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2h_x.txt", m2h.m.x);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2h_y.txt", m2h.m.y);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2h_z.txt", m2h.m.z);
+
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2v_x.txt", m2v.m.x);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2v_y.txt", m2v.m.y);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2v_z.txt", m2v.m.z);
+
+
             }
 
             #endregion
@@ -130,14 +141,14 @@ namespace Focusing2D
 
                 m1v.Focus(Convert.ToInt32(this.textBox_Detector1nx.Text), Convert.ToInt32(this.textBox_Detector1ny.Text), Convert.ToInt32(this.textBox_Detector1nz.Text),
                     Convert.ToDouble(this.textBox_Detector1dx.Text), Convert.ToDouble(this.textBox_Detector1dy.Text), Convert.ToDouble(this.textBox_Detector1dz.Text),
-                    Convert.ToDouble(this.textBox_Detector1bx.Text),Convert.ToDouble(this.textBox_Detector1by.Text),Convert.ToDouble(this.textBox_Detector1bz.Text));
-                
-                m1h.m.RotCoord(0.0, Convert.ToDouble(this.textBox_ErrM1h_Incident.Text), 0.0, m1h.m.xc, m1h.m.yc, m1h.m.zc);
-                m1v.m.RotCoord(0.0, Convert.ToDouble(this.textBox_ErrM1v_Incident.Text), 0.0, m1v.m.xc, m1v.m.yc, m1v.m.zc);
+                    Convert.ToDouble(this.textBox_Detector1bx.Text), Convert.ToDouble(this.textBox_Detector1by.Text), Convert.ToDouble(this.textBox_Detector1bz.Text));
+
+                m1h.m.RotCoord(Convert.ToDouble(textBox_ErrM1h_Rolling.Text), Convert.ToDouble(textBox_ErrM1h_InPlane.Text), Convert.ToDouble(this.textBox_ErrM1h_Incident.Text), m1h.m.xc, m1h.m.yc, m1h.m.zc);
+                m1v.m.RotCoord(Convert.ToDouble(textBox_ErrM1v_Rolling.Text), Convert.ToDouble(this.textBox_ErrM1v_Incident.Text), Convert.ToDouble(textBox_ErrM1v_InPlane.Text), m1v.m.xc, m1v.m.yc, m1v.m.zc);
 
 
                 //var progress = new Progress<ClsNac.Mirror2D.WaveField.ProgressInfo>(this.ProgressReport);
-                #if CL
+#if CL
 
                 ClsNac.WaveOptics.WaveField2D wf_source = new ClsNac.WaveOptics.WaveField2D(m1h.s.divL, m1h.s.divW);
                 wf_source.x = m1h.s.x;
@@ -147,7 +158,7 @@ namespace Focusing2D
                 wf_source.im = m1h.s.imag;
                 wf_source.lambda = lambda;
                 wf_source.CpyReImToComplex();
-                
+
                 ClsNac.WaveOptics.WaveField2D wf_m1h = new ClsNac.WaveOptics.WaveField2D(m1h.m.divL, m1h.m.divW);
                 wf_m1h.x = m1h.m.x;
                 wf_m1h.y = m1h.m.y;
@@ -166,31 +177,79 @@ namespace Focusing2D
                 wf_focus.z = m1v.f[0].z;
                 wf_focus.lambda = lambda;
 
-                if (radioButton_WO_double.Checked)
-                {
-                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_source, ref wf_m1h, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
-                    wf_m1h.CpyReImToComplex();
-                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1h, ref wf_m1v, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
-                    wf_m1v.CpyReImToComplex();
-                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1v, ref wf_focus, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
-                    wf_focus.CpyReImToComplex();
-
-                }
-                else
-                {
-                    ClsNac.WaveOptics.FresnelKirchhoff2Df.Propagation(wf_source, ref wf_m1h, ClsNac.WaveOptics.FresnelKirchhoff2Df.MODE.CUDA);
-                    wf_m1h.CpyReImToComplex();
-                    ClsNac.WaveOptics.FresnelKirchhoff2Df.Propagation(wf_m1h, ref wf_m1v, ClsNac.WaveOptics.FresnelKirchhoff2Df.MODE.CUDA);
-                    wf_m1v.CpyReImToComplex();
-                    ClsNac.WaveOptics.FresnelKirchhoff2Df.Propagation(wf_m1v, ref wf_focus, ClsNac.WaveOptics.FresnelKirchhoff2Df.MODE.CUDA);
-                    wf_focus.CpyReImToComplex();
-                }
+                ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_source, ref wf_m1h, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                wf_m1h.CpyReImToComplex();
+                ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1h, ref wf_m1v, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                wf_m1v.CpyReImToComplex();
+                ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m1v, ref wf_focus, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                wf_focus.CpyReImToComplex();
 
                 ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m1h_Intensity.txt", wf_m1h.Intensity());
                 ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m1v_Intensity.txt", wf_m1v.Intensity());
-                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\f_Intensity.txt", wf_focus.Intensity());
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\f1_Intensity.txt", wf_focus.Intensity());
 
-                #else
+                if (radioButton_WO_double.Checked)
+                {
+                    //m1vFocusと同じ座標をつくる
+                    m2v.Source(
+                        Convert.ToInt32(this.textBox_Detector1ny.Text), Convert.ToInt32(this.textBox_Detector1nz.Text),
+                        Convert.ToDouble(this.textBox_Detector1dy.Text), Convert.ToDouble(this.textBox_Detector1dz.Text),
+                        Convert.ToDouble(this.textBox_Detector1by.Text), Convert.ToDouble(this.textBox_Detector1bz.Text));
+                    //回転
+                    double t_y = Math.Atan((m2v.m.zc - m2v.s.zc) / (m2v.m.xc - m2v.s.xc));
+                    double t_z = Math.Atan((m2v.m.yc - m2v.s.yc) / (m2v.m.xc - m2v.s.xc));
+                    m2v.s.RotCoord(0.0, t_y, t_z, -m2v.pm.f, 0.0, 0.0);
+                    //波動場いれる
+                    m2v.s.u = wf_focus.u;
+
+                    m2h.Focus(Convert.ToInt32(this.textBox_Detector2nx.Text), Convert.ToInt32(this.textBox_Detector2ny.Text), Convert.ToInt32(this.textBox_Detector2nz.Text),
+                        Convert.ToDouble(this.textBox_Detector2dx.Text), Convert.ToDouble(this.textBox_Detector2dy.Text), Convert.ToDouble(this.textBox_Detector2dz.Text),
+                        Convert.ToDouble(this.textBox_Detector2bx.Text), Convert.ToDouble(this.textBox_Detector2by.Text), Convert.ToDouble(this.textBox_Detector2bz.Text));
+
+                    ClsNac.WaveOptics.WaveField2D wf_source2 = new ClsNac.WaveOptics.WaveField2D(m2v.s.divL, m2v.s.divW);
+                    wf_source2.x = m2v.s.x;
+                    wf_source2.y = m2v.s.y;
+                    wf_source2.z = m2v.s.z;
+                    wf_source2.re = m2v.s.real;
+                    wf_source2.im = m2v.s.imag;
+                    wf_source2.lambda = lambda;
+                    wf_source2.CpyReImToComplex();
+
+                    ClsNac.WaveOptics.WaveField2D wf_m2v = new ClsNac.WaveOptics.WaveField2D(m2v.m.divL, m2v.m.divW);
+                    wf_m2v.x = m2v.m.x;
+                    wf_m2v.y = m2v.m.y;
+                    wf_m2v.z = m2v.m.z;
+                    wf_m2v.lambda = lambda;
+
+                    ClsNac.WaveOptics.WaveField2D wf_m2h = new ClsNac.WaveOptics.WaveField2D(m2h.m.divL, m2h.m.divW);
+                    wf_m2h.x = m2h.m.x;
+                    wf_m2h.y = m2h.m.y;
+                    wf_m2h.z = m2h.m.z;
+                    wf_m2h.lambda = lambda;
+
+                    ClsNac.WaveOptics.WaveField2D wf_focus2 = new ClsNac.WaveOptics.WaveField2D(m2h.f[0].divL, m2h.f[0].divW);
+                    wf_focus2.x = m2h.f[0].x;
+                    wf_focus2.y = m2h.f[0].y;
+                    wf_focus2.z = m2h.f[0].z;
+                    wf_focus2.lambda = lambda;
+
+                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_source2, ref wf_m2v, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                    wf_m2v.CpyReImToComplex();
+                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m2v, ref wf_m2h, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                    wf_m2h.CpyReImToComplex();
+                    ClsNac.WaveOptics.FresnelKirchhoff2D.Propagation(wf_m2h, ref wf_focus2, ClsNac.WaveOptics.FresnelKirchhoff2D.MODE.CUDA);
+                    wf_focus2.CpyReImToComplex();
+
+                    ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2h_Intensity.txt", wf_m2h.Intensity());
+                    ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m2v_Intensity.txt", wf_m2v.Intensity());
+                    ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\f2_Intensity.txt", wf_focus2.Intensity());
+
+                }
+
+
+
+
+#else
 
                 ClsNac.Mirror2D.WaveField.WaveField wS = new ClsNac.Mirror2D.WaveField.WaveField(ref m1h.s, lambda);
                 ClsNac.Mirror2D.WaveField.WaveField wM1h = new ClsNac.Mirror2D.WaveField.WaveField(ref m1h.m, lambda);

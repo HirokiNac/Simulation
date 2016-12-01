@@ -51,7 +51,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label76 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox_ErrM1h_InPlane = new System.Windows.Forms.TextBox();
             this.label77 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.textBox_ErrM1h_Rolling = new System.Windows.Forms.TextBox();
@@ -103,7 +103,7 @@
             this.checkBox_TwoStage = new System.Windows.Forms.CheckBox();
             this.groupBox_ErrM1v = new System.Windows.Forms.GroupBox();
             this.label63 = new System.Windows.Forms.Label();
-            this.textBox_ErrM1v_Inplane = new System.Windows.Forms.TextBox();
+            this.textBox_ErrM1v_InPlane = new System.Windows.Forms.TextBox();
             this.label64 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
             this.textBox_ErrM1v_Rolling = new System.Windows.Forms.TextBox();
@@ -304,7 +304,7 @@
             this.textBox_DivWM1v.Name = "textBox_DivWM1v";
             this.textBox_DivWM1v.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivWM1v.TabIndex = 21;
-            this.textBox_DivWM1v.Text = "256";
+            this.textBox_DivWM1v.Text = "501";
             this.textBox_DivWM1v.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label52
@@ -396,7 +396,7 @@
             this.textBox_DivLM1v.Name = "textBox_DivLM1v";
             this.textBox_DivLM1v.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivLM1v.TabIndex = 5;
-            this.textBox_DivLM1v.Text = "256";
+            this.textBox_DivLM1v.Text = "501";
             this.textBox_DivLM1v.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_ThetaM1v
@@ -483,7 +483,7 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label76);
-            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.textBox_ErrM1h_InPlane);
             this.groupBox4.Controls.Add(this.label77);
             this.groupBox4.Controls.Add(this.label78);
             this.groupBox4.Controls.Add(this.textBox_ErrM1h_Rolling);
@@ -510,14 +510,14 @@
             this.label76.TabIndex = 64;
             this.label76.Text = "[rad]";
             // 
-            // textBox1
+            // textBox_ErrM1h_InPlane
             // 
-            this.textBox1.Location = new System.Drawing.Point(74, 97);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(60, 19);
-            this.textBox1.TabIndex = 63;
-            this.textBox1.Text = "0";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_ErrM1h_InPlane.Location = new System.Drawing.Point(74, 97);
+            this.textBox_ErrM1h_InPlane.Name = "textBox_ErrM1h_InPlane";
+            this.textBox_ErrM1h_InPlane.Size = new System.Drawing.Size(60, 19);
+            this.textBox_ErrM1h_InPlane.TabIndex = 63;
+            this.textBox_ErrM1h_InPlane.Text = "0";
+            this.textBox_ErrM1h_InPlane.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label77
             // 
@@ -631,7 +631,6 @@
             this.groupBox7.Controls.Add(this.label102);
             this.groupBox7.Controls.Add(this.textBox21);
             this.groupBox7.Controls.Add(this.label103);
-            this.groupBox7.Enabled = false;
             this.groupBox7.Location = new System.Drawing.Point(6, 227);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(176, 122);
@@ -794,7 +793,7 @@
             this.textBox_DivWM1h.Name = "textBox_DivWM1h";
             this.textBox_DivWM1h.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivWM1h.TabIndex = 38;
-            this.textBox_DivWM1h.Text = "256";
+            this.textBox_DivWM1h.Text = "501";
             this.textBox_DivWM1h.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label83
@@ -947,7 +946,7 @@
             this.textBox_DivLM1h.Name = "textBox_DivLM1h";
             this.textBox_DivLM1h.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivLM1h.TabIndex = 14;
-            this.textBox_DivLM1h.Text = "256";
+            this.textBox_DivLM1h.Text = "501";
             this.textBox_DivLM1h.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label95
@@ -1000,7 +999,7 @@
             // groupBox_ErrM1v
             // 
             this.groupBox_ErrM1v.Controls.Add(this.label63);
-            this.groupBox_ErrM1v.Controls.Add(this.textBox_ErrM1v_Inplane);
+            this.groupBox_ErrM1v.Controls.Add(this.textBox_ErrM1v_InPlane);
             this.groupBox_ErrM1v.Controls.Add(this.label64);
             this.groupBox_ErrM1v.Controls.Add(this.label61);
             this.groupBox_ErrM1v.Controls.Add(this.textBox_ErrM1v_Rolling);
@@ -1027,14 +1026,14 @@
             this.label63.TabIndex = 58;
             this.label63.Text = "[rad]";
             // 
-            // textBox_ErrM1v_Inplane
+            // textBox_ErrM1v_InPlane
             // 
-            this.textBox_ErrM1v_Inplane.Location = new System.Drawing.Point(74, 97);
-            this.textBox_ErrM1v_Inplane.Name = "textBox_ErrM1v_Inplane";
-            this.textBox_ErrM1v_Inplane.Size = new System.Drawing.Size(60, 19);
-            this.textBox_ErrM1v_Inplane.TabIndex = 57;
-            this.textBox_ErrM1v_Inplane.Text = "0";
-            this.textBox_ErrM1v_Inplane.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_ErrM1v_InPlane.Location = new System.Drawing.Point(74, 97);
+            this.textBox_ErrM1v_InPlane.Name = "textBox_ErrM1v_InPlane";
+            this.textBox_ErrM1v_InPlane.Size = new System.Drawing.Size(60, 19);
+            this.textBox_ErrM1v_InPlane.TabIndex = 57;
+            this.textBox_ErrM1v_InPlane.Text = "0";
+            this.textBox_ErrM1v_InPlane.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label64
             // 
@@ -1149,7 +1148,6 @@
             this.groupBox_M2h.Controls.Add(this.label115);
             this.groupBox_M2h.Controls.Add(this.textBox_DivLM2h);
             this.groupBox_M2h.Controls.Add(this.label116);
-            this.groupBox_M2h.Enabled = false;
             this.groupBox_M2h.Location = new System.Drawing.Point(6, 6);
             this.groupBox_M2h.Name = "groupBox_M2h";
             this.groupBox_M2h.Size = new System.Drawing.Size(176, 215);
@@ -1173,7 +1171,7 @@
             this.textBox_DivWM2h.Name = "textBox_DivWM2h";
             this.textBox_DivWM2h.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivWM2h.TabIndex = 38;
-            this.textBox_DivWM2h.Text = "101";
+            this.textBox_DivWM2h.Text = "501";
             this.textBox_DivWM2h.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label104
@@ -1344,7 +1342,7 @@
             this.textBox_DivLM2h.Name = "textBox_DivLM2h";
             this.textBox_DivLM2h.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivLM2h.TabIndex = 14;
-            this.textBox_DivLM2h.Text = "1001";
+            this.textBox_DivLM2h.Text = "501";
             this.textBox_DivLM2h.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label116
@@ -1392,7 +1390,6 @@
             this.groupBox_M2v.Controls.Add(this.textBox_LM2v);
             this.groupBox_M2v.Controls.Add(this.label10);
             this.groupBox_M2v.Controls.Add(this.label9);
-            this.groupBox_M2v.Enabled = false;
             this.groupBox_M2v.Location = new System.Drawing.Point(188, 6);
             this.groupBox_M2v.Name = "groupBox_M2v";
             this.groupBox_M2v.Size = new System.Drawing.Size(176, 215);
@@ -1416,7 +1413,7 @@
             this.textBox_DivWM2v.Name = "textBox_DivWM2v";
             this.textBox_DivWM2v.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivWM2v.TabIndex = 38;
-            this.textBox_DivWM2v.Text = "101";
+            this.textBox_DivWM2v.Text = "501";
             this.textBox_DivWM2v.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label53
@@ -1569,7 +1566,7 @@
             this.textBox_DivLM2v.Name = "textBox_DivLM2v";
             this.textBox_DivLM2v.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivLM2v.TabIndex = 14;
-            this.textBox_DivLM2v.Text = "1001";
+            this.textBox_DivLM2v.Text = "501";
             this.textBox_DivLM2v.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_LM2v
@@ -1800,7 +1797,6 @@
             this.groupBox_Focus2.Controls.Add(this.textBox_Detector2ny);
             this.groupBox_Focus2.Controls.Add(this.textBox_Detector2nx);
             this.groupBox_Focus2.Controls.Add(this.textBox_Detector2dx);
-            this.groupBox_Focus2.Enabled = false;
             this.groupBox_Focus2.Location = new System.Drawing.Point(165, 116);
             this.groupBox_Focus2.Name = "groupBox_Focus2";
             this.groupBox_Focus2.Size = new System.Drawing.Size(153, 265);
@@ -1841,7 +1837,7 @@
             this.textBox_Detector2dz.Name = "textBox_Detector2dz";
             this.textBox_Detector2dz.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector2dz.TabIndex = 71;
-            this.textBox_Detector2dz.Text = "500e-9";
+            this.textBox_Detector2dz.Text = "10e-9";
             this.textBox_Detector2dz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label68
@@ -1859,7 +1855,7 @@
             this.textBox_Detector2nz.Name = "textBox_Detector2nz";
             this.textBox_Detector2nz.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector2nz.TabIndex = 73;
-            this.textBox_Detector2nz.Text = "101";
+            this.textBox_Detector2nz.Text = "200";
             this.textBox_Detector2nz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label69
@@ -2014,7 +2010,7 @@
             this.textBox_Detector2ny.Name = "textBox_Detector2ny";
             this.textBox_Detector2ny.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector2ny.TabIndex = 51;
-            this.textBox_Detector2ny.Text = "101";
+            this.textBox_Detector2ny.Text = "200";
             this.textBox_Detector2ny.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Detector2nx
@@ -2023,7 +2019,7 @@
             this.textBox_Detector2nx.Name = "textBox_Detector2nx";
             this.textBox_Detector2nx.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector2nx.TabIndex = 37;
-            this.textBox_Detector2nx.Text = "11";
+            this.textBox_Detector2nx.Text = "1";
             this.textBox_Detector2nx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Detector2dx
@@ -2129,7 +2125,7 @@
             this.textBox_Detector1nz.Name = "textBox_Detector1nz";
             this.textBox_Detector1nz.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector1nz.TabIndex = 58;
-            this.textBox_Detector1nz.Text = "256";
+            this.textBox_Detector1nz.Text = "200";
             this.textBox_Detector1nz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label58
@@ -2266,7 +2262,7 @@
             this.textBox_Detector1ny.Name = "textBox_Detector1ny";
             this.textBox_Detector1ny.Size = new System.Drawing.Size(60, 19);
             this.textBox_Detector1ny.TabIndex = 46;
-            this.textBox_Detector1ny.Text = "256";
+            this.textBox_Detector1ny.Text = "200";
             this.textBox_Detector1ny.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label32
@@ -2594,7 +2590,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox_ErrM1h_InPlane;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.TextBox textBox_ErrM1h_Rolling;
@@ -2646,7 +2642,7 @@
         private System.Windows.Forms.CheckBox checkBox_TwoStage;
         private System.Windows.Forms.GroupBox groupBox_ErrM1v;
         private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.TextBox textBox_ErrM1v_Inplane;
+        private System.Windows.Forms.TextBox textBox_ErrM1v_InPlane;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.TextBox textBox_ErrM1v_Rolling;

@@ -184,7 +184,6 @@ namespace ClsNac.Mirror2D
         public Mirror2D(Parameter _pm, Mirror2D _m0)
         {
             m0 = _m0;
-
             Initialize(_pm);
         }
 
@@ -246,11 +245,8 @@ namespace ClsNac.Mirror2D
             return (double)pm.pos * pm.b * Math.Sqrt(1 - Math.Pow(x / pm.a, 2.0));
         }
 
-        public void Source(int _divY, int _divZ, double dy = 0.0, double dz = 0.0)
+        public void Source(int _divY, int _divZ, double dy = 0.0, double dz = 0.0,double by=0.0,double bz=0.0)
         {
-            //double s_xc = s.xc;
-            //double s_yc = s.yc;
-            //double s_zc = s.zc;
             s = new Coord(_divY, _divZ);
 
             for (int i = 0; i < _divY; i++)
@@ -258,8 +254,8 @@ namespace ClsNac.Mirror2D
                 for (int j = 0; j < _divZ; j++)
                 {
                     s.x[i * _divZ + j] = s0.xc;
-                    s.y[i * _divZ + j] = s0.yc + (-_divY / 2.0 + i) * dy;
-                    s.z[i * _divZ + j] = s0.zc + (-_divZ / 2.0 + j) * dz;
+                    s.y[i * _divZ + j] = s0.yc + (-_divY / 2.0 + i) * dy + by;
+                    s.z[i * _divZ + j] = s0.zc + (-_divZ / 2.0 + j) * dz + bz;
                     s.real[i * _divZ + j] = 1.0;
                     s.imag[i * _divZ + j] = 0.0;
                 }
@@ -320,11 +316,20 @@ namespace ClsNac.Mirror2D
                     this.f0.RotCoord(0.0, 0.0, 2.0 * (double)m0.pm.pos * m0.pm.theta_i, m0.m.xc, m0.m.yc, m0.m.zc);
                 }
             }
-            else
+            else if(this.pm.dir==Dir.Horizontal)
             {
                 if (m0.pm.dir == Dir.Vertical)
-                { }
-                else
+                {         
+                    //前ミラーの入射光線に合わせる
+                    this.m.RotCoord((double)m0.pm.pos * m0.pm.theta_s, (double)pm.pos * pm.theta_s,0.0 , s0.xc, s0.yc, s0.zc);
+                    //前ミラーの出射光線に合わせる
+                    this.m.RotCoord(2.0 * (double)m0.pm.pos * m0.pm.theta_i, 0.0, 0.0, m0.m.xc, m0.m.yc, m0.m.zc);
+                    //前ミラーの入射光線に合わせる
+                    this.f0.RotCoord((double)m0.pm.pos * m0.pm.theta_s, (double)pm.pos * pm.theta_s, 0.0, s0.xc, s0.yc, s0.zc);
+                    //前ミラーの出射光線に合わせる
+                    this.f0.RotCoord(2.0 * (double)m0.pm.pos * m0.pm.theta_i, 0.0, 0.0, m0.m.xc, m0.m.yc, m0.m.zc);
+                }
+                else if(m0.pm.dir==Dir.Horizontal)
                 { }
             }
 
