@@ -74,18 +74,24 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <ExecutablePath>C:\fftw;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>C:\fftw;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\fftw;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>C:\fftw32;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\fftw32;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\fftw32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>C:\fftw64;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\fftw64;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\fftw64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>C:\fftw64;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>C:\fftw64;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\fftw64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
