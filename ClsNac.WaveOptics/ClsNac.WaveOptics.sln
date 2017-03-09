@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClsNac.WaveOptics", "ClsNac.WaveOptics\ClsNac.WaveOptics.vcxproj", "{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cuWaveOptics", "cuWaveOptics\cuWaveOptics.vcxproj", "{5230FBE5-484A-406A-BE96-A2F272987F1A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppWaveOptics", "cppWaveOptics\cppWaveOptics.vcxproj", "{9123EE02-37C6-444C-A447-EF35654C0FF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +13,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Debug|x64.ActiveCfg = Debug|x64
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Debug|x64.Build.0 = Debug|x64
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Debug|x86.ActiveCfg = Debug|Win32
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Debug|x86.Build.0 = Debug|Win32
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Release|x64.ActiveCfg = Release|x64
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Release|x64.Build.0 = Release|x64
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Release|x86.ActiveCfg = Release|Win32
-		{778ADD1E-DFF0-406C-BD74-BE6FACF3D320}.Release|x86.Build.0 = Release|Win32
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Debug|x64.ActiveCfg = Debug|x64
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Debug|x64.Build.0 = Debug|x64
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Debug|x86.ActiveCfg = Debug|Win32
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Debug|x86.Build.0 = Debug|Win32
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Release|x64.ActiveCfg = Release|x64
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Release|x64.Build.0 = Release|x64
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Release|x86.ActiveCfg = Release|Win32
-		{5230FBE5-484A-406A-BE96-A2F272987F1A}.Release|x86.Build.0 = Release|Win32
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Debug|x64.ActiveCfg = Debug|x64
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Debug|x64.Build.0 = Debug|x64
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Debug|x86.ActiveCfg = Debug|Win32
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Debug|x86.Build.0 = Debug|Win32
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Release|x64.ActiveCfg = Release|x64
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Release|x64.Build.0 = Release|x64
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Release|x86.ActiveCfg = Release|Win32
+		{9123EE02-37C6-444C-A447-EF35654C0FF5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
