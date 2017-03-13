@@ -16,13 +16,13 @@ void ClsNac::cppWaveOptics::Propagate1D(double _lambda, int _dir,
 		|| _x2->Length != div2 || _y2->Length != div2)
 		return;
 
-#pragma omp parallel for schedule(static)
+#pragma omp parallel for private(i)
 	for (int i = 0; i < div2; i++)
 	{
 		for (int j = 0; j < div1; j++)
 		{
 			double xy = Math::Sqrt(Math::Pow(_x2[i] - _x1[j], 2.0) + Math::Pow(_y2[i] - _y1[j], 2.0));
-			_u2[i] += _u1[j] * Complex::Exp(Complex::ImaginaryOne*k*xy) / Math::Sqrt(xy);
+			_u2[i] += _u1[j] * Complex::Exp(_dir*Complex::ImaginaryOne*k*xy) / Math::Sqrt(xy);
 		}
 	}
 
@@ -40,16 +40,16 @@ void ClsNac::cppWaveOptics::Propagate2D(double _lambda, int _dir,
 		|| _x2->Length != div2 || _y2->Length != div2 || _z2->Length != div2)
 		return;
 
-#pragma omp parallel for schedule(static)
-	for (int i_2 = 0; i_2 < div2; i_2++)
+#pragma omp parallel for private(j)
+	for (int j = 0; j < div2; j++)
 	{
-		for (int i_1 = 0; i_1 < div1; i_1++)
+		for (int i = 0; i < div1; i++)
 		{
 			double xyz = Math::Sqrt(
-				Math::Pow(_x2[i_2] - _x1[i_1], 2.0) +
-				Math::Pow(_y2[i_2] - _y1[i_1], 2.0) +
-				Math::Pow(_z2[i_2] - _z1[i_1], 2.0));
-			_u2[i_2] += _u1[i_1] * Complex::Exp(-Complex::ImaginaryOne*k*xyz) / xyz;
+				Math::Pow(_x2[j] - _x1[i], 2.0) +
+				Math::Pow(_y2[j] - _y1[i], 2.0) +
+				Math::Pow(_z2[j] - _z1[i], 2.0));
+			_u2[j] += _u1[i] * Complex::Exp(_dir*Complex::ImaginaryOne*k*xyz) / xyz;
 		}
 	}
 
