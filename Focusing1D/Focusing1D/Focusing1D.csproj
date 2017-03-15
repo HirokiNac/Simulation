@@ -61,6 +61,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="cliWaveOptics">
+      <HintPath>.\cliWaveOptics.dll</HintPath>
+    </Reference>
     <Reference Include="MathNet.Numerics, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\MathNet.Numerics.dll</HintPath>

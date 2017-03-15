@@ -18,6 +18,19 @@ namespace ClsNac {
 		double k;
 
 	public:
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="_lambda"></param>
+		cliWaveOptics(double _lambda)
+		{
+			Core = omp_get_num_procs();
+		
+			lambda = _lambda;
+			k = 2.0*PI / _lambda;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -33,6 +46,7 @@ namespace ClsNac {
 			lambda = _lambda;
 			k = 2.0*PI / _lambda;
 		}
+		
 		~cliWaveOptics()
 		{
 			this->!cliWaveOptics();
@@ -54,7 +68,7 @@ namespace ClsNac {
 		/// <param name="_u2"></param>
 		void Propagate1D(int _dir,
 			 array<double>^ _x1, array<double>^ _y1, array<Complex>^ _u1,
-			 array<double>^ _x2, array<double>^ _y2,[OutAttribute] array<Complex>^ %_u2);
+			 array<double>^ _x2, array<double>^ _y2,array<Complex>^ %_u2);
 
 		/// <summary>
 		/// 
@@ -70,10 +84,7 @@ namespace ClsNac {
 		/// <param name="_u2i"></param>
 		void Propagate1D(int _dir,
 			array<double>^ _x1, array<double>^ _y1, array<double>^ _u1r, array<double>^ _u1i,
-			array<double>^ _x2, array<double>^ _y2, [OutAttribute] array<double>^ %_u2r, [OutAttribute] array<double>^ %_u2i);
-
-		
-
+			array<double>^ _x2, array<double>^ _y2, array<double>^ %_u2r, array<double>^ %_u2i);
 
 		/// <summary>
 		/// 
@@ -87,9 +98,13 @@ namespace ClsNac {
 		/// <param name="_y2"></param>
 		/// <param name="_z2"></param>
 		/// <param name="_u2"></param>
-		void Propagate2D( int _dir,
-			 array<double>^_x1,  array<double>^_y1,  array<double>^_z1,  array<Complex>^_u1,
-			 array<double>^_x2,  array<double>^_y2,  array<double>^_z2,[OutAttribute] array<Complex>^%_u2);
+		void Propagate2D(int _dir,
+			array<double>^_x1, array<double>^_y1, array<double>^_z1, array<Complex>^_u1,
+			array<double>^_x2, array<double>^_y2, array<double>^_z2, array<Complex>^ %_u2);
+
+		void Propagate2D(int _dir,
+			array<double, 2>^_x1, array<double, 2>^_y1, array<double, 2>^_z1, array<Complex, 2>^_u1,
+			array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2, array<Complex, 2>^ %_u2);
 
 		/// <summary>
 		/// 
@@ -107,7 +122,7 @@ namespace ClsNac {
 		/// <param name="_u2i"></param>
 		void Propagate2D(int _dir,
 			array<double>^_x1, array<double>^_y1, array<double>^_z1, array<double>^_u1r, array<double>^_u1i,
-			array<double>^_x2, array<double>^_y2, array<double>^_z2, [OutAttribute] array<double>^%_u2r,[OutAttribute] array<double>^%_u2i);
+			array<double>^_x2, array<double>^_y2, array<double>^_z2, array<double>^%_u2r, array<double>^%_u2i);
 
 
 	};

@@ -30,8 +30,10 @@ void ClsNac::cliWaveOptics::Propagate1D(const int _dir,
 }
 
 void ClsNac::cliWaveOptics::Propagate1D(int _dir, 
-	array<double>^ _x1, array<double>^ _y1, array<double>^ _u1r, array<double>^ _u1i, 
-	array<double>^ _x2, array<double>^ _y2,[OutAttribute] array<double>^ %_u2r,[OutAttribute] array<double>^ %_u2i)
+	array<double>^ _x1, array<double>^ _y1, 
+	array<double>^ _u1r, array<double>^ _u1i, 
+	array<double>^ _x2, array<double>^ _y2, 
+	[OutAttribute] array<double>^ %_u2r,[OutAttribute] array<double>^ %_u2i)
 {
 	int n1 = _x1->Length;
 	int n2 = _x2->Length;
@@ -95,13 +97,41 @@ void ClsNac::cliWaveOptics::Propagate2D(const int _dir,
 
 }
 
-void ClsNac::cliWaveOptics::Propagate2D(const int _dir, 
-	array<double>^ _x1, array<double>^ _y1, array<double>^ _z1, array<double>^ _u1r, array<double>^ _u1i, 
-	array<double>^ _x2, array<double>^ _y2, array<double>^ _z2,[OutAttribute] array<double>^ %_u2r,[OutAttribute] array<double>^ %_u2i)
+
+void ClsNac::cliWaveOptics::Propagate2D(int _dir,
+	array<double, 2>^_x1, array<double, 2>^_y1, array<double, 2>^_z1, array<Complex, 2>^_u1,
+	array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2,[OutAttribute] array<Complex, 2>^ %_u2)
+{
+	int m1 = _x1->GetLength(0);
+	int m2 = _x1->GetLength(1);
+	int n1 = _x2->GetLength(0);
+	int n2 = _x2->GetLength(1);
+
+	if (_y1->GetLength(0) != m1 || _y1->GetLength(1) != m2
+		|| _z1->GetLength(0) != m1 || _z1->GetLength(1) != m2
+		|| _u1->GetLength(0) != m1 || _u1->GetLength(1) != m2
+		|| _y2->GetLength(0) != n1 || _y2->GetLength(1) != n2
+		|| _z2->GetLength(0) != n1 || _z2->GetLength(1) != n2
+		|| _u2->GetLength(0) != n1 || _u2->GetLength(1) != n2)
+		return;
+
+
+
+
+
+}
+
+
+
+void ClsNac::cliWaveOptics::Propagate2D(const int _dir,
+	array<double>^ _x1, array<double>^ _y1, array<double>^ _z1,
+	array<double>^ _u1r, array<double>^ _u1i,
+	array<double>^ _x2, array<double>^ _y2, array<double>^ _z2,
+	[OutAttribute] array<double>^ %_u2r, [OutAttribute] array<double>^ %_u2i)
 {
 	int n1 = _x1->Length;
 	int n2 = _x2->Length;
-	if (_y1->Length != n1 || _z1->Length != n1 || _u1r->Length != n1||_u1i->Length!=n1
+	if (_y1->Length != n1 || _z1->Length != n1 || _u1r->Length != n1 || _u1i->Length != n1
 		|| _y2->Length != n2 || _z2->Length != n2)
 		return;
 
