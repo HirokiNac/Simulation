@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppWaveOptics", "cppWaveOptics\cppWaveOptics.vcxproj", "{9123EE02-37C6-444C-A447-EF35654C0FF5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cliWaveOptics", "cliWaveOptics\cppWaveOptics.vcxproj", "{9123EE02-37C6-444C-A447-EF35654C0FF5}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cuWaveOptics", "cuWaveOptics\cuWaveOptics.vcxproj", "{97A66D7F-5A06-4738-8E3E-3251EE8D0139}"
 EndProject
