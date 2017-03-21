@@ -124,6 +124,23 @@ namespace ClsNac {
 			array<double>^_x1, array<double>^_y1, array<double>^_z1, array<double>^_u1r, array<double>^_u1i,
 			array<double>^_x2, array<double>^_y2, array<double>^_z2, array<double>^%_u2r, array<double>^%_u2i);
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="_dir"></param>
+		/// <param name="_x1"></param>
+		/// <param name="_y1"></param>
+		/// <param name="_z1"></param>
+		/// <param name="_u1r"></param>
+		/// <param name="_u1i"></param>
+		/// <param name="_x2"></param>
+		/// <param name="_y2"></param>
+		/// <param name="_z2"></param>
+		/// <param name="_u2r"></param>
+		/// <param name="_u2i"></param>
+		void Propagate2D(int _dir,
+			array<double, 2>^_x1, array<double, 2>^_y1, array<double, 2>^_z1, array<double, 2>^_u1r, array<double, 2>^_u1i,
+			array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2, array<double, 2>^%_u2r, array<double, 2>^%_u2i);
 
 	};
 }

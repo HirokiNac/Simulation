@@ -18,43 +18,43 @@ dim3 calcBlock(dim3 thread, int x, int y)
 }
 
 
-__global__ void PropFw1D(const double _k,
+__global__ void kernelProp1D(const double _k,const int _dir,
 	const int _n1, const double* _x1, const double* _y1, const double* _u1re, const double* _u1im,
 	const int _n2, const double* _x2, const double* _y2, double* _u2re, double* _u2im)
 {
-	const unsigned int col = blockIdx.x * blockDim.x + threadIdx.x;
+	const unsigned int i = blockIdx.x * blockDim.x + threadIdx.x;
 
 	double r, rx, ry, rr;
 	double tr, ti;
 	double tur, tui;
 	double ur = 0.0, ui = 0.0;
-	if (col < _n2)
+	if (i < _n2)
 	{
 		for (int j = 0; j < _n1; j++)
 		{
-			rx = _x2[col] - _x1[j];
-			ry = _y2[col] - _y1[j];
+			rx = _x2[i] - _x1[j];
+			ry = _y2[i] - _y1[j];
 			r = sqrt(rx*rx + ry*ry);
 
 			rr = 1.0 / sqrt(r);
-			tr = cos(-_k*r) * rr;
-			ti = sin(-_k*r) * rr;
+			tr = cos(_dir*_k*r) * rr;
+			ti = sin(_dir*_k*r) * rr;
 
 			tur = _u1re[j];
 			tui = _u1im[j];
 
-			ur = ur + tur*tr - tui*ti;
-			ui = ui + tur*ti + tui*tr;
+			ur += tur*tr - tui*ti;
+			ui += tur*ti + tui*tr;
 
 		}
-		_u2re[col] = _u2re[col] + ur;
-		_u2im[col] = _u2im[col] + ui;
+		_u2re[i] += ur;
+		_u2im[i] += ui;
 
 	}
 
 }
 
-__global__ void PropFw1D_f(const float _k,
+__global__ void kernelProp1D_f(const float _k,const int _dir,
 	const int _n1, const float* _x1, const float* _y1, const float* _u1re, const float* _u1im,
 	const int _n2, const float* _x2, const  float* _y2, float* _u2re, float* _u2im)
 {

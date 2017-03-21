@@ -115,10 +115,25 @@ void ClsNac::cliWaveOptics::Propagate2D(int _dir,
 		|| _u2->GetLength(0) != n1 || _u2->GetLength(1) != n2)
 		return;
 
+#pragma omp parallel for private(i) num_threads(Core) schedule(static)
+	for (int j = 0; j < n1*n2; j++)
+	{
+		int j1 = j / n1;
+		int j2 = j%n1;
+		Complex u2 = 0.0;
+		for (int i = 0; i < m1*m2; i++)
+		{
+			int i1 = i / m1;
+			int i2 = i%m1;
 
-
-
-
+			double xyz = Math::Sqrt(
+				Math::Pow(_x2[j1, j2] - _x1[i1, i2], 2.0) +
+				Math::Pow(_y2[j1, j2] - _y1[i1, i2], 2.0) +
+				Math::Pow(_z2[j1, j2] - _z1[i1, i2], 2.0));
+			u2 += _u1[i1, i2] * Complex::Exp(_dir*Complex::ImaginaryOne*k*xyz) / xyz;
+		}
+		_u2[j1, j2] = u2;
+	}
 }
 
 
@@ -165,3 +180,57 @@ void ClsNac::cliWaveOptics::Propagate2D(const int _dir,
 
 }
 
+void ClsNac::cliWaveOptics::Propagate2D(int _dir,
+	array<double, 2>^_x1, array<double, 2>^_y1, array<double, 2>^_z1, 
+	array<double, 2>^_u1r, array<double, 2>^_u1i,
+	array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2, 
+	[OutAttribute] array<double, 2>^ %_u2r, [OutAttribute] array<double, 2>^%_u2i)
+{
+	int m1 = _x1->GetLength(0);
+	int m2 = _x1->GetLength(1);
+	int n1 = _x2->GetLength(0);
+	int n2 = _x2->GetLength(1);
+
+	if (_y1->GetLength(0) != m1 || _y1->GetLength(1) != m2
+		|| _z1->GetLength(0) != m1 || _z1->GetLength(1) != m2
+		|| _u1r->GetLength(0) != m1 || _u1r->GetLength(1) != m2
+		|| _u1i->GetLength(0) != m1 || _u1i->GetLength(1) != m2
+		|| _y2->GetLength(0) != n1 || _y2->GetLength(1) != n2
+		|| _z2->GetLength(0) != n1 || _z2->GetLength(1) != n2
+		|| _u2r->GetLength(0) != n1 || _u2r->GetLength(1) != n2
+		|| _u2i->GetLength(0) != n1 || _u2i->GetLength(1) != n2)
+		return;
+
+#pragma omp parallel for private(i) num_threads(Core) schedule(static)
+	for (int j = 0; j < n1*n2; j++)
+	{
+		int j1 = j / n1;
+		int j2 = j%n1;
+		double ur = 0.0;
+		double ui = 0.0;
+		for (int i = 0; i < m1*m2; i++)
+		{
+			int i1 = i / m1;
+			int i2 = i%m1;
+
+			double rx = _x2[j1, j2] - _x1[i1, i2];
+			double ry = _y2[j1, j2] - _y1[i1, i2];
+			double rz = _z2[j1, j2] - _z1[i1, i2];
+
+			double r = Math::Sqrt(rx*rx + ry*ry + rz*rz);
+			double rr = 1.0 / r;
+
+			double tr = Math::Cos(_dir*k*r)*rr;
+			double ti = Math::Sin(_dir*k*r)*rr;
+
+			ur += _u1r[i1, i2] * tr - _u1i[i1, i2] * ti;
+			ui += _u1r[i1, i2] * ti + _u1i[i1, i2] * tr;
+		}
+		_u2r[j1, j2] = ur;
+		_u2i[j1, j2] = ui;
+	}
+
+
+
+
+}
