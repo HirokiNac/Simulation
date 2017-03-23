@@ -70,9 +70,13 @@ namespace ClsNac.Mirror2D
             divW = _divW;
 
             x = new double[div];
+            x2 = new double[divW, divL];
             y = new double[div];
+            y2 = new double[divW, divL];
             z = new double[div];
+            z2 = new double[divW, divL];
             u = new Complex[div];
+            u2 = new Complex[divW, divL];
             real = new double[div];
             imag = new double[div];
         }
@@ -95,18 +99,18 @@ namespace ClsNac.Mirror2D
             {
                 for (int j = 0; j < divL; j++)
                 {
-                    double xx = x[i*divL+j] - x0;
+                    double xx = x[i * divL + j] - x0;
                     double yy = y[i * divL + j] - y0;
                     double zz = z[i * divL + j] - z0;
-                    x[i * divL + j] = xx * Math.Cos(t_x) * Math.Cos(t_y)
+                    x2[i, j] = x[i * divL + j] = xx * Math.Cos(t_x) * Math.Cos(t_y)
                         + yy * (Math.Sin(t_z) * Math.Cos(t_x) + Math.Cos(t_z) * Math.Sin(t_y) * Math.Sin(t_x))
                         + zz * (Math.Sin(t_z) * Math.Sin(t_x) - Math.Cos(t_z) * Math.Sin(t_y) * Math.Cos(t_x))
                         + x0;
-                    y[i * divL + j] = -xx * Math.Sin(t_z) * Math.Cos(t_y)
+                    y2[i, j] = y[i * divL + j] = -xx * Math.Sin(t_z) * Math.Cos(t_y)
                         + yy * (Math.Cos(t_z) * Math.Cos(t_x) - Math.Sin(t_z) * Math.Sin(t_y) * Math.Sin(t_x))
                         + zz * (Math.Cos(t_z) * Math.Sin(t_x) + Math.Sin(t_z) * Math.Sin(t_y) * Math.Cos(t_x))
                         + y0;
-                    z[i * divL + j] = xx * Math.Sin(t_y)
+                    z2[i, j] = z[i * divL + j] = xx * Math.Sin(t_y)
                         - yy * Math.Cos(t_y) * Math.Sin(t_x)
                         + zz * Math.Cos(t_y) * Math.Cos(t_x)
                         + z0;
@@ -229,9 +233,11 @@ namespace ClsNac.Mirror2D
             {
                 for (int j = 0; j < pm.divL; j++)
                 {
-                    m.x[i * pm.divL + j] = m_xc - pm.ML / 2.0 + dx * j;
-                    m.y[i * pm.divL + j] = m_yc - pm.MW / 2.0 + dy * i;
-                    m.z[i * pm.divL + j] = ell_z(m.x[i * pm.divL + j], m.y[i * pm.divL + j]);
+                    m.x2[i, j] = m.x[i * pm.divL + j] = m_xc - pm.ML / 2.0 + dx * j;
+                    m.y2[i, j] = m.y[i * pm.divL + j] = m_yc - pm.MW / 2.0 + dy * i;
+                    m.z2[i, j] = m.z[i * pm.divL + j] = ell_z(m.x[i * pm.divL + j], m.y[i * pm.divL + j]);
+
+                    
                 }
             }
             if (pm.dir == Dir.Horizontal)
@@ -272,9 +278,10 @@ namespace ClsNac.Mirror2D
             {
                 for (int j = 0; j < divZ; j++)
                 {
-                    f[0].x[i * divZ + j] = f0.xc + bx;
-                    f[0].y[i * divZ + j] = f0.yc + (-divY / 2 + i) * dy + by;
-                    f[0].z[i * divZ + j] = f0.zc + (-divZ / 2 + j) * dz + bz;
+                    f[0].x2[i, j] = f[0].x[i * divZ + j] = f0.xc + bx;
+                    f[0].y2[i, j] = f[0].y[i * divZ + j] = f0.yc + (-divY / 2 + i) * dy + by;
+                    f[0].z2[i, j] = f[0].z[i * divZ + j] = f0.zc + (-divZ / 2 + j) * dz + bz;
+                    
                 }
             }
 
@@ -290,6 +297,11 @@ namespace ClsNac.Mirror2D
             double[] z = m.z;
             m.y = z;
             m.z = y;
+
+            double[,] y2 = m.y2;
+            double[,] z2 = m.z2;
+            m.y2 = z2;
+            m.z2 = y2;
         }
 
         void changeAngle(Mirror2D m0)
@@ -341,6 +353,12 @@ namespace ClsNac.Mirror2D
             double yc = m.yc;
             double zc = m.zc;
 
+        }
+
+
+        public void setIntensity()
+        {
+            
         }
     }
 
