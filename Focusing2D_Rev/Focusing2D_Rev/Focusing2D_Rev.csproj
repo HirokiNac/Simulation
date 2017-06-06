@@ -59,7 +59,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MathNet.Numerics">
-      <HintPath>..\..\MathNet.Numerics.dll</HintPath>
+      <HintPath>..\..\..\JTEC\ZernikeTest\ZernikeTest\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -73,7 +73,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="ZedGraph">
-      <HintPath>..\..\ZedGraph.dll</HintPath>
+      <HintPath>..\..\Focusing1D\Focusing1D\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

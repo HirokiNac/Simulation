@@ -51,6 +51,7 @@ namespace Focusing2D_Rev
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\x.txt", m2d.m.x3);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\y.txt", m2d.m.y3);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z.txt", m2d.m.z3);
+                    ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_raw.txt", m2d.m.z);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_mod.txt", m2d.m.z3_mod);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_torus.txt", m2d.m.z_torus);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_torus_sub.txt", m2d.m.z_torus_sub);
