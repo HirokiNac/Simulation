@@ -1,4 +1,4 @@
-﻿#define CL
+﻿#define CLI
 
 using System;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClsNac.Mirror2D;
 using System.Runtime.InteropServices;
+using System.Numerics;
 
 namespace Focusing2D
 {
@@ -148,7 +149,36 @@ namespace Focusing2D
 
 
                 //var progress = new Progress<ClsNac.Mirror2D.WaveField.ProgressInfo>(this.ProgressReport);
-#if CL
+
+#if CLI
+
+                ClsNac.cliWaveOptics wo = new ClsNac.cliWaveOptics(lambda);
+                Complex[] u = new Complex[m1h.m.div];
+                m1h.s.u[0] = 1.0;
+                wo.Propagate2D(-1, m1h.s.x, m1h.s.y, m1h.s.z, m1h.s.u, m1h.m.x, m1h.m.y, m1h.m.z, ref u);
+                m1h.m.u = u;
+                u = new Complex[m1v.m.div];
+                wo.Propagate2D(-1, m1h.m.x, m1h.m.y, m1h.m.z, m1h.m.u, m1v.m.x, m1v.m.y, m1v.m.z, ref u);
+                m1v.m.u = u;
+                u = new Complex[m1v.f[0].div];
+                wo.Propagate2D(-1, m1v.m.x, m1v.m.y, m1v.m.z, m1v.m.u, m1v.f[0].x, m1v.f[0].y, m1v.f[0].z, ref u);
+                m1v.f[0].u = u;
+
+                double[,] intens = new double[m1v.f[0].divL, m1v.f[0].divW];
+                for(int i=0;i<m1v.f[0].divL;i++)
+                {
+                    for (int j = 0; j < m1v.f[0].divW; j++)
+                    {
+                        intens[i, j] = Math.Pow(m1v.f[0].u[i * m1v.f[0].divW + j].Magnitude, 2.0);
+                    }
+                }
+
+                //ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m1h_Intensity.txt", m1h.m.Intensity2);
+                //ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\m1v_Intensity.txt", m1v.m.Intensity2);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\f1_Intensity.txt", intens);
+
+
+#elif CL
 
                 ClsNac.WaveOptics.WaveField2D wf_source = new ClsNac.WaveOptics.WaveField2D(m1h.s.divL, m1h.s.divW);
                 wf_source.x = m1h.s.x;

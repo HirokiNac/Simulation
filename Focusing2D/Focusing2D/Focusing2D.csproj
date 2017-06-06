@@ -59,6 +59,9 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="cliWaveOptics">
+      <HintPath>.\cliWaveOptics.dll</HintPath>
+    </Reference>
     <Reference Include="ClsNac.WaveOptics.cs, Version=1.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\ClsNac.WaveOptics.cs.dll</HintPath>

@@ -5,21 +5,19 @@
 
 void ClsNac::cliWaveOptics::Propagate1D(const int _dir,
 	array<double>^ _x1, array<double>^ _y1, array<Complex>^ _u1,
-	array<double>^ _x2, array<double>^ _y2,[OutAttribute] array<Complex>^ %_u2)
+	array<double>^ _x2, array<double>^ _y2, array<Complex>^ %_u2)
 {
-	int n1 = _x1->Length;
-	int n2 = _x2->Length;
-	if (_y1->Length != n1 || _u1->Length != n1
-		|| _y2->Length != n2)
+	int m = _x1->Length;
+	int n = _x2->Length;
+	if (_y1->Length != m || _u1->Length != m
+		|| _y2->Length != n || _u2->Length != n)
 		return;
 
-	_u2 = gcnew array<Complex>(n2);
-
-#pragma omp parallel for private(i) num_threads(Core) schedule(static)
-	for (int i = 0; i < n2; i++)
+#pragma omp parallel for num_threads(Core) schedule(static)
+	for (int i = 0; i < n; i++)
 	{
 		Complex u = 0.0;
-		for (int j = 0; j < n1; j++)
+		for (int j = 0; j < m; j++)
 		{
 			double xy = Math::Sqrt(Math::Pow(_x2[i] - _x1[j], 2.0) + Math::Pow(_y2[i] - _y1[j], 2.0));
 			u += _u1[j] * Complex::Exp(_dir*Complex::ImaginaryOne*k*xy) / Math::Sqrt(xy);
@@ -33,24 +31,21 @@ void ClsNac::cliWaveOptics::Propagate1D(int _dir,
 	array<double>^ _x1, array<double>^ _y1, 
 	array<double>^ _u1r, array<double>^ _u1i, 
 	array<double>^ _x2, array<double>^ _y2, 
-	[OutAttribute] array<double>^ %_u2r,[OutAttribute] array<double>^ %_u2i)
+	array<double>^ %_u2r, array<double>^ %_u2i)
 {
-	int n1 = _x1->Length;
-	int n2 = _x2->Length;
-	if (_y1->Length != n1 || _u1r->Length != n1 || _u1i->Length != n1 
-		|| _y2->Length != n2)
+	int m = _x1->Length;
+	int n = _x2->Length;
+	if (_y1->Length != m || _u1r->Length != m || _u1i->Length != m
+		|| _y2->Length != n || _u2r->Length != n || _u2i->Length || n)
 		return;
 
-	_u2r = gcnew array<double>(n2);
-	_u2i = gcnew array<double>(n2);
-
-#pragma omp parallel for private(i) num_threads(Core) schedule(static)
-	for (int i = 0; i < n2; i++)
+#pragma omp parallel for num_threads(Core) schedule(static)
+	for (int i = 0; i < n; i++)
 	{
 		double ur = 0.0;
 		double ui = 0.0;
 
-		for (int j = 0; j < n1; j++)
+		for (int j = 0; j < m; j++)
 		{
 			double rx = _x2[i] - _x1[j];
 			double ry = _y2[i] - _y1[j];
@@ -72,20 +67,18 @@ void ClsNac::cliWaveOptics::Propagate1D(int _dir,
 
 void ClsNac::cliWaveOptics::Propagate2D(const int _dir,
 	array<double>^ _x1, array<double>^ _y1, array<double>^_z1, array<Complex>^ _u1,
-	array<double>^ _x2, array<double>^ _y2, array<double>^_z2,[OutAttribute] array<Complex>^ %_u2)
+	array<double>^ _x2, array<double>^ _y2, array<double>^_z2, array<Complex>^ %_u2)
 {
-	int n1 = _x1->Length;
-	int n2 = _x2->Length;
-	if (_y1->Length != n1 || _z1->Length != n1 || _u1->Length != n1
-		|| _y2->Length != n2 || _z2->Length != n2)
+	int m = _x1->Length;
+	int n = _x2->Length;
+	if (_y1->Length != m || _z1->Length != m || _u1->Length != m
+		|| _y2->Length != n || _z2->Length != n || _u2->Length != n)
 		return;
 
-	_u2 = gcnew array<Complex>(n2);
-
-#pragma omp parallel for private(i) num_threads(Core) schedule(static)
-	for (int j = 0; j < n2; j++)
+#pragma omp parallel for num_threads(Core) schedule(static)
+	for (int j = 0; j < n; j++)
 	{
-		for (int i = 0; i < n1; i++)
+		for (int i = 0; i < m; i++)
 		{
 			double xyz = Math::Sqrt(
 				Math::Pow(_x2[j] - _x1[i], 2.0) +
@@ -97,15 +90,16 @@ void ClsNac::cliWaveOptics::Propagate2D(const int _dir,
 
 }
 
-
 void ClsNac::cliWaveOptics::Propagate2D(int _dir,
 	array<double, 2>^_x1, array<double, 2>^_y1, array<double, 2>^_z1, array<Complex, 2>^_u1,
-	array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2,[OutAttribute] array<Complex, 2>^ %_u2)
+	array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2, array<Complex, 2>^ %_u2)
 {
 	int m1 = _x1->GetLength(0);
 	int m2 = _x1->GetLength(1);
+	int m = m1*m2;
 	int n1 = _x2->GetLength(0);
 	int n2 = _x2->GetLength(1);
+	int n = n1*n2;
 
 	if (_y1->GetLength(0) != m1 || _y1->GetLength(1) != m2
 		|| _z1->GetLength(0) != m1 || _z1->GetLength(1) != m2
@@ -115,13 +109,13 @@ void ClsNac::cliWaveOptics::Propagate2D(int _dir,
 		|| _u2->GetLength(0) != n1 || _u2->GetLength(1) != n2)
 		return;
 
-#pragma omp parallel for private(i) num_threads(Core) schedule(static)
-	for (int j = 0; j < n1*n2; j++)
+#pragma omp parallel for num_threads(Core) schedule(static)
+	for (int j = 0; j < n; j++)
 	{
 		int j1 = j / n1;
 		int j2 = j%n1;
 		Complex u2 = 0.0;
-		for (int i = 0; i < m1*m2; i++)
+		for (int i = 0; i < m; i++)
 		{
 			int i1 = i / m1;
 			int i2 = i%m1;
@@ -136,30 +130,25 @@ void ClsNac::cliWaveOptics::Propagate2D(int _dir,
 	}
 }
 
-
-
 void ClsNac::cliWaveOptics::Propagate2D(const int _dir,
 	array<double>^ _x1, array<double>^ _y1, array<double>^ _z1,
 	array<double>^ _u1r, array<double>^ _u1i,
 	array<double>^ _x2, array<double>^ _y2, array<double>^ _z2,
-	[OutAttribute] array<double>^ %_u2r, [OutAttribute] array<double>^ %_u2i)
+	array<double>^ %_u2r,  array<double>^ %_u2i)
 {
-	int n1 = _x1->Length;
-	int n2 = _x2->Length;
-	if (_y1->Length != n1 || _z1->Length != n1 || _u1r->Length != n1 || _u1i->Length != n1
-		|| _y2->Length != n2 || _z2->Length != n2)
+	int m = _x1->Length;
+	int n = _x2->Length;
+	if (_y1->Length != m || _z1->Length != m || _u1r->Length != m || _u1i->Length != m
+		|| _y2->Length != n || _z2->Length != n || _u2r->Length != n || _u2i->Length != n)
 		return;
 
-	_u2r = gcnew array<double>(n2);
-	_u2i = gcnew array<double>(n2);
-
-#pragma omp parallel for private(i) num_threads(Core) schedule(static)
-	for (int i = 0; i < n2; i++)
+#pragma omp parallel for num_threads(Core) schedule(static)
+	for (int i = 0; i < n; i++)
 	{
 		double ur = 0.0;
 		double ui = 0.0;
 
-		for (int j = 0; j < n1; j++)
+		for (int j = 0; j < m; j++)
 		{
 			double rx = _x2[i] - _x1[j];
 			double ry = _y2[i] - _y1[j];
@@ -181,15 +170,17 @@ void ClsNac::cliWaveOptics::Propagate2D(const int _dir,
 }
 
 void ClsNac::cliWaveOptics::Propagate2D(int _dir,
-	array<double, 2>^_x1, array<double, 2>^_y1, array<double, 2>^_z1, 
+	array<double, 2>^_x1, array<double, 2>^_y1, array<double, 2>^_z1,
 	array<double, 2>^_u1r, array<double, 2>^_u1i,
-	array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2, 
-	[OutAttribute] array<double, 2>^ %_u2r, [OutAttribute] array<double, 2>^%_u2i)
+	array<double, 2>^_x2, array<double, 2>^_y2, array<double, 2>^_z2,
+	array<double, 2>^ %_u2r, array<double, 2>^ %_u2i)
 {
 	int m1 = _x1->GetLength(0);
 	int m2 = _x1->GetLength(1);
+	int m = m1*m2;
 	int n1 = _x2->GetLength(0);
 	int n2 = _x2->GetLength(1);
+	int n = n1*n2;
 
 	if (_y1->GetLength(0) != m1 || _y1->GetLength(1) != m2
 		|| _z1->GetLength(0) != m1 || _z1->GetLength(1) != m2
@@ -201,14 +192,15 @@ void ClsNac::cliWaveOptics::Propagate2D(int _dir,
 		|| _u2i->GetLength(0) != n1 || _u2i->GetLength(1) != n2)
 		return;
 
-#pragma omp parallel for private(i) num_threads(Core) schedule(static)
-	for (int j = 0; j < n1*n2; j++)
+#pragma omp parallel for num_threads(Core) schedule(static)
+	for (int j = 0; j < n; j++)
 	{
 		int j1 = j / n1;
 		int j2 = j%n1;
 		double ur = 0.0;
 		double ui = 0.0;
-		for (int i = 0; i < m1*m2; i++)
+
+		for (int i = 0; i < m; i++)
 		{
 			int i1 = i / m1;
 			int i2 = i%m1;
@@ -223,8 +215,8 @@ void ClsNac::cliWaveOptics::Propagate2D(int _dir,
 			double tr = Math::Cos(_dir*k*r)*rr;
 			double ti = Math::Sin(_dir*k*r)*rr;
 
-			ur += _u1r[i1, i2] * tr - _u1i[i1, i2] * ti;
-			ui += _u1r[i1, i2] * ti + _u1i[i1, i2] * tr;
+			ur += (_u1r[i1, i2] * tr - _u1i[i1, i2] * ti);
+			ui += (_u1r[i1, i2] * ti + _u1i[i1, i2] * tr);
 		}
 		_u2r[j1, j2] = ur;
 		_u2i[j1, j2] = ui;

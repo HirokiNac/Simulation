@@ -1,4 +1,4 @@
-﻿//#define CPP
+﻿#define CLI
 
 using System;
 using System.Text;
@@ -68,28 +68,12 @@ namespace ClsNac
 
             public Complex[] u { get; set; }
             public double[] real
-            {
-                get
-                {
-                    double[] _real = new double[div];
-                    for (int i = 0; i < div; i++)
-                        _real[i] = u[i].Real;
-                    return _real;
-                }
-            }
+            { get; set; }
             public double[] imag
-            {
-                get
-                {
-                    double[] _imag = new double[div];
-                    for (int i = 0; i < div; i++)
-                        _imag[i] = u[i].Imaginary;
-                    return _imag;
-                }
-            }
+            { get; set; }
 
-            public double[] Intensity { get; set; }
-            public double[] Phase { get; set; }
+            public double[] Intensity;
+            public double[] Phase;
 
             /// <summary>
             /// Constructor
@@ -111,6 +95,8 @@ namespace ClsNac
                 x = new double[div];
                 y = new double[div];
                 u = new Complex[div];
+                real = new double[div];
+                imag = new double[div];
             }
 
             #region 座標補正
@@ -363,6 +349,9 @@ namespace ClsNac
                     s.x[0]= s_xc;
                     s.y[0] = s_yc;
                     s.u[0] = new Complex(1.0, 0.0);
+                    s.real[0] = 1.0;
+                    s.imag[0] = 1.0;
+                   
                 }
                 s.Rot(pm.theta_s, s.xc, s.yc);
 
@@ -737,11 +726,27 @@ namespace ClsNac
 
             public void ForwardPropagation(Mirror1D.Coord1D Opt1,ref Mirror1D.Coord1D Opt2)
             {
-                Complex[] _u;
-                ForwardPropagation(Opt1.x, Opt1.y, Opt1.u, Opt2.x, Opt2.y, out _u);
+                //
+
+#if CLI
+                double[] _ur = new double[Opt2.u.Length];
+                double[] _ui = new double[Opt2.u.Length];
+                ClsNac.cliWaveOptics wo = new cliWaveOptics(lambda);
+                wo.Propagate1D(-1, Opt1.x, Opt1.y, Opt1.real, Opt1.imag, Opt2.x, Opt2.y, ref _ur, ref _ui);
+                Opt2.real = _ur;
+                Opt2.imag = _ui;
+                InP(_ur, _ui, out Opt2.Intensity, out Opt2.Phase);
+                _ur = null;
+                _ui = null;
+                wo.Dispose();
+#else
+                Complex[] _u = new Complex[Opt2.x.Length];
+                //ForwardPropagation(Opt1.x, Opt1.y, Opt1.u, Opt2.x, Opt2.y, out _u);
+                ClsNac.cliWaveOptics wo = new cliWaveOptics(lambda);
+                wo.Propagate1D(-1, Opt1.x, Opt1.y, Opt1.u, Opt2.x, Opt2.y, ref _u);
                 Opt2.u = _u;
                 InP(ref Opt2);
-                _u = null;
+#endif
             }
 
             public void ForwardPropagation(double[] x1, double[] y1, Complex[] u1, double[] x2, double[] y2, out Complex[] u2)
@@ -763,7 +768,7 @@ namespace ClsNac
                 }
                 int div2 = x2.Length;
 
-                #region 伝播元の微小長さの計算
+#region 伝播元の微小長さの計算
                 double[] ds = new double[div1];
 
                 //伝播元の微小長さの計算
@@ -779,9 +784,9 @@ namespace ClsNac
                 {
                     ds[0] = 1;
                 }
-                #endregion
+#endregion
 
-                #region 伝播計算
+#region 伝播計算
                 Complex[] _u2 = new Complex[div2];
 #if CPP
                 ClsNac.WF1D.fProp(lambda, x1, y1, u1, x2, y2, _u2);
@@ -822,6 +827,20 @@ namespace ClsNac
                     Intensity[i] = Math.Pow(u[i].Magnitude, 2.0);
                     Phase[i] = u[i].Phase;
                 }
+            }
+
+            public static void InP(double[] _real,double[] _imag,out double[] _Intensity,out double[] _Phase)
+            {
+                int div = _real.Length;
+                //強度計算
+                _Intensity = new double[div];
+                _Phase = new double[div];
+                for (int i = 0; i < div; i++)
+                {
+                    _Intensity[i] = _real[i] * _real[i] + _imag[i] * _imag[i];
+                    _Phase[i] = 0;
+                }
+
             }
 #endregion
         }
