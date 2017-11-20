@@ -85,7 +85,7 @@ __global__ void kernelProp1D_f(const float _k,const int _dir,
 
 }
 
-__global__ void PropFw2D(const double _k,
+__global__ void kernelProp2D(const double _k,const int _dir,
 	const int _n1, const double* _x1, const double* _y1, const  double* _z1, const  double* _u1re, const  double* _u1im,
 	const int _n2, const double* _x2, const double* _y2, const double* _z2, double* _u2re, double* _u2im)
 {
@@ -127,7 +127,7 @@ __global__ void PropFw2D(const double _k,
 	__syncthreads();
 }
 
-__global__ void PropFw2D2(const double _k,
+__global__ void kernelProp2D2(const double _k,
 	const int _m1,const int _n1, const double* _x1, const double* _y1, const  double* _z1, const  double* _u1re, const  double* _u1im,
 	const int _m2,const int _n2, const double* _x2, const double* _y2, const double* _z2, double* _u2re, double* _u2im)
 {
@@ -256,7 +256,7 @@ int _n2, double* _x2, double* _y2, double* &_u2re, double* &_u2im)
 	cudaMalloc((void**)&du2im, memsize2);
 	//cudaMemcpy(du2im, _u2im, memsize2, cudaMemcpyHostToDevice);
 
-	PropFw1D << <numBlock, threadsPerBlock >> >(_k, _n1, dx1, dy1, du1re, du1im, _n2, dx2, dy2, du2re, du2im);
+	kernelProp1D << <numBlock, threadsPerBlock >> > (_k, -1, _n1, dx1, dy1, du1re, du1im, _n2, dx2, dy2, du2re, du2im);
 
 	double* u2re_out = 0;
 	cudaMallocHost((void**)&u2re_out, memsize2);
@@ -331,7 +331,7 @@ int _n2, float* _x2, float* _y2, float* &_u2re, float* &_u2im)
 	cudaMalloc((void**)&du1im, memsize1);
 	cudaMemcpy(du2im, _u2im, memsize1, cudaMemcpyHostToDevice);
 
-	PropFw1D_f << <_n2 / 512, 512 >> >(_k, _n1, dx1, dy1, du1re, du1im, _n2, dx2, dy2, du2re, du2im);
+	kernelProp1D_f << <_n2 / 512, 512 >> >(_k, _n1, dx1, dy1, du1re, du1im, _n2, dx2, dy2, du2re, du2im);
 
 	//out
 	float* u2re_out = (float*)malloc(memsize2);
@@ -419,7 +419,7 @@ int _n2, double* _x2, double* _y2, double* _z2, double* &_u2re, double* &_u2im)
 	cudaMalloc((void**)&du2im, memsize2);
 	//cudaMemcpy(du2im, _u2im, memsize2, cudaMemcpyHostToDevice);
 	//dim3 b = calcBlock(threadsPerBlock, _n2, 1);
-	PropFw2D << <calcBlock(threadsPerBlock, _n2, 1), threadsPerBlock >> >(_k, _n1, dx1, dy1, dz1, du1re, du1im, _n2, dx2, dy2, dz2, du2re, du2im);
+	kernelProp2D << <calcBlock(threadsPerBlock, _n2, 1), threadsPerBlock >> >(_k, _n1, dx1, dy1, dz1, du1re, du1im, _n2, dx2, dy2, dz2, du2re, du2im);
 
 	cudaDeviceSynchronize();
 
