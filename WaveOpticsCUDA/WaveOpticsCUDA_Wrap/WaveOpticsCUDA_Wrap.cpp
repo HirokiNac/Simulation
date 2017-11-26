@@ -1,0 +1,50 @@
+// これは メイン DLL ファイルです。
+
+#include "stdafx.h"
+#include "WaveOpticsCUDA.h"
+#include "WaveOpticsCUDA_Wrap.h"
+
+
+
+void ClsNac::WaveOpticsCUDA_Wrap::Prop1D(double _lambda, int _dir,
+	int _n1, array<double>^ _x1, array<double>^ _y1, array<double>^ _u1re, array<double>^ _u1im,
+	int _n2, array<double>^ _x2, array<double>^ _y2, array<double>^ _u2re, array<double>^ _u2im)
+{
+	
+}
+
+void ClsNac::WaveOpticsCUDA_Wrap::Prop2D(double _lambda, int _dir,
+	int _n1, array<double, 2>^ _x1, array<double, 2>^ _y1, array<double, 2>^ _z1, array<double, 2>^ _u1re, array<double, 2>^ _u1im,
+	int _n2, array<double, 2>^ _x2, array<double, 2>^ _y2, array<double, 2>^ _z2, array<double, 2>^ _u2re, array<double, 2>^ _u2im)
+{
+	pin_ptr<double> ptr_x1 = &_x1[0, 0];
+	pin_ptr<double> ptr_y1 = &_y1[0, 0];
+	pin_ptr<double> ptr_z1 = &_z1[0, 0];
+	pin_ptr<double> ptr_u1re = &_u1re[0, 0];
+	pin_ptr<double> ptr_u1im = &_u1im[0, 0];
+	pin_ptr<double> ptr_x2 = &_x2[0, 0];
+	pin_ptr<double> ptr_y2 = &_y2[0, 0];
+	pin_ptr<double> ptr_z2 = &_z2[0, 0];
+	pin_ptr<double> ptr_u2re = &_u1re[0, 0];
+	pin_ptr<double> ptr_u2im = &_u1im[0, 0];
+
+	WaveOpticsCUDA::Prop2D(_lambda, _dir,
+		_n1, ptr_x1, ptr_y1, ptr_z1, ptr_u1re, ptr_u1im,
+		_n2, ptr_x2, ptr_y2, ptr_z2, ptr_u2re, ptr_u2im);
+	
+	ptr_x1 = nullptr;
+	ptr_y1 = nullptr;
+	ptr_z1 = nullptr;
+	ptr_u1re = nullptr;
+	ptr_u1im = nullptr;
+	ptr_x2 = nullptr;
+	ptr_y2 = nullptr;
+	ptr_z2 = nullptr;
+	ptr_u2re = nullptr;
+	ptr_u2im = nullptr;
+
+
+
+
+}
+
