@@ -205,6 +205,7 @@ namespace Focusing1D
             else wF.Energy = 1e3 * Convert.ToDouble(this.textBox_WavelengthEnergy.Text);
 
             wF.ForwardPropagation(M1.s, ref M1.m);
+
             GraphWaveM(this.zgc_M1w, M1.m);
 
             //ミラー1から焦点1
@@ -212,6 +213,7 @@ namespace Focusing1D
             {
                 for (int i = 0; i < M1.pm.Fnx; i++)
                     wF.ForwardPropagation(M1.m, ref M1.f[i]);
+
 
                 //探索
                 double Max = double.MinValue;

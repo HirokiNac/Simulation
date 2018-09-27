@@ -104,6 +104,10 @@
             this.label10 = new System.Windows.Forms.Label();
             this.textBox_rx = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox_PitchML = new System.Windows.Forms.TextBox();
+            this.textBox_PitchMW = new System.Windows.Forms.TextBox();
             this.pictureBox_Focus = new System.Windows.Forms.PictureBox();
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -131,16 +135,12 @@
             this.label47 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button_Err_Fig = new System.Windows.Forms.Button();
+            this.button_Err_FigXY = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
             this.textBox_Err_Angle = new System.Windows.Forms.TextBox();
             this.label38 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label_Progress = new System.Windows.Forms.Label();
-            this.textBox_PitchML = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.textBox_PitchMW = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.groupBox_F1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -929,6 +929,44 @@
             this.label2.TabIndex = 64;
             this.label2.Text = "[m]";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(17, 146);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(50, 12);
+            this.label12.TabIndex = 57;
+            this.label12.Text = "長さピッチ";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(25, 196);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(42, 12);
+            this.label13.TabIndex = 56;
+            this.label13.Text = "幅ピッチ";
+            // 
+            // textBox_PitchML
+            // 
+            this.textBox_PitchML.Location = new System.Drawing.Point(73, 143);
+            this.textBox_PitchML.Name = "textBox_PitchML";
+            this.textBox_PitchML.Size = new System.Drawing.Size(60, 19);
+            this.textBox_PitchML.TabIndex = 63;
+            this.textBox_PitchML.Text = "0.5e-3";
+            this.textBox_PitchML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_PitchML.TextChanged += new System.EventHandler(this.textBox_PitchML_TextChanged);
+            // 
+            // textBox_PitchMW
+            // 
+            this.textBox_PitchMW.Location = new System.Drawing.Point(73, 193);
+            this.textBox_PitchMW.Name = "textBox_PitchMW";
+            this.textBox_PitchMW.Size = new System.Drawing.Size(60, 19);
+            this.textBox_PitchMW.TabIndex = 62;
+            this.textBox_PitchMW.Text = "0.5e-3";
+            this.textBox_PitchMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_PitchMW.TextChanged += new System.EventHandler(this.textBox_PitchMW_TextChanged);
+            // 
             // pictureBox_Focus
             // 
             this.pictureBox_Focus.Location = new System.Drawing.Point(0, 0);
@@ -1061,7 +1099,7 @@
             this.groupBox_Err.Controls.Add(this.label47);
             this.groupBox_Err.Controls.Add(this.button2);
             this.groupBox_Err.Controls.Add(this.button1);
-            this.groupBox_Err.Controls.Add(this.button_Err_Fig);
+            this.groupBox_Err.Controls.Add(this.button_Err_FigXY);
             this.groupBox_Err.Controls.Add(this.label37);
             this.groupBox_Err.Controls.Add(this.textBox_Err_Angle);
             this.groupBox_Err.Controls.Add(this.label38);
@@ -1213,14 +1251,15 @@
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button_Err_Fig
+            // button_Err_FigXY
             // 
-            this.button_Err_Fig.Location = new System.Drawing.Point(140, 18);
-            this.button_Err_Fig.Name = "button_Err_Fig";
-            this.button_Err_Fig.Size = new System.Drawing.Size(30, 23);
-            this.button_Err_Fig.TabIndex = 17;
-            this.button_Err_Fig.Text = "...";
-            this.button_Err_Fig.UseVisualStyleBackColor = true;
+            this.button_Err_FigXY.Location = new System.Drawing.Point(140, 18);
+            this.button_Err_FigXY.Name = "button_Err_FigXY";
+            this.button_Err_FigXY.Size = new System.Drawing.Size(30, 23);
+            this.button_Err_FigXY.TabIndex = 17;
+            this.button_Err_FigXY.Text = "...";
+            this.button_Err_FigXY.UseVisualStyleBackColor = true;
+            this.button_Err_FigXY.Click += new System.EventHandler(this.button_Err_FigXY_Click);
             // 
             // label37
             // 
@@ -1264,44 +1303,6 @@
             this.label_Progress.Size = new System.Drawing.Size(49, 12);
             this.label_Progress.TabIndex = 90;
             this.label_Progress.Text = "progress";
-            // 
-            // textBox_PitchML
-            // 
-            this.textBox_PitchML.Location = new System.Drawing.Point(73, 143);
-            this.textBox_PitchML.Name = "textBox_PitchML";
-            this.textBox_PitchML.Size = new System.Drawing.Size(60, 19);
-            this.textBox_PitchML.TabIndex = 63;
-            this.textBox_PitchML.Text = "0.5e-3";
-            this.textBox_PitchML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_PitchML.TextChanged += new System.EventHandler(this.textBox_PitchML_TextChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(17, 146);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(50, 12);
-            this.label12.TabIndex = 57;
-            this.label12.Text = "長さピッチ";
-            // 
-            // textBox_PitchMW
-            // 
-            this.textBox_PitchMW.Location = new System.Drawing.Point(73, 193);
-            this.textBox_PitchMW.Name = "textBox_PitchMW";
-            this.textBox_PitchMW.Size = new System.Drawing.Size(60, 19);
-            this.textBox_PitchMW.TabIndex = 62;
-            this.textBox_PitchMW.Text = "0.5e-3";
-            this.textBox_PitchMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_PitchMW.TextChanged += new System.EventHandler(this.textBox_PitchMW_TextChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(25, 196);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(42, 12);
-            this.label13.TabIndex = 56;
-            this.label13.Text = "幅ピッチ";
             // 
             // Form1
             // 
@@ -1418,7 +1419,7 @@
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.TextBox textBox_Err_Fig;
         private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Button button_Err_Fig;
+        private System.Windows.Forms.Button button_Err_FigXY;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox textBox_Err_Angle;
         private System.Windows.Forms.Label label38;

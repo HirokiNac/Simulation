@@ -134,7 +134,7 @@ Prop1DCuda(const double _k, const int _dir,
 	cudaMalloc((void**)&du2im, memsize2);
 	//cudaMemcpy(du2im, _u2im, memsize2, cudaMemcpyHostToDevice);
 
-	Prop1D_kernel << <numBlock, threadsPerBlock >> > (_k, _dir, _n1, dx1, dy1, du1re, du1im, _n2, dx2, dy2, du2re, du2im);
+	Prop1D_kernel << <numBlock, threads >> > (_k, _dir, _n1, dx1, dy1, du1re, du1im, _n2, dx2, dy2, du2re, du2im);
 
 	double* u2re_out = 0;
 	cudaMallocHost((void**)&u2re_out, memsize2);
@@ -212,13 +212,12 @@ Prop2DCuda(const double _k,const int _dir,
 
 	double *du2re = 0;
 	cudaMalloc((void**)&du2re, memsize2);
-	//cudaMemcpy(du2re, _u2re, memsize2, cudaMemcpyHostToDevice);
 
 	double *du2im = 0;
 	cudaMalloc((void**)&du2im, memsize2);
-	//cudaMemcpy(du2im, _u2im, memsize2, cudaMemcpyHostToDevice);
-	//dim3 b = calcBlock(threadsPerBlock, _n2, 1);
-	Prop2D_kernel << <numBlock,threadsPerBlock >> >(_k,_dir, _n1, dx1, dy1, dz1, du1re, du1im, _n2, dx2, dy2, dz2, du2re, du2im);
+
+
+	Prop2D_kernel << <numBlock,threads >> >(_k,_dir, _n1, dx1, dy1, dz1, du1re, du1im, _n2, dx2, dy2, dz2, du2re, du2im);
 
 	cudaDeviceSynchronize();
 

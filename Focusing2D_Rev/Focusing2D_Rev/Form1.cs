@@ -257,5 +257,30 @@ namespace Focusing2D_Rev
             catch (Exception)
             { }
         }
+
+        private void button_Err_FigXY_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog_FigError = new OpenFileDialog();
+                //誤差データ読み込み
+                if (openFileDialog_FigError.ShowDialog() == DialogResult.OK)
+                {
+                    double[,] data_Error = null;
+                    ClsNac.FileIO.FileIO.readFile(openFileDialog_FigError.FileName, ref data_Error);
+
+                    //理想形状データ数確認
+                    //誤差データ数補完
+                    
+                    //理想形状データ＋誤差データ
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            
+            
+        }
     }
 }
