@@ -270,9 +270,36 @@ namespace Focusing2D_Rev
                     ClsNac.FileIO.FileIO.readFile(openFileDialog_FigError.FileName, ref data_Error);
 
                     //理想形状データ数確認
-                    //誤差データ数補完
+                    double[,] data_Error2 = new double[m2d.divW, m2d.divL];
+                    if (m2d.divW==data_Error.GetLength(0)&& m2d.divL == data_Error.GetLength(1))
+                    {
+                        data_Error.CopyTo(data_Error2, 0);
+                    }
+                    else if(m2d.divW==data_Error.GetLength(0))
+                    {
+
+                    }
+                    else if(m2d.divL==data_Error.GetLength(1))
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+
+
+                //誤差データ数補完
                     
                     //理想形状データ＋誤差データ
+                    for(int i_W=0;i_W<m2d.divW;i_W++)
+                    {
+                        for (int i_L = 0; i_L < m2d.divL; i_L++)
+                        {
+                            m2d.m.z[i_W, i_L] += data_Error2[i_W, i_L];
+                        }
+                    }
+
                 }
             }
             catch (Exception)
