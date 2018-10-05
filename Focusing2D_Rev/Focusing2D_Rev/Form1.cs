@@ -118,7 +118,7 @@ namespace Focusing2D_Rev
 
                 #region ミラー設定
                 wM = new ClsNac.Mirror2D.WaveField.WaveField2D(lambda);
-                wM.Initialize(m2d.m.x3, m2d.m.y3, m2d.m.z3, m2d.m.reflect);
+                wM.Initialize(m2d.m.x, m2d.m.y, m2d.m.z);
                 #endregion
 
                 #region 焦点設定
@@ -271,23 +271,16 @@ namespace Focusing2D_Rev
 
                     //理想形状データ数確認
                     double[,] data_Error2 = new double[m2d.divW, m2d.divL];
-                    if (m2d.divW==data_Error.GetLength(0)&& m2d.divL == data_Error.GetLength(1))
+                    if (m2d.divW == data_Error.GetLength(0) && m2d.divL == data_Error.GetLength(1))
                     {
                         data_Error.CopyTo(data_Error2, 0);
                     }
-                    else if(m2d.divW==data_Error.GetLength(0))
-                    {
-
-                    }
-                    else if(m2d.divL==data_Error.GetLength(1))
-                    {
-
-                    }
                     else
                     {
-
+                        ClsNac.MathNetMod.Spline2D spline2D = new ClsNac.MathNetMod.Spline2D(data_Error);
+                        data_Error2 = spline2D.Interpolation(m2d.divW, m2d.divL);
                     }
-
+                
 
                 //誤差データ数補完
                     

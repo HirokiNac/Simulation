@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClsNac.cs" />
+    <Compile Include="ClsNac.MathNetMod.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
