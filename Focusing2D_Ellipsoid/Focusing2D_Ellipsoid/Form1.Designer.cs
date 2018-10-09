@@ -54,11 +54,16 @@
             this.label38 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_MirrorFigure = new System.Windows.Forms.TabPage();
+            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.pictureBox_Figure = new System.Windows.Forms.PictureBox();
             this.tabPage_WaveOptical = new System.Windows.Forms.TabPage();
+            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
+            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox_Focus = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.checkBox_MthetaUnit = new System.Windows.Forms.CheckBox();
             this.textBox_LSM = new System.Windows.Forms.TextBox();
             this.label129 = new System.Windows.Forms.Label();
             this.textBox_LMF = new System.Windows.Forms.TextBox();
@@ -75,6 +80,8 @@
             this.textBox_rx = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_MW = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label120 = new System.Windows.Forms.Label();
             this.label126 = new System.Windows.Forms.Label();
             this.label121 = new System.Windows.Forms.Label();
@@ -134,13 +141,6 @@
             this.nud_coreNum = new System.Windows.Forms.NumericUpDown();
             this.button_WaveOptCalc = new System.Windows.Forms.Button();
             this.button_DetectorOutput = new System.Windows.Forms.Button();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
-            this.checkBox_MthetaUnit = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.groupBox_Err.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_MirrorFigure.SuspendLayout();
@@ -399,6 +399,36 @@
             this.tabPage_MirrorFigure.Text = "形状計算";
             this.tabPage_MirrorFigure.UseVisualStyleBackColor = true;
             // 
+            // zedGraphControl2
+            // 
+            this.zedGraphControl2.Location = new System.Drawing.Point(175, 6);
+            this.zedGraphControl2.Name = "zedGraphControl2";
+            this.zedGraphControl2.ScrollGrace = 0D;
+            this.zedGraphControl2.ScrollMaxX = 0D;
+            this.zedGraphControl2.ScrollMaxY = 0D;
+            this.zedGraphControl2.ScrollMaxY2 = 0D;
+            this.zedGraphControl2.ScrollMinX = 0D;
+            this.zedGraphControl2.ScrollMinY = 0D;
+            this.zedGraphControl2.ScrollMinY2 = 0D;
+            this.zedGraphControl2.Size = new System.Drawing.Size(360, 160);
+            this.zedGraphControl2.TabIndex = 97;
+            this.zedGraphControl2.UseExtendedPrintDialog = true;
+            // 
+            // zedGraphControl1
+            // 
+            this.zedGraphControl1.Location = new System.Drawing.Point(6, 172);
+            this.zedGraphControl1.Name = "zedGraphControl1";
+            this.zedGraphControl1.ScrollGrace = 0D;
+            this.zedGraphControl1.ScrollMaxX = 0D;
+            this.zedGraphControl1.ScrollMaxY = 0D;
+            this.zedGraphControl1.ScrollMaxY2 = 0D;
+            this.zedGraphControl1.ScrollMinX = 0D;
+            this.zedGraphControl1.ScrollMinY = 0D;
+            this.zedGraphControl1.ScrollMinY2 = 0D;
+            this.zedGraphControl1.Size = new System.Drawing.Size(163, 360);
+            this.zedGraphControl1.TabIndex = 97;
+            this.zedGraphControl1.UseExtendedPrintDialog = true;
+            // 
             // pictureBox_Figure
             // 
             this.pictureBox_Figure.Location = new System.Drawing.Point(175, 172);
@@ -421,13 +451,43 @@
             this.tabPage_WaveOptical.Text = "波動光学計算";
             this.tabPage_WaveOptical.UseVisualStyleBackColor = true;
             // 
+            // zedGraphControl3
+            // 
+            this.zedGraphControl3.Location = new System.Drawing.Point(182, 5);
+            this.zedGraphControl3.Name = "zedGraphControl3";
+            this.zedGraphControl3.ScrollGrace = 0D;
+            this.zedGraphControl3.ScrollMaxX = 0D;
+            this.zedGraphControl3.ScrollMaxY = 0D;
+            this.zedGraphControl3.ScrollMaxY2 = 0D;
+            this.zedGraphControl3.ScrollMinX = 0D;
+            this.zedGraphControl3.ScrollMinY = 0D;
+            this.zedGraphControl3.ScrollMinY2 = 0D;
+            this.zedGraphControl3.Size = new System.Drawing.Size(354, 166);
+            this.zedGraphControl3.TabIndex = 98;
+            this.zedGraphControl3.UseExtendedPrintDialog = true;
+            // 
+            // zedGraphControl4
+            // 
+            this.zedGraphControl4.Location = new System.Drawing.Point(4, 180);
+            this.zedGraphControl4.Name = "zedGraphControl4";
+            this.zedGraphControl4.ScrollGrace = 0D;
+            this.zedGraphControl4.ScrollMaxX = 0D;
+            this.zedGraphControl4.ScrollMaxY = 0D;
+            this.zedGraphControl4.ScrollMaxY2 = 0D;
+            this.zedGraphControl4.ScrollMinX = 0D;
+            this.zedGraphControl4.ScrollMinY = 0D;
+            this.zedGraphControl4.ScrollMinY2 = 0D;
+            this.zedGraphControl4.Size = new System.Drawing.Size(169, 354);
+            this.zedGraphControl4.TabIndex = 99;
+            this.zedGraphControl4.UseExtendedPrintDialog = true;
+            // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(6, 6);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(174, 172);
+            this.listBox1.Size = new System.Drawing.Size(167, 160);
             this.listBox1.TabIndex = 92;
             // 
             // pictureBox_Focus
@@ -479,6 +539,20 @@
             this.groupBox3.TabIndex = 92;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "形状計算";
+            // 
+            // checkBox_MthetaUnit
+            // 
+            this.checkBox_MthetaUnit.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBox_MthetaUnit.AutoSize = true;
+            this.checkBox_MthetaUnit.Checked = true;
+            this.checkBox_MthetaUnit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox_MthetaUnit.Location = new System.Drawing.Point(139, 116);
+            this.checkBox_MthetaUnit.Name = "checkBox_MthetaUnit";
+            this.checkBox_MthetaUnit.Size = new System.Drawing.Size(33, 22);
+            this.checkBox_MthetaUnit.TabIndex = 74;
+            this.checkBox_MthetaUnit.Text = "deg";
+            this.checkBox_MthetaUnit.UseVisualStyleBackColor = true;
+            this.checkBox_MthetaUnit.CheckedChanged += new System.EventHandler(this.checkBox_MthetaUnit_CheckedChanged);
             // 
             // textBox_LSM
             // 
@@ -623,6 +697,24 @@
             this.textBox_MW.TabIndex = 59;
             this.textBox_MW.Text = "6e-3";
             this.textBox_MW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(139, 196);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(22, 12);
+            this.label15.TabIndex = 64;
+            this.label15.Text = "[m]";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(139, 146);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(22, 12);
+            this.label14.TabIndex = 64;
+            this.label14.Text = "[m]";
             // 
             // label120
             // 
@@ -821,7 +913,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(28, 124);
+            this.label28.Location = new System.Drawing.Point(27, 124);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(48, 12);
             this.label28.TabIndex = 41;
@@ -839,7 +931,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 24);
+            this.label4.Location = new System.Drawing.Point(-5, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 12);
             this.label4.TabIndex = 43;
@@ -866,7 +958,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(27, 74);
+            this.label22.Location = new System.Drawing.Point(-5, 74);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(80, 12);
             this.label22.TabIndex = 43;
@@ -958,7 +1050,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(39, 149);
+            this.label23.Location = new System.Drawing.Point(38, 149);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(37, 12);
             this.label23.TabIndex = 35;
@@ -1214,98 +1306,6 @@
             this.button_DetectorOutput.TabIndex = 86;
             this.button_DetectorOutput.Text = "結果出力";
             this.button_DetectorOutput.UseVisualStyleBackColor = true;
-            // 
-            // zedGraphControl1
-            // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(6, 172);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(163, 360);
-            this.zedGraphControl1.TabIndex = 97;
-            this.zedGraphControl1.UseExtendedPrintDialog = true;
-            // 
-            // zedGraphControl2
-            // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(175, 6);
-            this.zedGraphControl2.Name = "zedGraphControl2";
-            this.zedGraphControl2.ScrollGrace = 0D;
-            this.zedGraphControl2.ScrollMaxX = 0D;
-            this.zedGraphControl2.ScrollMaxY = 0D;
-            this.zedGraphControl2.ScrollMaxY2 = 0D;
-            this.zedGraphControl2.ScrollMinX = 0D;
-            this.zedGraphControl2.ScrollMinY = 0D;
-            this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(360, 160);
-            this.zedGraphControl2.TabIndex = 97;
-            this.zedGraphControl2.UseExtendedPrintDialog = true;
-            // 
-            // zedGraphControl3
-            // 
-            this.zedGraphControl3.Location = new System.Drawing.Point(182, 5);
-            this.zedGraphControl3.Name = "zedGraphControl3";
-            this.zedGraphControl3.ScrollGrace = 0D;
-            this.zedGraphControl3.ScrollMaxX = 0D;
-            this.zedGraphControl3.ScrollMaxY = 0D;
-            this.zedGraphControl3.ScrollMaxY2 = 0D;
-            this.zedGraphControl3.ScrollMinX = 0D;
-            this.zedGraphControl3.ScrollMinY = 0D;
-            this.zedGraphControl3.ScrollMinY2 = 0D;
-            this.zedGraphControl3.Size = new System.Drawing.Size(354, 166);
-            this.zedGraphControl3.TabIndex = 98;
-            this.zedGraphControl3.UseExtendedPrintDialog = true;
-            // 
-            // zedGraphControl4
-            // 
-            this.zedGraphControl4.Location = new System.Drawing.Point(4, 180);
-            this.zedGraphControl4.Name = "zedGraphControl4";
-            this.zedGraphControl4.ScrollGrace = 0D;
-            this.zedGraphControl4.ScrollMaxX = 0D;
-            this.zedGraphControl4.ScrollMaxY = 0D;
-            this.zedGraphControl4.ScrollMaxY2 = 0D;
-            this.zedGraphControl4.ScrollMinX = 0D;
-            this.zedGraphControl4.ScrollMinY = 0D;
-            this.zedGraphControl4.ScrollMinY2 = 0D;
-            this.zedGraphControl4.Size = new System.Drawing.Size(169, 354);
-            this.zedGraphControl4.TabIndex = 99;
-            this.zedGraphControl4.UseExtendedPrintDialog = true;
-            // 
-            // checkBox_MthetaUnit
-            // 
-            this.checkBox_MthetaUnit.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox_MthetaUnit.AutoSize = true;
-            this.checkBox_MthetaUnit.Checked = true;
-            this.checkBox_MthetaUnit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_MthetaUnit.Location = new System.Drawing.Point(139, 116);
-            this.checkBox_MthetaUnit.Name = "checkBox_MthetaUnit";
-            this.checkBox_MthetaUnit.Size = new System.Drawing.Size(33, 22);
-            this.checkBox_MthetaUnit.TabIndex = 74;
-            this.checkBox_MthetaUnit.Text = "deg";
-            this.checkBox_MthetaUnit.UseVisualStyleBackColor = true;
-            this.checkBox_MthetaUnit.CheckedChanged += new System.EventHandler(this.checkBox_MthetaUnit_CheckedChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(139, 146);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(22, 12);
-            this.label14.TabIndex = 64;
-            this.label14.Text = "[m]";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(139, 196);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(22, 12);
-            this.label15.TabIndex = 64;
-            this.label15.Text = "[m]";
             // 
             // Form1
             // 
