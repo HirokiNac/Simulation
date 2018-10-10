@@ -667,11 +667,15 @@ namespace ClsNac
                         s.x[i, j] = x[j];
                         s.y[i, j] = s.yc + (-ny / 2 + i) * dy;
                         s.z[i, j] = z[j];
-                        
-                        s.u[i, j] =
-                            _source == source.gauss ?
-                            gauss(s.y[i, j], s.zc + (-nz / 2 + j) * dz, sigy, sigz) :
-                            new Complex(1.0, 0.0);
+
+                        if(_source==source.gauss)
+                        {
+                            s.u[i, j] = gauss(s.y[i, j], s.zc + (-nz / 2 + j) * dz, sigy, sigz);
+                        }
+                        else
+                        {
+                            s.u[i, j] = new Complex(1.0, 0.0);
+                        }
                         s.Intensity[i, j] = Math.Pow(s.u[i, j].Magnitude, 2.0);
                     }
                 }
@@ -811,6 +815,15 @@ namespace ClsNac
                 public bool[,] reflect;
                 public double[,] Intensity;
                 public double[,] Phase;
+                public double[,] Re;
+                public double[,] Im;
+
+                public double[] xv;
+                public double[] yv;
+                public double[] zv;
+                public double[] rev;
+                public double[] imv;
+
 
                 public int divW { get; private set; }
                 public int divL { get; private set; }
@@ -838,6 +851,30 @@ namespace ClsNac
                     z = _z;
                     reflect = _reflect;
                     u = _u != null ? _u : new Complex[divW, divL];
+
+                    Re = new double[divW, divL];
+                    Im = new double[divW, divL];
+                    Intensity = new double[divW, divL];
+                    Phase = new double[divW, divL];
+                    xv = new double[divW * divL];
+                    yv = new double[divW * divL];
+                    zv = new double[divW * divL];
+                    rev = new double[divW * divL];
+                    imv = new double[divW * divL];
+
+                    for (int i = 0; i < divW; i++)
+                    {
+                        for (int j = 0; j < divL; j++)
+                        {
+                            Re[i, j] = u[i, j].Real;
+                            Im[i, j] = u[i, j].Imaginary;
+                            xv[i + divW * j] = x[i, j];
+                            yv[i + divW * j] = y[i, j];
+                            zv[i + divW * j] = z[i, j];
+                            rev[i + divW* j] = Re[i, j];
+                            imv[i + divW * j] = Im[i, j];
+                        }
+                    }
                 }
 
                 //順方向伝播(引数：伝播元波動場)
@@ -900,6 +937,24 @@ namespace ClsNac
                         doneNum++;
                     });
                     #endregion
+                }
+
+                public void ForwardPropagation2(WaveField2D u_back)
+                {
+                    ClsNac.WaveOpticsCpp_Wrapper.Prop2D(lambda, -1,
+                        u_back.divL * u_back.divW, u_back.xv, u_back.yv, u_back.zv, u_back.rev, u_back.imv,
+                        divL * divW, xv, yv, zv, rev, imv);
+
+                    for (int i = 0; i < divW; i++)
+                    {
+                        for (int j = 0; j < divL; j++)
+                        {
+                            u[i, j] = new Complex(rev[i + divW * j], imv[i + divW * j]);
+                            Intensity[i, j] = Math.Pow(u[i, j].Magnitude, 2.0);
+                            Phase[i, j] = u[i, j].Phase;
+                        }
+                    }
+
                 }
 
                 ////逆方向伝播（引数；伝播元波動場）

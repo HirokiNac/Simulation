@@ -73,15 +73,15 @@ namespace Focusing2D_Rev
         private void button_WaveOptCalc_Click(object sender, EventArgs e)
         {
             #region cancel
-            if (this._cts == null)
-            {
-                this._cts = new CancellationTokenSource();
-            }
-            else
-            {
-                this._cts.Cancel(true);
-                return;
-            }
+            //if (this._cts == null)
+            //{
+            //    this._cts = new CancellationTokenSource();
+            //}
+            //else
+            //{
+            //    this._cts.Cancel(true);
+            //    return;
+            //}
             #endregion
 
             try
@@ -141,9 +141,9 @@ namespace Focusing2D_Rev
 
 
             //伝播計算
-            wM.ForwardPropagation(wS);
+            wM.ForwardPropagation2(wS);
             for (int i = 0; i < wF.Length; i++)
-                wF[i].ForwardPropagation(wM);
+                wF[i].ForwardPropagation2(wM);
             //
 
             //表示
