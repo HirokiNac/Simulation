@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.button_FigOutput = new System.Windows.Forms.Button();
             this.button_FigCalc = new System.Windows.Forms.Button();
             this.label118 = new System.Windows.Forms.Label();
@@ -112,12 +111,8 @@
             this.fbd = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_MirrorFigure = new System.Windows.Forms.TabPage();
-            this.zedGraphControl2 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.tabPage_WaveOptical = new System.Windows.Forms.TabPage();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.zedGraphControl3 = new ZedGraph.ZedGraphControl();
-            this.zedGraphControl4 = new ZedGraph.ZedGraphControl();
             this.groupBox_Err = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBox_Err_Inplane = new System.Windows.Forms.TextBox();
@@ -991,8 +986,6 @@
             // 
             // tabPage_MirrorFigure
             // 
-            this.tabPage_MirrorFigure.Controls.Add(this.zedGraphControl2);
-            this.tabPage_MirrorFigure.Controls.Add(this.zedGraphControl1);
             this.tabPage_MirrorFigure.Controls.Add(this.pictureBox_Figure);
             this.tabPage_MirrorFigure.Location = new System.Drawing.Point(4, 22);
             this.tabPage_MirrorFigure.Name = "tabPage_MirrorFigure";
@@ -1002,39 +995,9 @@
             this.tabPage_MirrorFigure.Text = "形状計算";
             this.tabPage_MirrorFigure.UseVisualStyleBackColor = true;
             // 
-            // zedGraphControl2
-            // 
-            this.zedGraphControl2.Location = new System.Drawing.Point(0, 366);
-            this.zedGraphControl2.Name = "zedGraphControl2";
-            this.zedGraphControl2.ScrollGrace = 0D;
-            this.zedGraphControl2.ScrollMaxX = 0D;
-            this.zedGraphControl2.ScrollMaxY = 0D;
-            this.zedGraphControl2.ScrollMaxY2 = 0D;
-            this.zedGraphControl2.ScrollMinX = 0D;
-            this.zedGraphControl2.ScrollMinY = 0D;
-            this.zedGraphControl2.ScrollMinY2 = 0D;
-            this.zedGraphControl2.Size = new System.Drawing.Size(360, 172);
-            this.zedGraphControl2.TabIndex = 89;
-            // 
-            // zedGraphControl1
-            // 
-            this.zedGraphControl1.Location = new System.Drawing.Point(366, 0);
-            this.zedGraphControl1.Name = "zedGraphControl1";
-            this.zedGraphControl1.ScrollGrace = 0D;
-            this.zedGraphControl1.ScrollMaxX = 0D;
-            this.zedGraphControl1.ScrollMaxY = 0D;
-            this.zedGraphControl1.ScrollMaxY2 = 0D;
-            this.zedGraphControl1.ScrollMinX = 0D;
-            this.zedGraphControl1.ScrollMinY = 0D;
-            this.zedGraphControl1.ScrollMinY2 = 0D;
-            this.zedGraphControl1.Size = new System.Drawing.Size(175, 360);
-            this.zedGraphControl1.TabIndex = 89;
-            // 
             // tabPage_WaveOptical
             // 
             this.tabPage_WaveOptical.Controls.Add(this.listBox1);
-            this.tabPage_WaveOptical.Controls.Add(this.zedGraphControl3);
-            this.tabPage_WaveOptical.Controls.Add(this.zedGraphControl4);
             this.tabPage_WaveOptical.Controls.Add(this.pictureBox_Focus);
             this.tabPage_WaveOptical.Location = new System.Drawing.Point(4, 22);
             this.tabPage_WaveOptical.Name = "tabPage_WaveOptical";
@@ -1048,38 +1011,10 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(366, 366);
+            this.listBox1.Location = new System.Drawing.Point(366, 6);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(174, 172);
             this.listBox1.TabIndex = 92;
-            // 
-            // zedGraphControl3
-            // 
-            this.zedGraphControl3.Location = new System.Drawing.Point(0, 366);
-            this.zedGraphControl3.Name = "zedGraphControl3";
-            this.zedGraphControl3.ScrollGrace = 0D;
-            this.zedGraphControl3.ScrollMaxX = 0D;
-            this.zedGraphControl3.ScrollMaxY = 0D;
-            this.zedGraphControl3.ScrollMaxY2 = 0D;
-            this.zedGraphControl3.ScrollMinX = 0D;
-            this.zedGraphControl3.ScrollMinY = 0D;
-            this.zedGraphControl3.ScrollMinY2 = 0D;
-            this.zedGraphControl3.Size = new System.Drawing.Size(360, 172);
-            this.zedGraphControl3.TabIndex = 90;
-            // 
-            // zedGraphControl4
-            // 
-            this.zedGraphControl4.Location = new System.Drawing.Point(366, 0);
-            this.zedGraphControl4.Name = "zedGraphControl4";
-            this.zedGraphControl4.ScrollGrace = 0D;
-            this.zedGraphControl4.ScrollMaxX = 0D;
-            this.zedGraphControl4.ScrollMaxY = 0D;
-            this.zedGraphControl4.ScrollMaxY2 = 0D;
-            this.zedGraphControl4.ScrollMinX = 0D;
-            this.zedGraphControl4.ScrollMinY = 0D;
-            this.zedGraphControl4.ScrollMinY2 = 0D;
-            this.zedGraphControl4.Size = new System.Drawing.Size(175, 360);
-            this.zedGraphControl4.TabIndex = 91;
             // 
             // groupBox_Err
             // 
@@ -1423,10 +1358,6 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox textBox_Err_Angle;
         private System.Windows.Forms.Label label38;
-        private ZedGraph.ZedGraphControl zedGraphControl2;
-        private ZedGraph.ZedGraphControl zedGraphControl1;
-        private ZedGraph.ZedGraphControl zedGraphControl3;
-        private ZedGraph.ZedGraphControl zedGraphControl4;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label9;

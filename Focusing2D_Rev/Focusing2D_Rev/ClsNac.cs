@@ -941,8 +941,36 @@ namespace ClsNac
 
                 public void ForwardPropagation2(WaveField2D u_back)
                 {
+                    double[] ds = new double[u_back.divW * u_back.divL];
+
+                    #region 微小領域をかけた場合の計算
+                    //伝播元の微小長さの計算
+                    if (u_back.x.Length != 1)
+                    {
+                        for (int m = 1; m < u_back.divW; m++)
+                        {
+                            for (int n = 1; n < u_back.divL; n++)
+                            {
+                                ds[m + n * u_back.divW] = Math.Sqrt(Math.Pow(u_back.yv[m + n * u_back.divW] - u_back.yv[m - 1 + n * u_back.divW], 2.0) + Math.Pow(u_back.zv[m + n * u_back.divW] - u_back.zv[m - 1 + n * u_back.divW], 2.0))
+                                    * Math.Sqrt(Math.Pow(u_back.xv[m + n * u_back.divW] - u_back.xv[m + (n - 1) * u_back.divW], 2.0) + Math.Pow(u_back.zv[m + n * u_back.divW] - u_back.zv[m + (n - 1) * u_back.divW], 2.0));
+                            }
+                            ds[m] = ds[m + 1 * u_back.divW];
+                        }
+                        for (int n = 0; n < u_back.divL; n++)
+                        {
+                            ds[0 + n * u_back.divW] = ds[1 + n * u_back.divW];
+                        }
+                    }
+                    else
+                    {
+                        ds[0] = 1;
+                    }
+
+                    #endregion
+
+
                     ClsNac.WaveOpticsCpp_Wrapper.Prop2D(lambda, -1,
-                        u_back.divL * u_back.divW, u_back.xv, u_back.yv, u_back.zv, u_back.rev, u_back.imv,
+                        u_back.divL * u_back.divW, u_back.xv, u_back.yv, u_back.zv, u_back.rev, u_back.imv, ds,
                         divL * divW, xv, yv, zv, rev, imv);
 
                     for (int i = 0; i < divW; i++)
