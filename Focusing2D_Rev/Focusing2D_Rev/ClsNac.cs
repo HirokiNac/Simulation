@@ -827,6 +827,7 @@ namespace ClsNac
 
                 public int divW { get; private set; }
                 public int divL { get; private set; }
+                public int div { get { return divW * divL; } }
 
 
                 int doneNum;

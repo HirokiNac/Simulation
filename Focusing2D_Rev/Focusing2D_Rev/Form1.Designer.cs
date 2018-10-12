@@ -675,6 +675,7 @@
             this.comboBox_LambdaEnergy.AutoCompleteCustomSource.AddRange(new string[] {
             "Energy",
             "Wavelength"});
+            this.comboBox_LambdaEnergy.Enabled = false;
             this.comboBox_LambdaEnergy.FormattingEnabled = true;
             this.comboBox_LambdaEnergy.Items.AddRange(new object[] {
             "波長",
@@ -862,6 +863,7 @@
             // 
             // button_TorusCalc
             // 
+            this.button_TorusCalc.Enabled = false;
             this.button_TorusCalc.Location = new System.Drawing.Point(88, 329);
             this.button_TorusCalc.Name = "button_TorusCalc";
             this.button_TorusCalc.Size = new System.Drawing.Size(80, 30);
@@ -948,7 +950,7 @@
             this.textBox_PitchML.Name = "textBox_PitchML";
             this.textBox_PitchML.Size = new System.Drawing.Size(60, 19);
             this.textBox_PitchML.TabIndex = 63;
-            this.textBox_PitchML.Text = "0.5e-3";
+            this.textBox_PitchML.Text = "0.1e-3";
             this.textBox_PitchML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_PitchML.TextChanged += new System.EventHandler(this.textBox_PitchML_TextChanged);
             // 
@@ -958,7 +960,7 @@
             this.textBox_PitchMW.Name = "textBox_PitchMW";
             this.textBox_PitchMW.Size = new System.Drawing.Size(60, 19);
             this.textBox_PitchMW.TabIndex = 62;
-            this.textBox_PitchMW.Text = "0.5e-3";
+            this.textBox_PitchMW.Text = "0.1e-3";
             this.textBox_PitchMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_PitchMW.TextChanged += new System.EventHandler(this.textBox_PitchMW_TextChanged);
             // 
@@ -1056,6 +1058,7 @@
             // 
             // textBox_Err_Inplane
             // 
+            this.textBox_Err_Inplane.Enabled = false;
             this.textBox_Err_Inplane.Location = new System.Drawing.Point(74, 153);
             this.textBox_Err_Inplane.Name = "textBox_Err_Inplane";
             this.textBox_Err_Inplane.Size = new System.Drawing.Size(60, 19);
@@ -1074,6 +1077,7 @@
             // 
             // button4
             // 
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(4, 178);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 30);
@@ -1083,6 +1087,7 @@
             // 
             // button3
             // 
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(90, 178);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(80, 30);
@@ -1101,6 +1106,7 @@
             // 
             // textBox_Err_Rolling
             // 
+            this.textBox_Err_Rolling.Enabled = false;
             this.textBox_Err_Rolling.Location = new System.Drawing.Point(74, 128);
             this.textBox_Err_Rolling.Name = "textBox_Err_Rolling";
             this.textBox_Err_Rolling.Size = new System.Drawing.Size(60, 19);
@@ -1170,6 +1176,7 @@
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(140, 76);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 23);
@@ -1179,6 +1186,7 @@
             // 
             // button1
             // 
+            this.button1.Enabled = false;
             this.button1.Location = new System.Drawing.Point(140, 47);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(30, 23);
@@ -1207,6 +1215,7 @@
             // 
             // textBox_Err_Angle
             // 
+            this.textBox_Err_Angle.Enabled = false;
             this.textBox_Err_Angle.Location = new System.Drawing.Point(74, 103);
             this.textBox_Err_Angle.Name = "textBox_Err_Angle";
             this.textBox_Err_Angle.Size = new System.Drawing.Size(60, 19);

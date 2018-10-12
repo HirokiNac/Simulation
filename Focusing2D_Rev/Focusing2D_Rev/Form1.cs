@@ -70,22 +70,28 @@ namespace Focusing2D_Rev
             { MessageBox.Show("形状がありません．"); }
         }
 
-        private void button_WaveOptCalc_Click(object sender, EventArgs e)
+        private async void button_WaveOptCalc_Click(object sender, EventArgs e)
         {
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+
             #region cancel
-            //if (this._cts == null)
-            //{
-            //    this._cts = new CancellationTokenSource();
-            //}
-            //else
-            //{
-            //    this._cts.Cancel(true);
-            //    return;
-            //}
+            if (this._cts == null)
+            {
+                this._cts = new CancellationTokenSource();
+            }
+            else
+            {
+                this._cts.Cancel(true);
+                return;
+            }
             #endregion
+
+
 
             try
             {
+                button_WaveOptCalc.Enabled = false;
+                sw.Start();
 
                 if (m2d == null)
                 {
@@ -93,6 +99,7 @@ namespace Focusing2D_Rev
                     return;
                 }
 
+                #region 初期設定
                 double lambda = 1e-10 * Convert.ToDouble(this.textBox_WavelengthEnergy.Text);
 
                 #region 光源設定
@@ -101,12 +108,12 @@ namespace Focusing2D_Rev
                 if (this.radioButton_SourceGauss.Checked)
                 {
                     m2d.Source(Convert.ToInt32(this.textBox_SourceDivY.Text), Convert.ToInt32(this.textBox_SourceDivZ.Text),
-                    Convert.ToDouble(this.textBox_SourceSizeZ.Text), Convert.ToDouble(this.textBox_SourceSizeZ.Text),
+                    Convert.ToDouble(this.textBox_SourceSizeY.Text), Convert.ToDouble(this.textBox_SourceSizeZ.Text),
                     ClsNac.Mirror2D.Mirror2D.source.gauss);
                 }
                 else if (this.radioButton_SourceRectangle.Checked)
                     m2d.Source(Convert.ToInt32(this.textBox_SourceDivY.Text), Convert.ToInt32(this.textBox_SourceDivZ.Text),
-                    Convert.ToDouble(this.textBox_SourceSizeZ.Text), Convert.ToDouble(this.textBox_SourceSizeZ.Text));
+                    Convert.ToDouble(this.textBox_SourceSizeY.Text), Convert.ToDouble(this.textBox_SourceSizeZ.Text));
                 else
                 {
                     m2d.Source(1, 1, 0, 0);
@@ -134,32 +141,78 @@ namespace Focusing2D_Rev
                     wF[i].Initialize(m2d.f.x[i], m2d.f.y[i], m2d.f.z[i]);
                 }
                 #endregion
+                #endregion
 
+                //全要素数計算
+                progressBar.Value = 0;
+                progressBar.Maximum = 100;
+                double progressMax = wS.div * wM.div + wM.div * wF.Length * wF[0].div;
+                int progress_sm = (int)(100.0 * wS.div * wM.div / progressMax);
+                int progress_mf = (int)(100.0 * wM.div * wF[0].div / progressMax);
+                
+                
+                await Task.Run(() =>
+                {
+                    //伝播計算
+                    
+                    BeginInvoke((Action)(() => { ProgressReport(0, "Source->Mirror"); }));
+                    wM.ForwardPropagation2(wS);
+
+                    BeginInvoke((Action)(() => { ProgressReport(progress_sm, "Mirror->Focus0"); }));
+
+                    for (int i = 0; i < wF.Length; i++)
+                    {
+                        wF[i].ForwardPropagation2(wM);
+
+                        BeginInvoke((Action)(() => { ProgressReport(progress_mf, string.Format("Mirror->Focus{0}", i + 1)); }));
+                    }
+                    //
+                });
+
+                //表示
+                ClsNac.Graphic.Plot2dPlane myPlane = new ClsNac.Graphic.Plot2dPlane(this.pictureBox_Focus);
+                myPlane.Draw(wF[wF.Length / 2].Intensity);
+                //listbox追加
+                listBox1.Items.Clear();
+                
+                //
             }
             catch (Exception ex)
-            { }
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                sw.Stop();
+                label_Progress.Text = sw.Elapsed.ToString(@"hh\:mm\:ss");
+                this._cts = null;
+                button_WaveOptCalc.Enabled = true;
+            }
 
 
-            //伝播計算
-            wM.ForwardPropagation2(wS);
-            for (int i = 0; i < wF.Length; i++)
-                wF[i].ForwardPropagation2(wM);
-            //
-
-            //表示
-            ClsNac.Graphic.Plot2dPlane myPlane = new ClsNac.Graphic.Plot2dPlane(this.pictureBox_Focus);
-            myPlane.Draw(wF[wF.Length / 2].Intensity);
-            //
         }
+
+        private void ProgressReport(int _progressValue, string _message)
+        {
+            progressBar.Value += _progressValue;
+            label_Progress.Text = _message;
+        }
+
 
         private void button_DetectorOutput_Click(object sender, EventArgs e)
         {
             if (this.fbd.ShowDialog() == DialogResult.OK)
             {
                 ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensitySource.txt", m2d.s.Intensity);
+                ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\PhaseSource.txt", m2d.s.Phase);
+
                 ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensityMirror.txt", wM.Intensity);
+                ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\PhaseMirror.txt", wM.Phase);
                 for (int i = 0; i < wF.Length; i++)
+                {
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensityFocus" + i.ToString("D2") + ".txt", wF[i].Intensity);
+                    ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\PhaseFocus" + i.ToString("D2") + ".txt", wF[i].Phase);
+                }
             }
 
         }

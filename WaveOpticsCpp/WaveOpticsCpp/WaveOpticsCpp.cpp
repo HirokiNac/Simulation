@@ -16,7 +16,7 @@ void WaveOpticsCpp::Prop1D(const double _lambda, const int _dir,
 	double tur, tui;
 	double ur = 0.0, ui = 0.0;
 
-#pragma omp parallel for schedule(static) num_threads(N)
+#pragma omp parallel for schedule(static)// num_threads(N)
 	for (int i = 0; i < _n2; i++)
 	{
 		for (int j = 0; j < _n1; j++)
@@ -47,7 +47,7 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 	double k = 2.0*PI / _lambda;
 
 
-#pragma omp parallel for schedule(static) num_threads(N)
+#pragma omp parallel for schedule(static) // num_threads(N)
 	for (int i = 0; i < _n2; i++)
 	{
 
@@ -87,7 +87,7 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 	double k = 2.0*PI / _lambda;
 
 
-#pragma omp parallel for schedule(static) num_threads(N)
+#pragma omp parallel for schedule(static)// num_threads(N)
 	for (int i = 0; i < _n2; i++)
 	{
 
