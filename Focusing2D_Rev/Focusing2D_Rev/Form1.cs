@@ -146,7 +146,7 @@ namespace Focusing2D_Rev
                 //全要素数計算
                 progressBar.Value = 0;
                 progressBar.Maximum = 100;
-                double progressMax = wS.div * wM.div + wM.div * wF.Length * wF[0].div;
+                long progressMax = wS.div * wM.div + (long)wM.div * wF.Length * wF[0].div;
                 int progress_sm = (int)(100.0 * wS.div * wM.div / progressMax);
                 int progress_mf = (int)(100.0 * wM.div * wF[0].div / progressMax);
                 
