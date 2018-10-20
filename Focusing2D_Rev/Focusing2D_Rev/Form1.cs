@@ -184,7 +184,8 @@ namespace Focusing2D_Rev
             finally
             {
                 sw.Stop();
-                label_Progress.Text = sw.Elapsed.ToString(@"hh\:mm\:ss");
+                progressBar.Value = 100;
+                label_Progress.Text = "Finish  " + sw.Elapsed.ToString(@"hh\:mm\:ss");
                 this._cts = null;
                 button_WaveOptCalc.Enabled = true;
             }
