@@ -327,7 +327,7 @@ namespace Focusing2D_Rev
                     double[,] data_Error2 = new double[m2d.divW, m2d.divL];
                     if (m2d.divW == data_Error.GetLength(0) && m2d.divL == data_Error.GetLength(1))
                     {
-                        data_Error.CopyTo(data_Error2, 0);
+                        Array.Copy(data_Error, data_Error2, m2d.divW * m2d.divL);
                     }
                     else
                     {
