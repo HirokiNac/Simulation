@@ -126,6 +126,9 @@ namespace Focusing2D_Rev
                 #region ミラー設定
                 wM = new ClsNac.Mirror2D.WaveField.WaveField2D(lambda);
                 wM.Initialize(m2d.m.x, m2d.m.y, m2d.m.z);
+
+                //厳密な計算
+
                 #endregion
 
                 #region 焦点設定
@@ -133,7 +136,9 @@ namespace Focusing2D_Rev
                 m2d.Focus(
                     Convert.ToInt32(this.textBox_Dnx.Text), Convert.ToDouble(this.textBox_Ddx.Text),
                     Convert.ToInt32(this.textBox_Dny.Text), Convert.ToDouble(this.textBox_Ddy.Text),
-                    Convert.ToInt32(this.textBox_Dnz.Text), Convert.ToDouble(this.textBox_Ddz.Text));
+                    Convert.ToInt32(this.textBox_Dnz.Text), Convert.ToDouble(this.textBox_Ddz.Text),
+                    Convert.ToDouble(textBox_Dbx.Text), Convert.ToDouble(textBox_Dby.Text), Convert.ToDouble(textBox_Dbz.Text));
+
                 wF = new ClsNac.Mirror2D.WaveField.WaveField2D[m2d.f.nx];
                 for (int i = 0; i < m2d.f.nx; i++)
                 {
@@ -274,43 +279,86 @@ namespace Focusing2D_Rev
             m2d.torus(Convert.ToDouble(this.textBox_rx.Text) - Convert.ToDouble(this.textBox_ry.Text), Convert.ToDouble(this.textBox_ry.Text));
         }
 
-        private void textBox_ML_TextChanged(object sender, EventArgs e)
+
+        private void textBox_ML_Leave(object sender, EventArgs e)
         {
-            double ML = double.Parse(textBox_ML.Text);
-            double Pitch = double.Parse(textBox_PitchML.Text);
-            textBox_DivML.Text = Convert.ToString((int)(ML / Pitch) + 1);
+            try
+            {
+                double ML = double.Parse(textBox_ML.Text);
+                double Pitch = double.Parse(textBox_PitchML.Text);
+                textBox_DivML.Text = Convert.ToString((int)(ML / Pitch) + 1);
+            }
+            catch (Exception)
+            { }
+
         }
 
-        private void textBox_PitchML_TextChanged(object sender, EventArgs e)
+        private void textBox_DivML_Leave(object sender, EventArgs e)
         {
-            double ML = double.Parse(textBox_ML.Text);
-            double Pitch = double.Parse(textBox_PitchML.Text);
-            textBox_DivML.Text = Convert.ToString((int)(ML / Pitch) + 1);
+            try
+            {
+                double ML = double.Parse(textBox_ML.Text);
+                int Div = int.Parse(textBox_DivML.Text);
+                textBox_PitchML.Text = Convert.ToString((double)(ML / Div));
+            }
+            catch (Exception)
+            { }
+
         }
 
-        private void textBox_MW_TextChanged(object sender, EventArgs e)
+        private void textBox_PitchML_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                double ML = double.Parse(textBox_ML.Text);
+                double Pitch = double.Parse(textBox_PitchML.Text);
+                textBox_DivML.Text = Convert.ToString((int)(ML / Pitch + 1));
+            }
+            catch (Exception)
+            { }
+
+        }
+
+        private void textBox_MW_Leave(object sender, EventArgs e)
         {
             try
             {
                 double MW = double.Parse(textBox_MW.Text);
                 double Pitch = double.Parse(textBox_PitchMW.Text);
-                textBox_DivMW.Text = Convert.ToString((int)(MW / Pitch) + 1);
+                textBox_DivMW.Text = Convert.ToString((int)(MW / Pitch + 1));
             }
             catch (Exception)
             { }
+
         }
 
-        private void textBox_PitchMW_TextChanged(object sender, EventArgs e)
+        private void textBox_PitchMW_Leave(object sender, EventArgs e)
         {
             try
             {
                 double MW = double.Parse(textBox_MW.Text);
                 double Pitch = double.Parse(textBox_PitchMW.Text);
-                textBox_DivMW.Text = Convert.ToString((int)(MW / Pitch) + 1);
+                textBox_DivMW.Text = Convert.ToString((int)(MW / Pitch + 1));
             }
             catch (Exception)
             { }
+
         }
+
+        private void textBox_DivMW_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                double MW = double.Parse(textBox_MW.Text);
+                int Div = int.Parse(textBox_DivMW.Text);
+                textBox_PitchMW.Text = Convert.ToString((double)(MW / Div));
+            }
+            catch (Exception)
+            { }
+
+        }
+
+
 
         private void button_Err_FigXY_Click(object sender, EventArgs e)
         {
@@ -356,5 +404,6 @@ namespace Focusing2D_Rev
             
             
         }
+
     }
 }

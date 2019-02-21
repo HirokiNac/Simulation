@@ -289,6 +289,7 @@ namespace ClsNac
 
             public Coord s;
             public CoordM m;
+            public CoordM m2;
             public CoordF f;
             #endregion
 
@@ -307,7 +308,6 @@ namespace ClsNac
                 ML = _ML;
 
                 m = new CoordM(divW, divL);
-
                 Ellipsoid();
             }
 
@@ -473,6 +473,19 @@ namespace ClsNac
                 #endregion
 
                 torus(m.rx[divL / 2] - m.ry[divL / 2], m.ry[divL / 2]);
+
+                #region 角度基準を計算
+                //m2 = m;
+
+                //for(int i=0;i<m2.divW;i++)
+                //{
+                //    for (int j = 0; j < m2.divL; j++)
+                //    {
+
+                //    }
+                //}
+
+                #endregion
             }
 
             double ell_z(double x,double y)
@@ -718,8 +731,8 @@ namespace ClsNac
 
                     for (int j = 0; j < nz; j++)
                     {
-                        x[n][j] = f.xc + (-nx / 2 + n) * dx;
-                        z[n][j] = f.zc + (-nz / 2 + j) * dz;
+                        x[n][j] = f.xc + (-nx / 2 + n) * dx + bx;
+                        z[n][j] = f.zc + (-nz / 2 + j) * dz + bz;
                         //focus_x2[i][j] = Math.Sqrt(Math.Pow(focus_x[i][j] - focus_x[i][0], 2.0) + Math.Pow(focus_y[i][j] - focus_y[i][0], 2.0));
                     }
                     //double theta = (f.zc - m.zc) / (f.xc - m.xc);
@@ -730,7 +743,7 @@ namespace ClsNac
                         for (int j = 0; j < nz; j++)
                         {
                             f.x[n][i, j] = x[n][j];
-                            f.y[n][i, j] = f.yc + (-ny / 2 + i) * dy;
+                            f.y[n][i, j] = f.yc + (-ny / 2 + i) * dy + by;
                             f.z[n][i, j] = z[n][j];
                         }
                     }

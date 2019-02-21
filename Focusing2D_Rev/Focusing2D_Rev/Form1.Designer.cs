@@ -66,9 +66,9 @@
             this.textBox_Ddy = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
-            this.textBox_Detector1by = new System.Windows.Forms.TextBox();
+            this.textBox_Dbz = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
-            this.textBox_Dbx = new System.Windows.Forms.TextBox();
+            this.textBox_Dby = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
@@ -136,6 +136,9 @@
             this.label38 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label_Progress = new System.Windows.Forms.Label();
+            this.textBox_Dbx = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.groupBox_F1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -210,8 +213,8 @@
             this.textBox_Mtheta.Location = new System.Drawing.Point(73, 118);
             this.textBox_Mtheta.Name = "textBox_Mtheta";
             this.textBox_Mtheta.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Mtheta.TabIndex = 60;
-            this.textBox_Mtheta.Text = "26e-3";
+            this.textBox_Mtheta.TabIndex = 5;
+            this.textBox_Mtheta.Text = "35e-3";
             this.textBox_Mtheta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label122
@@ -228,29 +231,29 @@
             this.textBox_LSM.Location = new System.Drawing.Point(73, 18);
             this.textBox_LSM.Name = "textBox_LSM";
             this.textBox_LSM.Size = new System.Drawing.Size(60, 19);
-            this.textBox_LSM.TabIndex = 52;
-            this.textBox_LSM.Text = "6";
+            this.textBox_LSM.TabIndex = 1;
+            this.textBox_LSM.Text = "0.5";
             this.textBox_LSM.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_DivMW
             // 
             this.textBox_DivMW.Location = new System.Drawing.Point(73, 218);
             this.textBox_DivMW.Name = "textBox_DivMW";
-            this.textBox_DivMW.ReadOnly = true;
             this.textBox_DivMW.Size = new System.Drawing.Size(60, 19);
-            this.textBox_DivMW.TabIndex = 62;
+            this.textBox_DivMW.TabIndex = 9;
             this.textBox_DivMW.Text = "61";
             this.textBox_DivMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_DivMW.Leave += new System.EventHandler(this.textBox_DivMW_Leave);
             // 
             // textBox_DivML
             // 
             this.textBox_DivML.Location = new System.Drawing.Point(73, 168);
             this.textBox_DivML.Name = "textBox_DivML";
-            this.textBox_DivML.ReadOnly = true;
             this.textBox_DivML.Size = new System.Drawing.Size(60, 19);
-            this.textBox_DivML.TabIndex = 63;
+            this.textBox_DivML.TabIndex = 7;
             this.textBox_DivML.Text = "2701";
             this.textBox_DivML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_DivML.Leave += new System.EventHandler(this.textBox_DivML_Leave);
             // 
             // label123
             // 
@@ -293,10 +296,10 @@
             this.textBox_MW.Location = new System.Drawing.Point(73, 93);
             this.textBox_MW.Name = "textBox_MW";
             this.textBox_MW.Size = new System.Drawing.Size(60, 19);
-            this.textBox_MW.TabIndex = 59;
-            this.textBox_MW.Text = "6e-3";
+            this.textBox_MW.TabIndex = 4;
+            this.textBox_MW.Text = "18e-3";
             this.textBox_MW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_MW.TextChanged += new System.EventHandler(this.textBox_MW_TextChanged);
+            this.textBox_MW.Leave += new System.EventHandler(this.textBox_MW_Leave);
             // 
             // label127
             // 
@@ -312,10 +315,10 @@
             this.textBox_ML.Location = new System.Drawing.Point(73, 68);
             this.textBox_ML.Name = "textBox_ML";
             this.textBox_ML.Size = new System.Drawing.Size(60, 19);
-            this.textBox_ML.TabIndex = 58;
-            this.textBox_ML.Text = "270e-3";
+            this.textBox_ML.TabIndex = 3;
+            this.textBox_ML.Text = "286e-3";
             this.textBox_ML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_ML.TextChanged += new System.EventHandler(this.textBox_ML_TextChanged);
+            this.textBox_ML.Leave += new System.EventHandler(this.textBox_ML_Leave);
             // 
             // label128
             // 
@@ -331,8 +334,8 @@
             this.textBox_LMF.Location = new System.Drawing.Point(73, 43);
             this.textBox_LMF.Name = "textBox_LMF";
             this.textBox_LMF.Size = new System.Drawing.Size(60, 19);
-            this.textBox_LMF.TabIndex = 55;
-            this.textBox_LMF.Text = "1";
+            this.textBox_LMF.TabIndex = 2;
+            this.textBox_LMF.Text = "10e3";
             this.textBox_LMF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label129
@@ -347,7 +350,7 @@
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(8, 445);
+            this.label63.Location = new System.Drawing.Point(8, 466);
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(37, 12);
             this.label63.TabIndex = 88;
@@ -363,7 +366,7 @@
             this.groupBox_F1.Controls.Add(this.button_DetectorOutput);
             this.groupBox_F1.Location = new System.Drawing.Point(194, 12);
             this.groupBox_F1.Name = "groupBox_F1";
-            this.groupBox_F1.Size = new System.Drawing.Size(200, 520);
+            this.groupBox_F1.Size = new System.Drawing.Size(200, 538);
             this.groupBox_F1.TabIndex = 84;
             this.groupBox_F1.TabStop = false;
             this.groupBox_F1.Text = "波動光学計算";
@@ -383,10 +386,13 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.textBox_Ddy);
             this.groupBox1.Controls.Add(this.label33);
+            this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label40);
-            this.groupBox1.Controls.Add(this.textBox_Detector1by);
+            this.groupBox1.Controls.Add(this.textBox_Dbz);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label39);
             this.groupBox1.Controls.Add(this.textBox_Dbx);
+            this.groupBox1.Controls.Add(this.textBox_Dby);
             this.groupBox1.Controls.Add(this.label23);
             this.groupBox1.Controls.Add(this.label41);
             this.groupBox1.Controls.Add(this.label42);
@@ -394,7 +400,7 @@
             this.groupBox1.Controls.Add(this.textBox_Ddz);
             this.groupBox1.Location = new System.Drawing.Point(6, 189);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(188, 250);
+            this.groupBox1.Size = new System.Drawing.Size(188, 271);
             this.groupBox1.TabIndex = 86;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "焦点";
@@ -404,7 +410,7 @@
             this.textBox_Dnx.Location = new System.Drawing.Point(81, 21);
             this.textBox_Dnx.Name = "textBox_Dnx";
             this.textBox_Dnx.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Dnx.TabIndex = 46;
+            this.textBox_Dnx.TabIndex = 20;
             this.textBox_Dnx.Text = "1";
             this.textBox_Dnx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -413,7 +419,7 @@
             this.textBox_Dny.Location = new System.Drawing.Point(81, 71);
             this.textBox_Dny.Name = "textBox_Dny";
             this.textBox_Dny.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Dny.TabIndex = 46;
+            this.textBox_Dny.TabIndex = 22;
             this.textBox_Dny.Text = "101";
             this.textBox_Dny.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -431,7 +437,7 @@
             this.textBox_Dnz.Location = new System.Drawing.Point(81, 121);
             this.textBox_Dnz.Name = "textBox_Dnz";
             this.textBox_Dnz.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Dnz.TabIndex = 42;
+            this.textBox_Dnz.TabIndex = 24;
             this.textBox_Dnz.Text = "101";
             this.textBox_Dnz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -487,7 +493,7 @@
             this.textBox_Ddx.Location = new System.Drawing.Point(81, 46);
             this.textBox_Ddx.Name = "textBox_Ddx";
             this.textBox_Ddx.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Ddx.TabIndex = 44;
+            this.textBox_Ddx.TabIndex = 21;
             this.textBox_Ddx.Text = "100e-6";
             this.textBox_Ddx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -505,7 +511,7 @@
             this.textBox_Ddy.Location = new System.Drawing.Point(81, 96);
             this.textBox_Ddy.Name = "textBox_Ddy";
             this.textBox_Ddy.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Ddy.TabIndex = 44;
+            this.textBox_Ddy.TabIndex = 23;
             this.textBox_Ddy.Text = "10e-9";
             this.textBox_Ddy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -521,38 +527,38 @@
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(147, 196);
+            this.label40.Location = new System.Drawing.Point(147, 221);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(22, 12);
             this.label40.TabIndex = 50;
             this.label40.Text = "[m]";
             // 
-            // textBox_Detector1by
+            // textBox_Dbz
             // 
-            this.textBox_Detector1by.Location = new System.Drawing.Point(81, 218);
-            this.textBox_Detector1by.Name = "textBox_Detector1by";
-            this.textBox_Detector1by.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Detector1by.TabIndex = 52;
-            this.textBox_Detector1by.Text = "0";
-            this.textBox_Detector1by.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_Dbz.Location = new System.Drawing.Point(81, 243);
+            this.textBox_Dbz.Name = "textBox_Dbz";
+            this.textBox_Dbz.Size = new System.Drawing.Size(60, 19);
+            this.textBox_Dbz.TabIndex = 27;
+            this.textBox_Dbz.Text = "0";
+            this.textBox_Dbz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(39, 196);
+            this.label39.Location = new System.Drawing.Point(39, 221);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(36, 12);
             this.label39.TabIndex = 48;
             this.label39.Text = "Y調整";
             // 
-            // textBox_Dbx
+            // textBox_Dby
             // 
-            this.textBox_Dbx.Location = new System.Drawing.Point(81, 193);
-            this.textBox_Dbx.Name = "textBox_Dbx";
-            this.textBox_Dbx.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Dbx.TabIndex = 49;
-            this.textBox_Dbx.Text = "0";
-            this.textBox_Dbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox_Dby.Location = new System.Drawing.Point(81, 218);
+            this.textBox_Dby.Name = "textBox_Dby";
+            this.textBox_Dby.Size = new System.Drawing.Size(60, 19);
+            this.textBox_Dby.TabIndex = 26;
+            this.textBox_Dby.Text = "0";
+            this.textBox_Dby.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label23
             // 
@@ -566,7 +572,7 @@
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(39, 221);
+            this.label41.Location = new System.Drawing.Point(39, 246);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(36, 12);
             this.label41.TabIndex = 51;
@@ -575,7 +581,7 @@
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(147, 221);
+            this.label42.Location = new System.Drawing.Point(147, 246);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(22, 12);
             this.label42.TabIndex = 53;
@@ -595,7 +601,7 @@
             this.textBox_Ddz.Location = new System.Drawing.Point(81, 146);
             this.textBox_Ddz.Name = "textBox_Ddz";
             this.textBox_Ddz.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Ddz.TabIndex = 39;
+            this.textBox_Ddz.TabIndex = 25;
             this.textBox_Ddz.Text = "10e-9";
             this.textBox_Ddz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -787,14 +793,14 @@
             // 
             // nud_coreNum
             // 
-            this.nud_coreNum.Location = new System.Drawing.Point(28, 460);
+            this.nud_coreNum.Location = new System.Drawing.Point(28, 481);
             this.nud_coreNum.Name = "nud_coreNum";
             this.nud_coreNum.Size = new System.Drawing.Size(60, 19);
             this.nud_coreNum.TabIndex = 87;
             // 
             // button_WaveOptCalc
             // 
-            this.button_WaveOptCalc.Location = new System.Drawing.Point(94, 445);
+            this.button_WaveOptCalc.Location = new System.Drawing.Point(94, 466);
             this.button_WaveOptCalc.Name = "button_WaveOptCalc";
             this.button_WaveOptCalc.Size = new System.Drawing.Size(100, 30);
             this.button_WaveOptCalc.TabIndex = 85;
@@ -804,7 +810,7 @@
             // 
             // button_DetectorOutput
             // 
-            this.button_DetectorOutput.Location = new System.Drawing.Point(94, 481);
+            this.button_DetectorOutput.Location = new System.Drawing.Point(94, 502);
             this.button_DetectorOutput.Name = "button_DetectorOutput";
             this.button_DetectorOutput.Size = new System.Drawing.Size(100, 30);
             this.button_DetectorOutput.TabIndex = 86;
@@ -949,20 +955,20 @@
             this.textBox_PitchML.Location = new System.Drawing.Point(73, 143);
             this.textBox_PitchML.Name = "textBox_PitchML";
             this.textBox_PitchML.Size = new System.Drawing.Size(60, 19);
-            this.textBox_PitchML.TabIndex = 63;
+            this.textBox_PitchML.TabIndex = 6;
             this.textBox_PitchML.Text = "0.1e-3";
             this.textBox_PitchML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_PitchML.TextChanged += new System.EventHandler(this.textBox_PitchML_TextChanged);
+            this.textBox_PitchML.Leave += new System.EventHandler(this.textBox_PitchML_Leave);
             // 
             // textBox_PitchMW
             // 
             this.textBox_PitchMW.Location = new System.Drawing.Point(73, 193);
             this.textBox_PitchMW.Name = "textBox_PitchMW";
             this.textBox_PitchMW.Size = new System.Drawing.Size(60, 19);
-            this.textBox_PitchMW.TabIndex = 62;
+            this.textBox_PitchMW.TabIndex = 8;
             this.textBox_PitchMW.Text = "0.1e-3";
             this.textBox_PitchMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBox_PitchMW.TextChanged += new System.EventHandler(this.textBox_PitchMW_TextChanged);
+            this.textBox_PitchMW.Leave += new System.EventHandler(this.textBox_PitchMW_Leave);
             // 
             // pictureBox_Focus
             // 
@@ -1234,7 +1240,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(194, 550);
+            this.progressBar.Location = new System.Drawing.Point(194, 568);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(200, 23);
             this.progressBar.TabIndex = 89;
@@ -1242,17 +1248,44 @@
             // label_Progress
             // 
             this.label_Progress.AutoSize = true;
-            this.label_Progress.Location = new System.Drawing.Point(192, 535);
+            this.label_Progress.Location = new System.Drawing.Point(192, 553);
             this.label_Progress.Name = "label_Progress";
             this.label_Progress.Size = new System.Drawing.Size(49, 12);
             this.label_Progress.TabIndex = 90;
             this.label_Progress.Text = "progress";
             // 
+            // textBox_Dbx
+            // 
+            this.textBox_Dbx.Location = new System.Drawing.Point(81, 193);
+            this.textBox_Dbx.Name = "textBox_Dbx";
+            this.textBox_Dbx.Size = new System.Drawing.Size(60, 19);
+            this.textBox_Dbx.TabIndex = 26;
+            this.textBox_Dbx.Text = "0";
+            this.textBox_Dbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(39, 196);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 12);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "X調整";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(147, 196);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(22, 12);
+            this.label15.TabIndex = 50;
+            this.label15.Text = "[m]";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 579);
+            this.ClientSize = new System.Drawing.Size(950, 609);
             this.Controls.Add(this.label_Progress);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.groupBox_Err);
@@ -1317,9 +1350,9 @@
         private System.Windows.Forms.TextBox textBox_Ddy;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.TextBox textBox_Detector1by;
+        private System.Windows.Forms.TextBox textBox_Dbz;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.TextBox textBox_Dbx;
+        private System.Windows.Forms.TextBox textBox_Dby;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label42;
@@ -1392,6 +1425,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox_PitchML;
         private System.Windows.Forms.TextBox textBox_PitchMW;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBox_Dbx;
     }
 }
 
