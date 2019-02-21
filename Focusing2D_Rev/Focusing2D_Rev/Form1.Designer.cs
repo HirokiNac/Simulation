@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button_FigOutput = new System.Windows.Forms.Button();
             this.button_FigCalc = new System.Windows.Forms.Button();
             this.label118 = new System.Windows.Forms.Label();
@@ -136,9 +137,6 @@
             this.label38 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label_Progress = new System.Windows.Forms.Label();
-            this.textBox_Dbx = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.groupBox_F1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -150,6 +148,7 @@
             this.tabPage_MirrorFigure.SuspendLayout();
             this.tabPage_WaveOptical.SuspendLayout();
             this.groupBox_Err.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_FigOutput
@@ -364,7 +363,7 @@
             this.groupBox_F1.Controls.Add(this.nud_coreNum);
             this.groupBox_F1.Controls.Add(this.button_WaveOptCalc);
             this.groupBox_F1.Controls.Add(this.button_DetectorOutput);
-            this.groupBox_F1.Location = new System.Drawing.Point(194, 12);
+            this.groupBox_F1.Location = new System.Drawing.Point(194, 28);
             this.groupBox_F1.Name = "groupBox_F1";
             this.groupBox_F1.Size = new System.Drawing.Size(200, 538);
             this.groupBox_F1.TabIndex = 84;
@@ -860,7 +859,7 @@
             this.groupBox3.Controls.Add(this.textBox_DivML);
             this.groupBox3.Controls.Add(this.textBox_PitchMW);
             this.groupBox3.Controls.Add(this.textBox_DivMW);
-            this.groupBox3.Location = new System.Drawing.Point(12, 12);
+            this.groupBox3.Location = new System.Drawing.Point(12, 28);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(176, 354);
             this.groupBox3.TabIndex = 86;
@@ -986,7 +985,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage_MirrorFigure);
             this.tabControl1.Controls.Add(this.tabPage_WaveOptical);
-            this.tabControl1.Location = new System.Drawing.Point(400, 12);
+            this.tabControl1.Location = new System.Drawing.Point(400, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(549, 564);
@@ -1046,7 +1045,7 @@
             this.groupBox_Err.Controls.Add(this.label37);
             this.groupBox_Err.Controls.Add(this.textBox_Err_Angle);
             this.groupBox_Err.Controls.Add(this.label38);
-            this.groupBox_Err.Location = new System.Drawing.Point(12, 372);
+            this.groupBox_Err.Location = new System.Drawing.Point(12, 388);
             this.groupBox_Err.Name = "groupBox_Err";
             this.groupBox_Err.Size = new System.Drawing.Size(176, 219);
             this.groupBox_Err.TabIndex = 88;
@@ -1240,7 +1239,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(194, 568);
+            this.progressBar.Location = new System.Drawing.Point(194, 550);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(200, 23);
             this.progressBar.TabIndex = 89;
@@ -1248,44 +1247,17 @@
             // label_Progress
             // 
             this.label_Progress.AutoSize = true;
-            this.label_Progress.Location = new System.Drawing.Point(192, 553);
+            this.label_Progress.Location = new System.Drawing.Point(192, 535);
             this.label_Progress.Name = "label_Progress";
             this.label_Progress.Size = new System.Drawing.Size(49, 12);
             this.label_Progress.TabIndex = 90;
             this.label_Progress.Text = "progress";
             // 
-            // textBox_Dbx
-            // 
-            this.textBox_Dbx.Location = new System.Drawing.Point(81, 193);
-            this.textBox_Dbx.Name = "textBox_Dbx";
-            this.textBox_Dbx.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Dbx.TabIndex = 26;
-            this.textBox_Dbx.Text = "0";
-            this.textBox_Dbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(39, 196);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(36, 12);
-            this.label14.TabIndex = 48;
-            this.label14.Text = "X調整";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(147, 196);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(22, 12);
-            this.label15.TabIndex = 50;
-            this.label15.Text = "[m]";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 609);
+            this.ClientSize = new System.Drawing.Size(950, 579);
             this.Controls.Add(this.label_Progress);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.groupBox_Err);
@@ -1310,6 +1282,8 @@
             this.tabPage_WaveOptical.ResumeLayout(false);
             this.groupBox_Err.ResumeLayout(false);
             this.groupBox_Err.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1425,9 +1399,6 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox_PitchML;
         private System.Windows.Forms.TextBox textBox_PitchMW;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox_Dbx;
     }
 }
 

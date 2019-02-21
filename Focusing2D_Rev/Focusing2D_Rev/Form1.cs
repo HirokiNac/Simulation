@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Xml.Serialization;
+using System.Xml;
+using System.IO;
 
 namespace Focusing2D_Rev
 {
@@ -52,6 +54,7 @@ namespace Focusing2D_Rev
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\y.txt", m2d.m.y3);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z.txt", m2d.m.z3);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_raw.txt", m2d.m.z);
+                    ClsNac.FileIO.FileIO.writeFile(fbd.SelectedPath + "\\z_raw_plane.txt", m2d.m.z_mod);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_mod.txt", m2d.m.z3_mod);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_torus.txt", m2d.m.z_torus);
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\z_torus_sub.txt", m2d.m.z_torus_sub);
@@ -397,12 +400,120 @@ namespace Focusing2D_Rev
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
             
             
+        }
+
+
+
+
+        public class Setting
+        {
+            public double L1;
+            public double L2;
+            public double ML;
+            public double MW;
+            public double Mtheta;
+            public double MLd;
+            public double MWd;
+
+            public double lambda_energy;
+            public enum type_source { point,square,gauss};
+            public type_source source;
+            public double source_YW;
+            public int source_YN;
+            public double source_ZW;
+            public int source_ZN;
+
+            public int focus_XN;
+            public int focus_YN;
+            public int focus_ZN;
+            public double focus_Xd;
+            public double focus_Yd;
+            public double focus_Zd;
+        }
+
+        private void toolStripButton_SettingSave_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "*.xml|*.xml";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Setting setting = new Setting();
+
+                setting.L1 = double.Parse(textBox_LSM.Text);
+                setting.L2 = double.Parse(textBox_LMF.Text);
+                setting.ML = double.Parse(textBox_ML.Text);
+                setting.MW = double.Parse(textBox_MW.Text);
+                setting.Mtheta = double.Parse(textBox_Mtheta.Text);
+                setting.MLd = double.Parse(textBox_PitchML.Text);
+                setting.MWd = double.Parse(textBox_PitchMW.Text);
+
+                setting.lambda_energy = double.Parse(textBox_WavelengthEnergy.Text);
+                setting.source_YW = double.Parse(textBox_SourceSizeY.Text);
+                setting.source_ZW = double.Parse(textBox_SourceSizeZ.Text);
+                setting.source_YN = int.Parse(textBox_SourceDivY.Text);
+                setting.source_ZN = int.Parse(textBox_SourceDivZ.Text);
+
+                if (radioButton_SourceGauss.Checked)
+                    setting.source = Setting.type_source.gauss;
+                else if (radioButton_SourceRectangle.Checked)
+                    setting.source = Setting.type_source.square;
+                else
+                    setting.source = Setting.type_source.point;
+
+
+                setting.focus_XN = int.Parse(textBox_Dnx.Text);
+                setting.focus_YN = int.Parse(textBox_Dny.Text);
+                setting.focus_ZN = int.Parse(textBox_Dnz.Text);
+                setting.focus_Xd = double.Parse(textBox_Ddx.Text);
+                setting.focus_Yd = double.Parse(textBox_Ddy.Text);
+                setting.focus_Zd = double.Parse(textBox_Ddz.Text);
+
+                FileStream fs = new FileStream(sfd.FileName, FileMode.Create);
+                StreamWriter writer = new StreamWriter(fs, Encoding.UTF8);
+
+                XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+                ns.Add(String.Empty, String.Empty);
+
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Setting));
+                xmlSerializer.Serialize(writer, setting, ns);
+
+                writer.Flush();
+                writer.Close();
+                writer = null;
+            }
+
+
+        }
+
+
+
+
+        private void toolStripButton_SettingLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if(ofd.ShowDialog()==DialogResult.OK)
+            {
+                FileStream fs = new FileStream(ofd.FileName,FileMode.Open);
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(Setting));
+                Setting setting = (Setting)xmlSerializer.Deserialize(fs);
+                fs.Close();
+
+                textBox_LSM.Text = setting.L1.ToString();
+                textBox_LMF.Text = setting.L2.ToString();
+                textBox_ML.Text = setting.ML.ToString();
+                textBox_MW.Text = setting.MW.ToString();
+                textBox_Mtheta.Text = setting.Mtheta.ToString();
+                textBox_PitchML.Text = setting.MLd.ToString();
+
+            }
+
         }
 
     }
