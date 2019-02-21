@@ -1,4 +1,6 @@
-﻿namespace Focusing2D_Rev
+﻿using System.Windows.Forms;
+
+namespace Focusing2D_Rev
 {
     partial class Form1
     {
@@ -137,6 +139,12 @@
             this.label38 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label_Progress = new System.Windows.Forms.Label();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.textBox_Dbx = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.toolStripButton_SettingSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton_SettingLoad = new System.Windows.Forms.ToolStripButton();
             this.groupBox_F1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -148,7 +156,7 @@
             this.tabPage_MirrorFigure.SuspendLayout();
             this.tabPage_WaveOptical.SuspendLayout();
             this.groupBox_Err.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_FigOutput
@@ -1239,7 +1247,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(194, 550);
+            this.progressBar.Location = new System.Drawing.Point(194, 584);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(200, 23);
             this.progressBar.TabIndex = 89;
@@ -1247,17 +1255,76 @@
             // label_Progress
             // 
             this.label_Progress.AutoSize = true;
-            this.label_Progress.Location = new System.Drawing.Point(192, 535);
+            this.label_Progress.Location = new System.Drawing.Point(192, 569);
             this.label_Progress.Name = "label_Progress";
             this.label_Progress.Size = new System.Drawing.Size(49, 12);
             this.label_Progress.TabIndex = 90;
             this.label_Progress.Text = "progress";
             // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton_SettingSave,
+            this.toolStripButton_SettingLoad});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(950, 25);
+            this.toolStrip2.TabIndex = 91;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // textBox_Dbx
+            // 
+            this.textBox_Dbx.Location = new System.Drawing.Point(81, 193);
+            this.textBox_Dbx.Name = "textBox_Dbx";
+            this.textBox_Dbx.Size = new System.Drawing.Size(60, 19);
+            this.textBox_Dbx.TabIndex = 26;
+            this.textBox_Dbx.Text = "0";
+            this.textBox_Dbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(39, 196);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 12);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "X調整";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(147, 196);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(22, 12);
+            this.label15.TabIndex = 50;
+            this.label15.Text = "[m]";
+            // 
+            // toolStripButton_SettingSave
+            // 
+            this.toolStripButton_SettingSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_SettingSave.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_SettingSave.Image")));
+            this.toolStripButton_SettingSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_SettingSave.Name = "toolStripButton_SettingSave";
+            this.toolStripButton_SettingSave.Size = new System.Drawing.Size(35, 22);
+            this.toolStripButton_SettingSave.Text = "Save";
+            this.toolStripButton_SettingSave.Click += new System.EventHandler(this.toolStripButton_SettingSave_Click);
+            // 
+            // toolStripButton_SettingLoad
+            // 
+            this.toolStripButton_SettingLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton_SettingLoad.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton_SettingLoad.Image")));
+            this.toolStripButton_SettingLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton_SettingLoad.Name = "toolStripButton_SettingLoad";
+            this.toolStripButton_SettingLoad.Size = new System.Drawing.Size(37, 22);
+            this.toolStripButton_SettingLoad.Text = "Load";
+            this.toolStripButton_SettingLoad.Click += new System.EventHandler(this.toolStripButton_SettingLoad_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 579);
+            this.ClientSize = new System.Drawing.Size(950, 668);
+            this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.label_Progress);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.groupBox_Err);
@@ -1282,8 +1349,8 @@
             this.tabPage_WaveOptical.ResumeLayout(false);
             this.groupBox_Err.ResumeLayout(false);
             this.groupBox_Err.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1399,6 +1466,16 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox textBox_PitchML;
         private System.Windows.Forms.TextBox textBox_PitchMW;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private Label label15;
+        private Label label14;
+        private TextBox textBox_Dbx;
+        private ToolStrip toolStrip2;
+        private ToolStripButton toolStripButton_SettingSave;
+        private ToolStripButton toolStripButton_SettingLoad;
+        //private System.Windows.Forms.Label label15;
+        //private System.Windows.Forms.Label label14;
+        //private System.Windows.Forms.TextBox textBox_Dbx;
     }
 }
 
