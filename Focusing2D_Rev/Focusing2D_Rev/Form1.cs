@@ -39,7 +39,7 @@ namespace Focusing2D_Rev
                 Convert.ToDouble(this.textBox_MW.Text), Convert.ToDouble(this.textBox_ML.Text));
             
             ClsNac.Graphic.Plot2dPlane myPlane = new ClsNac.Graphic.Plot2dPlane(this.pictureBox_Figure);
-            myPlane.Draw(m2d.m.z3_mod);
+            //myPlane.Draw(m2d.m.z3_mod);
             this.textBox_rx.Text = Convert.ToString(m2d.m.rx[m2d.m.divL / 2]);
             this.textBox_ry.Text = Convert.ToString(m2d.m.ry[m2d.m.divL / 2]);
         }

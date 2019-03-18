@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
@@ -334,7 +336,8 @@ namespace ClsNac
                 double dy = MW / (divW - 1.0);
 
                 #region 拡張なしver.
-                for (int j = 0; j < divL; j++)
+                Parallel.For(0, divL, j =>
+                //for (int j = 0; j < divL; j++)
                 {
                     for (int i = 0; i < divW; i++)
                     {
@@ -345,8 +348,10 @@ namespace ClsNac
                     m.rx[j] = curv(m.x[0, j]);
                     m.ry[j] = m.z[0, j];
                 }
+                );
                 #endregion
 
+                #if kakuchou
                 #region 拡張ありver.
                 #region 平面
                 //上流端・下流端の先端座標から平面の式を求める
@@ -438,7 +443,7 @@ namespace ClsNac
                     m.z2[j] = (double[])listZ[j].ToArray();
                 }
 
-                #region 座標の補正
+#region 座標の補正
 
                 m.Initialize3(2 * iMax - 1, divL);
 
@@ -468,13 +473,14 @@ namespace ClsNac
                         m.reflect[i, j] = false;
                     }
                 }
-                #endregion
+#endregion
 
-                #endregion
+#endregion
 
                 torus(m.rx[divL / 2] - m.ry[divL / 2], m.ry[divL / 2]);
+                #endif
 
-                #region 角度基準を計算
+#region 角度基準を計算
                 //m2 = m;
 
                 //for(int i=0;i<m2.divW;i++)
@@ -485,7 +491,7 @@ namespace ClsNac
                 //    }
                 //}
 
-                #endregion
+#endregion
             }
 
             double ell_z(double x,double y)
@@ -636,7 +642,7 @@ namespace ClsNac
                 return z;
             }
 
-            #region Source&Detector
+#region Source&Detector
 
             public enum source { point, gauss, rectangle }
 
@@ -750,7 +756,7 @@ namespace ClsNac
                 }
 
             }
-            #endregion
+#endregion
 
         }
 
@@ -794,11 +800,11 @@ namespace ClsNac
 
             class WaveField2D
             {
-                #region 宣言
+#region 宣言
 
 
 
-                #region constant
+#region constant
                 const double h = 6.62607e-34;
                 const double e = 1.602e-19;
                 const double c = 2.99792458e8;
@@ -819,7 +825,7 @@ namespace ClsNac
                 }
                 double k { get; set; }
 
-                #endregion
+#endregion
 
                 public Complex[,] u;     //波動場
                 public double[,] x;      //波動場X座標
@@ -845,7 +851,7 @@ namespace ClsNac
 
                 int doneNum;
 
-                #endregion
+#endregion
 
                 //コンストラクタ
                 public WaveField2D(double _lambda)
@@ -896,7 +902,7 @@ namespace ClsNac
                 {
                     double[,] ds = new double[u_back.divW, u_back.divL];
                     
-                    #region 微小領域をかけた場合の計算
+#region 微小領域をかけた場合の計算
                     //伝播元の微小長さの計算
                     if (u_back.x.Length != 1)
                     {
@@ -919,9 +925,9 @@ namespace ClsNac
                         ds[0,0] = 1;
                     }
 
-                    #endregion
+#endregion
 
-                    #region 伝播計算
+#region 伝播計算
                     doneNum = 0;
                     this.Intensity = new double[this.divW, this.divL];
                     this.Phase = new double[this.divW, this.divL];
@@ -950,14 +956,14 @@ namespace ClsNac
                         }
                         doneNum++;
                     });
-                    #endregion
+#endregion
                 }
 
                 public void ForwardPropagation2(WaveField2D u_back)
                 {
                     double[] ds = new double[u_back.divW * u_back.divL];
 
-                    #region 微小領域をかけた場合の計算
+#region 微小領域をかけた場合の計算
                     //伝播元の微小長さの計算
                     if (u_back.x.Length != 1)
                     {
@@ -980,7 +986,7 @@ namespace ClsNac
                         ds[0] = 1;
                     }
 
-                    #endregion
+#endregion
 
 
                     ClsNac.WaveOpticsCpp_Wrapper.Prop2D(lambda, -1,
@@ -1073,7 +1079,7 @@ namespace ClsNac
 
     namespace Mirror
     {
-        #region interface
+#region interface
         interface ICoord
         {
             int div { get; }
@@ -1094,16 +1100,16 @@ namespace ClsNac
 
             Complex[][] u { get; set; }
         }
-        #endregion
+#endregion
 
-        #region 座標
+#region 座標
 
         /// <summary>
         /// 光源，暫定焦点座標(一次元)
         /// </summary>
         public class Coord : ICoord
         {
-            #region 変数
+#region 変数
             /// <summary>分割数</summary>
             public int div { get; private set; }
 
@@ -1179,9 +1185,9 @@ namespace ClsNac
                 }
             }
 
-            #endregion
+#endregion
 
-            #region constructor
+#region constructor
             /// <summary>
             /// コンストラクタ
             /// </summary>
@@ -1212,9 +1218,9 @@ namespace ClsNac
                 u = new Complex[div];
             }
 
-            #endregion
+#endregion
 
-            #region 座標補正
+#region 座標補正
             /// <summary>
             /// xy座標回転
             /// </summary>
@@ -1245,7 +1251,7 @@ namespace ClsNac
                     y[i] += dy;
                 }
             }
-            #endregion
+#endregion
         }
 
         /// <summary>
@@ -1307,8 +1313,8 @@ namespace ClsNac
         /// </summary>
         public class CoordF : ICoordF
         {
-            #region 変数
-            #region 座標
+#region 変数
+#region 座標
             /// <summary>光軸方向分割数</summary>
             public int n { get; private set; }
             /// <summary>垂直方向分割数</summary>
@@ -1331,8 +1337,8 @@ namespace ClsNac
 
             public double bx { get; private set; }
             public double by { get; private set; }
-            #endregion
-            #region 波動光学
+#endregion
+#region 波動光学
             /// <summary></summary>
             public Complex[][] u { get; set; }
 
@@ -1371,7 +1377,7 @@ namespace ClsNac
                         }
                     }
 
-                    #region FWHM1
+#region FWHM1
                     //外側からピークトップにかけて
                     //カウント/2以上になる境目を探す
                     double dblePos1 = 0.0;
@@ -1393,9 +1399,9 @@ namespace ClsNac
                         }
                     }
                     double FWHM1 = Math.Abs(dblePos1 - dblePos2);
-                    #endregion
+#endregion
 
-                    #region FWHM2
+#region FWHM2
                     //ピークトップから外側にかけて
                     //カウント/2以下になる境目を探す
                     dblePos1 = 0.0;
@@ -1417,7 +1423,7 @@ namespace ClsNac
                         }
                     }
                     double FWHM2 = Math.Abs(dblePos1 - dblePos2);
-                    #endregion
+#endregion
 
                     return Tuple.Create<double, double>(FWHM1, FWHM2);
                 }
@@ -1425,14 +1431,14 @@ namespace ClsNac
                     return Tuple.Create<double, double>(0.0, 0.0);
 
             }
-            #endregion
+#endregion
 
             public double DoF { get; private set; }
             
-            #endregion
+#endregion
 
 
-            #region constructor
+#region constructor
             /// <summary>
             /// コンストラクタ
             /// </summary>
@@ -1474,11 +1480,11 @@ namespace ClsNac
             {
                 Initialize(1, _div, 0.0, 0.0);
             }
-            #endregion
+#endregion
 
             public void Finish()
             {
-                #region intensity
+#region intensity
                 Intensity = new double[n, div];
                 IntensityJagged = new double[n][];
                 Parallel.For(0, n, i =>
@@ -1490,9 +1496,9 @@ namespace ClsNac
                         IntensityJagged[i][j] = Intensity[i, j];
                     }
                 });
-                #endregion
+#endregion
 
-                #region phase
+#region phase
                 Phase = new double[n, div];
                 PhaseJagged = new double[n][];
                 Parallel.For(0, n, i =>
@@ -1506,9 +1512,9 @@ namespace ClsNac
                 });
 
 
-                #endregion
+#endregion
 
-                #region fwhm
+#region fwhm
                 FWHM1 = new double[n];
                 FWHM2 = new double[n];
 
@@ -1533,12 +1539,12 @@ namespace ClsNac
                         iMinFWHM2 = i;
                     }
                 }
-                #endregion
+#endregion
             }
 
-            #region 補正
+#region 補正
 
-            #region 座標変換
+#region 座標変換
             /// <summary>
             /// xy座標中心回転
             /// </summary>
@@ -1586,9 +1592,9 @@ namespace ClsNac
                 }
 
             }
-            #endregion
+#endregion
 
-            #region cooord変換
+#region cooord変換
             /// <summary>
             /// CoordFをCoordに変換
             /// </summary>
@@ -1621,13 +1627,13 @@ namespace ClsNac
                     u[_n][j] = _c.u[j];
                 }
             }
-            #endregion
+#endregion
 
-            #endregion
+#endregion
 
         }
 
-        #endregion
+#endregion
 
         namespace Figure
         {
@@ -1635,7 +1641,7 @@ namespace ClsNac
             public class Mirror1D
             {
 
-                #region 宣言
+#region 宣言
 
                 internal enum mType { Ell, Para }
                 internal enum mDiv { Angle, Even }
@@ -1660,7 +1666,7 @@ namespace ClsNac
                 const double tol_ML = 1e-6;
                 const int tol_max = 1000;
 
-                #region coord
+#region coord
                 /// <summary>
                 /// 光源座標
                 /// </summary>
@@ -1683,9 +1689,9 @@ namespace ClsNac
                 /// </summary>
                 internal CoordF fw;
 
-                #endregion
+#endregion
 
-                #endregion
+#endregion
 
                 /// <summary>
                 /// コンストラクタ
@@ -1729,7 +1735,7 @@ namespace ClsNac
                     }
                 }
 
-                #region ellipse
+#region ellipse
 
                 void Ellipse()
                 {
@@ -1751,7 +1757,7 @@ namespace ClsNac
                     double m_yc = (double)mpos * ell_b * Math.Sqrt(1 - Math.Pow((m_xc / ell_a), 2.0));
 
 
-                    #region 等分割
+#region 等分割
                     if (mdiv == mDiv.Even)
                     {
                         for (int i = 0; i < div; i++)
@@ -1770,9 +1776,9 @@ namespace ClsNac
                             m.theta[i] -= inc_c - theta_i;
 
                     }
-                    #endregion
+#endregion
 
-                    #region 角度分割
+#region 角度分割
                     else
                     {
                         double x0 = m_xc - ML / 2.0;
@@ -1840,11 +1846,11 @@ namespace ClsNac
                         for (int i = 0; i < m.div; i++)
                             m.theta[i] -= inc_c - theta_i;
                     }
-                    #endregion
+#endregion
 
                 }
 
-                #region subroutin
+#region subroutin
                 /// <summary>
                 /// 楕円のyを返す
                 /// </summary>
@@ -1895,11 +1901,11 @@ namespace ClsNac
                     return ell_a / (this.ell_b * (-x * x / Math.Pow(a2x2, 3.0 / 2.0) - 1.0 / Math.Sqrt(a2x2)));
                 }
 
-                #endregion
+#endregion
 
-                #endregion
+#endregion
 
-                #region Source&Detector
+#region Source&Detector
                 /// <summary>
                 /// 光源座標設定
                 /// </summary>
@@ -1959,7 +1965,7 @@ namespace ClsNac
                     fw.Move(bx * Math.Cos(theta) + by * Math.Sin(theta), bx * Math.Sin(theta) - by * Math.Sin(theta));
                     fw.Rot(theta);
                 }
-                #endregion
+#endregion
 
 
 
@@ -1984,7 +1990,7 @@ namespace ClsNac
 
                 }
 
-                #region 補正
+#region 補正
                 /// <summary>一段目のミラー形状再計算
                 /// 波動光学計算用座標
                 /// </summary>
@@ -2103,7 +2109,7 @@ namespace ClsNac
                     return Math.Sqrt(Math.Pow(x0 - x, 2.0) + Math.Pow(y0 - y, 2.0));
                 }
 
-                #region 回転
+#region 回転
                 public enum RotPoint
                 {
                     Assign,
@@ -2228,9 +2234,9 @@ namespace ClsNac
                         for (int i = 0; i < x.GetLength(0); i++)
                             rotXY(ref x[i], ref y[i], theta, x0, y0);
                 }
-                #endregion
+#endregion
 
-                #region 移動
+#region 移動
 
                 /// <summary>
                 /// 座標移動
@@ -2313,9 +2319,9 @@ namespace ClsNac
                             movXY(ref x[i], ref y[i], dx, dy);
                 }
 
-                #endregion
+#endregion
 
-                #endregion
+#endregion
             }
 
         }
@@ -2336,7 +2342,7 @@ namespace ClsNac
             class WaveField1D
             {
 
-                #region 宣言
+#region 宣言
                 const double h = 6.62607e-34;
                 const double e = 1.602e-19;
                 const double c = 2.99792458e8;
@@ -2373,9 +2379,9 @@ namespace ClsNac
 
                 IProgress<ProgressInfo> progress;
                 public CancellationToken ct { get; set; }
-                #endregion
+#endregion
 
-                #region constructor
+#region constructor
                 public WaveField1D() { }
 
                 public WaveField1D(Coord _Source, CoordM _Mirror, CoordF _Focus)
@@ -2383,9 +2389,9 @@ namespace ClsNac
                     Initialize(_Source, _Mirror, _Focus);
                 }
 
-                #endregion
+#endregion
 
-                #region void
+#region void
 
                 public void Initialize(Coord _Source, CoordM _Mirror, CoordF _Focus)
                 {
@@ -2506,7 +2512,7 @@ namespace ClsNac
                         progress.Report(new ProgressInfo(_value, _message + string.Format("計算中 {0}/{1}", _value, 100)));
                 }
 
-                #endregion
+#endregion
 
             }
 
@@ -2549,7 +2555,7 @@ namespace ClsNac
                     //波数の計算
                     k = 2.0 * Math.PI / this.lambda;
 
-                    #region 微小領域をかけない場合の計算
+#region 微小領域をかけない場合の計算
                     //伝播計算
                     //for (int i = 0; i < this.x.Length; i++)
                     //{
@@ -2560,9 +2566,9 @@ namespace ClsNac
                     //                        / Math.Sqrt(Math.Pow(this.x[i] - u_back.x[j], 2.0) + Math.Pow(this.y[i] - u_back.y[j], 2.0));
                     //    }
                     //}
-                    #endregion
+#endregion
 
-                    #region 微小領域をかけた場合の計算
+#region 微小領域をかけた場合の計算
                     //伝播元の微小長さの計算
                     if (u_back.x.Length != 1)
                     {
@@ -2592,7 +2598,7 @@ namespace ClsNac
                         //                    / Math.Sqrt(Math.Pow(this.x[i] - u_back.x[j], 2.0) + Math.Pow(this.y[i] - u_back.y[j], 2.0));
                         //}
                     }
-                    #endregion
+#endregion
 
                     //強度計算
                     this.Intensity = new double[this.u.Length];
@@ -2670,7 +2676,7 @@ namespace ClsNac
                     return dblePos2 - dblePos1;
                 }
 
-                #region 並列計算ver
+#region 並列計算ver
                 /// <summary>
                 /// 
                 /// </summary>
@@ -2685,7 +2691,7 @@ namespace ClsNac
                     //波数の計算
                     k = 2.0 * Math.PI / this.lambda;
 
-                    #region 微小領域をかけない場合の計算
+#region 微小領域をかけない場合の計算
                     //伝播計算
                     //for (int i = 0; i < this.x.Length; i++)
                     //{
@@ -2696,9 +2702,9 @@ namespace ClsNac
                     //                        / Math.Sqrt(Math.Pow(this.x[i] - u_back.x[j], 2.0) + Math.Pow(this.y[i] - u_back.y[j], 2.0));
                     //    }
                     //}
-                    #endregion
+#endregion
 
-                    #region 微小領域をかけた場合の計算
+#region 微小領域をかけた場合の計算
                     //伝播元の微小長さの計算
                     if (u_back.x.Length != 1)
                     {
@@ -2723,7 +2729,7 @@ namespace ClsNac
                                             / Math.Sqrt(Math.Pow(this.x[i] - u_back.x[j], 2.0) + Math.Pow(this.y[i] - u_back.y[j], 2.0)) * ds[j];
                         }
                     });
-                    #endregion
+#endregion
 
                     //強度計算
                     this.Intensity = new double[this.u.Length];
@@ -2737,7 +2743,7 @@ namespace ClsNac
                 }
 
 
-                #endregion
+#endregion
             }
 
         }
@@ -3328,7 +3334,7 @@ namespace ClsNac
         public static class FileIO
         {
 
-            #region FileInput
+#region FileInput
 
 
             public static void readFile(string filePath, ref double[,] readData)
@@ -3418,9 +3424,9 @@ namespace ClsNac
                 sr.Close();
             }
 
-            #endregion FileInput
+#endregion FileInput
 
-            #region FileOutput
+#region FileOutput
 
             /// <summary>
             /// データ書込
@@ -3502,7 +3508,7 @@ namespace ClsNac
 
             }
 
-            #endregion FileOutput
+#endregion FileOutput
         }
 
     }
