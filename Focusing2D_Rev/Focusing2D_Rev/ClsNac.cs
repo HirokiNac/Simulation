@@ -33,7 +33,9 @@ namespace ClsNac
             public double[] rx { get; set; }
             public double[] ry { get; set; }
 
-            public Complex[,] u { get; set; }
+            //public Complex[,] u { get; set; }
+            public double[,] real { get; set; }
+            public double[,] imag { get; set; }
             public double[,] Intensity { get; set; }
             public double[,] Phase { get; set; }
 
@@ -56,7 +58,9 @@ namespace ClsNac
                 rx = new double[divL];
                 ry = new double[divL];
 
-                u = new Complex[divW, divL];
+                //u = new Complex[divW, divL];
+                real = new double[divW, divL];
+                imag = new double[divW, divL];
                 Intensity = new double[divW, divL];
                 Phase = new double[divW, divL];
 
@@ -689,13 +693,16 @@ namespace ClsNac
 
                         if(_source==source.gauss)
                         {
-                            s.u[i, j] = gauss(s.y[i, j], s.zc + (-nz / 2 + j) * dz, sigy, sigz);
+                            s.real[i, j] = gauss(s.y[i, j], s.zc + (-nz / 2 + j) * dz, sigy, sigz);
+                            s.imag[i, j] = 0.0;
                         }
                         else
                         {
-                            s.u[i, j] = new Complex(1.0, 0.0);
+                            s.real[i, j] = 1.0;
+                            s.imag[i, j] = 0.0;
                         }
-                        s.Intensity[i, j] = Math.Pow(s.u[i, j].Magnitude, 2.0);
+
+                        s.Intensity[i, j] = Math.Sqrt(s.real[i, j] * s.real[i, j] + s.imag[i, j] * s.imag[i, j]);
                     }
                 }
 
@@ -827,7 +834,7 @@ namespace ClsNac
 
 #endregion
 
-                public Complex[,] u;     //波動場
+                //public Complex[,] u;     //波動場
                 public double[,] x;      //波動場X座標
                 public double[,] y;      //波動場Y座標
                 public double[,] z;
@@ -861,7 +868,7 @@ namespace ClsNac
 
                 public WaveField2D() { }
 
-                public void Initialize(double[,] _x, double[,] _y, double[,] _z, bool[,] _reflect = null, Complex[,] _u = null)
+                public void Initialize(double[,] _x, double[,] _y, double[,] _z, bool[,] _reflect = null, double[,] _real=null,double[,] _imag=null)
                 {
                     divW = _x.GetLength(0);
                     divL = _x.GetLength(1);
@@ -870,7 +877,10 @@ namespace ClsNac
                     y = _y;
                     z = _z;
                     reflect = _reflect;
-                    u = _u != null ? _u : new Complex[divW, divL];
+                    //u = _u != null ? _u : new Complex[divW, divL];
+
+                    if (_real == null) _real = new double[divW, divL];
+                    if (_imag == null) _imag = new double[divW, divL];
 
                     Re = new double[divW, divL];
                     Im = new double[divW, divL];
@@ -886,8 +896,8 @@ namespace ClsNac
                     {
                         for (int j = 0; j < divL; j++)
                         {
-                            Re[i, j] = u[i, j].Real;
-                            Im[i, j] = u[i, j].Imaginary;
+                            Re[i, j] = _real[i, j];
+                            Im[i, j] = _imag[i, j];
                             xv[i + divW * j] = x[i, j];
                             yv[i + divW * j] = y[i, j];
                             zv[i + divW * j] = z[i, j];
@@ -898,6 +908,7 @@ namespace ClsNac
                 }
 
                 //順方向伝播(引数：伝播元波動場)
+#if CSPARA
                 public void ForwardPropagation(WaveField2D u_back)
                 {
                     double[,] ds = new double[u_back.divW, u_back.divL];
@@ -958,7 +969,7 @@ namespace ClsNac
                     });
 #endregion
                 }
-
+#endif
                 public void ForwardPropagation2(WaveField2D u_back)
                 {
                     double[] ds = new double[u_back.divW * u_back.divL];
@@ -997,9 +1008,10 @@ namespace ClsNac
                     {
                         for (int j = 0; j < divL; j++)
                         {
-                            u[i, j] = new Complex(rev[i + divW * j], imv[i + divW * j]);
-                            Intensity[i, j] = Math.Pow(u[i, j].Magnitude, 2.0);
-                            Phase[i, j] = u[i, j].Phase;
+                            Re[i, j] = rev[i + divW * j];
+                            Im[i, j] = imv[i + divW * j];
+                            Intensity[i, j] = Math.Sqrt(Re[i, j] * Re[i, j] + Im[i, j] * Im[i, j]);
+                            Phase[i, j] = Math.Atan2(Re[i, j], Im[i, j]);
                         }
                     }
 

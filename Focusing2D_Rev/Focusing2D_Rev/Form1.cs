@@ -123,7 +123,7 @@ namespace Focusing2D_Rev
 
                 }
 
-                wS.Initialize(m2d.s.x, m2d.s.y, m2d.s.z, _u: m2d.s.u);
+                wS.Initialize(m2d.s.x, m2d.s.y, m2d.s.z, _real: m2d.s.real, _imag: m2d.s.imag);
                 #endregion
 
                 #region ミラー設定
