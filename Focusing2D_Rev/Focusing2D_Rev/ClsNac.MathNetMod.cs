@@ -78,7 +78,10 @@ namespace ClsNac.MathNetMod
                     z1[i] = z[i, j];
                 //x方向に補完
                 for (int ii = 0; ii < nx_mod; ii++)
+                    z_subMod[ii][j] = Interpolate.Linear(x, z1).Interpolate(x_mod[ii]);
+#if CUBIC
                     z_subMod[ii][j] = Interpolate.CubicSpline(x, z1).Interpolate(x_mod[ii]);
+#endif
             });
 
             //[変換後x,変換後y]
@@ -86,7 +89,10 @@ namespace ClsNac.MathNetMod
             Parallel.For(0, ny_mod, jj =>
             {
                 for (int ii = 0; ii < nx_mod; ii++)
+                    z_mod[ii, jj] = Interpolate.Linear(y, z_subMod[ii]).Interpolate(y_mod[jj]);
+#if CUBIC
                     z_mod[ii, jj] = Interpolate.CubicSpline(y, z_subMod[ii]).Interpolate(y_mod[jj]);
+#endif
             });
 
             return z_mod;

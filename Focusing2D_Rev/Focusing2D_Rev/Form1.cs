@@ -382,8 +382,21 @@ namespace Focusing2D_Rev
                     }
                     else
                     {
-                        ClsNac.MathNetMod.Spline2D spline2D = new ClsNac.MathNetMod.Spline2D(data_Error);
-                        data_Error2 = spline2D.Interpolation(m2d.divW, m2d.divL);
+                        double[] posx = new double[m2d.divW];
+                        double[] posy = new double[m2d.divL];
+
+                        double dx = data_Error.GetLength(0) / (double)m2d.divW;
+                        double dy = data_Error.GetLength(1) / (double)m2d.divL;
+
+                        for (int i = 0; i < m2d.divW; i++) posx[i] = i * dx;
+                        for (int j = 0; j < m2d.divL; j++) posy[j] = j * dy;
+
+
+                        ClsNac.Spline spline = new ClsNac.Spline(data_Error);
+                        data_Error2 = spline.Execute2(posx, posy);
+
+                        //ClsNac.MathNetMod.Spline2D spline2D = new ClsNac.MathNetMod.Spline2D(data_Error);
+                        //data_Error2 = spline2D.Interpolation(m2d.divW, m2d.divL);
                     }
                 
 

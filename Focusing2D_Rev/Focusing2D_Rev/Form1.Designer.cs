@@ -68,9 +68,12 @@ namespace Focusing2D_Rev
             this.label5 = new System.Windows.Forms.Label();
             this.textBox_Ddy = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.label40 = new System.Windows.Forms.Label();
             this.textBox_Dbz = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
+            this.textBox_Dbx = new System.Windows.Forms.TextBox();
             this.textBox_Dby = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
@@ -140,9 +143,6 @@ namespace Focusing2D_Rev
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.label_Progress = new System.Windows.Forms.Label();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.textBox_Dbx = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.toolStripButton_SettingSave = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton_SettingLoad = new System.Windows.Forms.ToolStripButton();
             this.groupBox_F1.SuspendLayout();
@@ -531,6 +531,15 @@ namespace Focusing2D_Rev
             this.label33.TabIndex = 47;
             this.label33.Text = "[m]";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(147, 196);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(22, 12);
+            this.label15.TabIndex = 50;
+            this.label15.Text = "[m]";
+            // 
             // label40
             // 
             this.label40.AutoSize = true;
@@ -549,6 +558,15 @@ namespace Focusing2D_Rev
             this.textBox_Dbz.Text = "0";
             this.textBox_Dbz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(39, 196);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(36, 12);
+            this.label14.TabIndex = 48;
+            this.label14.Text = "X調整";
+            // 
             // label39
             // 
             this.label39.AutoSize = true;
@@ -557,6 +575,15 @@ namespace Focusing2D_Rev
             this.label39.Size = new System.Drawing.Size(36, 12);
             this.label39.TabIndex = 48;
             this.label39.Text = "Y調整";
+            // 
+            // textBox_Dbx
+            // 
+            this.textBox_Dbx.Location = new System.Drawing.Point(81, 193);
+            this.textBox_Dbx.Name = "textBox_Dbx";
+            this.textBox_Dbx.Size = new System.Drawing.Size(60, 19);
+            this.textBox_Dbx.TabIndex = 26;
+            this.textBox_Dbx.Text = "0";
+            this.textBox_Dbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Dby
             // 
@@ -963,7 +990,7 @@ namespace Focusing2D_Rev
             this.textBox_PitchML.Name = "textBox_PitchML";
             this.textBox_PitchML.Size = new System.Drawing.Size(60, 19);
             this.textBox_PitchML.TabIndex = 6;
-            this.textBox_PitchML.Text = "0.1e-3";
+            this.textBox_PitchML.Text = "80e-6";
             this.textBox_PitchML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_PitchML.Leave += new System.EventHandler(this.textBox_PitchML_Leave);
             // 
@@ -973,7 +1000,7 @@ namespace Focusing2D_Rev
             this.textBox_PitchMW.Name = "textBox_PitchMW";
             this.textBox_PitchMW.Size = new System.Drawing.Size(60, 19);
             this.textBox_PitchMW.TabIndex = 8;
-            this.textBox_PitchMW.Text = "0.1e-3";
+            this.textBox_PitchMW.Text = "2e-6";
             this.textBox_PitchMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_PitchMW.Leave += new System.EventHandler(this.textBox_PitchMW_Leave);
             // 
@@ -1271,33 +1298,6 @@ namespace Focusing2D_Rev
             this.toolStrip2.Size = new System.Drawing.Size(950, 25);
             this.toolStrip2.TabIndex = 91;
             this.toolStrip2.Text = "toolStrip2";
-            // 
-            // textBox_Dbx
-            // 
-            this.textBox_Dbx.Location = new System.Drawing.Point(81, 193);
-            this.textBox_Dbx.Name = "textBox_Dbx";
-            this.textBox_Dbx.Size = new System.Drawing.Size(60, 19);
-            this.textBox_Dbx.TabIndex = 26;
-            this.textBox_Dbx.Text = "0";
-            this.textBox_Dbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(39, 196);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(36, 12);
-            this.label14.TabIndex = 48;
-            this.label14.Text = "X調整";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(147, 196);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(22, 12);
-            this.label15.TabIndex = 50;
-            this.label15.Text = "[m]";
             // 
             // toolStripButton_SettingSave
             // 

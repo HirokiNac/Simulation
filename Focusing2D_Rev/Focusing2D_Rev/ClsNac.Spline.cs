@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace ClsNk
+namespace ClsNac
 {
 
     //2013/04/05更新
@@ -82,14 +82,14 @@ namespace ClsNk
             spline(posX2, orgData2, ref yy2);
         }
 
-        public Spline(double[,] _orgData, int _coreN = 1)
+        public Spline(double[,] _orgData, int _coreN = 0)
         {
             nx1 = _orgData.GetLength(0);
             nx2 = _orgData.GetLength(1);
             coreN = _coreN;
 
             zero2 = zero(_orgData);
-            _orgData = hosei(_orgData, 0, _orgData.GetLength(0), 0, _orgData.GetLength(1));
+            //_orgData = hosei(_orgData, 0, _orgData.GetLength(0), 0, _orgData.GetLength(1));
 
             orgData2 = new double[nx1][];
             for (int i = 0; i < nx1; i++)
@@ -189,22 +189,22 @@ namespace ClsNk
                         y[i, j] = splint(posX1, posX2, orgData2, yy2, sx1[i, j], sx2[i, j]);
 
 
-                    for (int ii = 0; ii < sx1.GetLength(0); ii++)
-                    {
-                        if (j < sx2[ii, 0] || j > sx2[ii, sx2.GetLength(1) - 1])
-                        {
-                            y[i, j] = 0.0;
-                            break;
-                        }
-                    }
-                    for (int jj = 0; jj < sx2.GetLength(1); jj++)
-                    {
-                        if (i < sx1[0, jj] || i > sx1[sx1.GetLength(0) - 1, jj])
-                        {
-                            y[i, j] = 0.0;
-                            break;
-                        }
-                    }
+                    //for (int ii = 0; ii < sx1.GetLength(0); ii++)
+                    //{
+                    //    if (j < sx2[ii, 0] || j > sx2[ii, sx2.GetLength(1) - 1])
+                    //    {
+                    //        y[i, j] = 0.0;
+                    //        break;
+                    //    }
+                    //}
+                    //for (int jj = 0; jj < sx2.GetLength(1); jj++)
+                    //{
+                    //    if (i < sx1[0, jj] || i > sx1[sx1.GetLength(0) - 1, jj])
+                    //    {
+                    //        y[i, j] = 0.0;
+                    //        break;
+                    //    }
+                    //}
 
 
                 }
@@ -280,9 +280,13 @@ namespace ClsNk
         /// <param name="y2">２階導関数</param>
         private static void spline(double[] x, double[][] y, ref double[][] y2)
         {
-            y2 = new double[y.GetLength(0)][];
-            for (int i = 0; i < y.GetLength(0); i++)
-                spline(x, y[i], ref y2[i]);
+            double[][] y2_temp = new double[y.GetLength(0)][];
+            Parallel.For(0, y.GetLength(0), i => { spline(x, y[i], ref y2_temp[i]); });
+
+            y2 = y2_temp;
+
+            //for (int i = 0; i < y.GetLength(0); i++)
+            //    spline(x, y[i], ref y2[i]);
         }
 
         /// <summary>
