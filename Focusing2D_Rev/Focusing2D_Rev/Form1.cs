@@ -212,11 +212,11 @@ namespace Focusing2D_Rev
         {
             if (this.fbd.ShowDialog() == DialogResult.OK)
             {
-                ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensitySource.txt", m2d.s.Intensity);
-                ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\PhaseSource.txt", m2d.s.Phase);
+                //ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensitySource.txt", m2d.s.Intensity);
+                //ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\PhaseSource.txt", m2d.s.Phase);
 
-                ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensityMirror.txt", wM.Intensity);
-                ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\PhaseMirror.txt", wM.Phase);
+                //ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensityMirror.txt", wM.Intensity);
+                //ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\PhaseMirror.txt", wM.Phase);
                 for (int i = 0; i < wF.Length; i++)
                 {
                     ClsNac.FileIO.FileIO.writeFile(this.fbd.SelectedPath + "\\IntensityFocus" + i.ToString("D2") + ".txt", wF[i].Intensity);
