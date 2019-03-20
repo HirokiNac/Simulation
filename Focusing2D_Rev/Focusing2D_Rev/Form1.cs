@@ -371,6 +371,7 @@ namespace Focusing2D_Rev
                 //誤差データ読み込み
                 if (openFileDialog_FigError.ShowDialog() == DialogResult.OK)
                 {
+                    textBox_Err_FigXY.Text = openFileDialog_FigError.FileName;
                     double[,] data_Error = null;
                     ClsNac.FileIO.FileIO.readFile(openFileDialog_FigError.FileName, ref data_Error);
 

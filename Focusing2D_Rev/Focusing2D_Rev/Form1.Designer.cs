@@ -130,7 +130,7 @@ namespace Focusing2D_Rev
             this.label62 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox_Err_Fig = new System.Windows.Forms.TextBox();
+            this.textBox_Err_FigXY = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
@@ -248,7 +248,7 @@ namespace Focusing2D_Rev
             this.textBox_DivMW.Name = "textBox_DivMW";
             this.textBox_DivMW.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivMW.TabIndex = 9;
-            this.textBox_DivMW.Text = "61";
+            this.textBox_DivMW.Text = "9000";
             this.textBox_DivMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_DivMW.Leave += new System.EventHandler(this.textBox_DivMW_Leave);
             // 
@@ -258,7 +258,7 @@ namespace Focusing2D_Rev
             this.textBox_DivML.Name = "textBox_DivML";
             this.textBox_DivML.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivML.TabIndex = 7;
-            this.textBox_DivML.Text = "2701";
+            this.textBox_DivML.Text = "3575";
             this.textBox_DivML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_DivML.Leave += new System.EventHandler(this.textBox_DivML_Leave);
             // 
@@ -342,7 +342,7 @@ namespace Focusing2D_Rev
             this.textBox_LMF.Name = "textBox_LMF";
             this.textBox_LMF.Size = new System.Drawing.Size(60, 19);
             this.textBox_LMF.TabIndex = 2;
-            this.textBox_LMF.Text = "10e3";
+            this.textBox_LMF.Text = "1e3";
             this.textBox_LMF.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label129
@@ -519,7 +519,7 @@ namespace Focusing2D_Rev
             this.textBox_Ddy.Name = "textBox_Ddy";
             this.textBox_Ddy.Size = new System.Drawing.Size(60, 19);
             this.textBox_Ddy.TabIndex = 23;
-            this.textBox_Ddy.Text = "10e-9";
+            this.textBox_Ddy.Text = "250e-6";
             this.textBox_Ddy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label33
@@ -582,7 +582,7 @@ namespace Focusing2D_Rev
             this.textBox_Dbx.Name = "textBox_Dbx";
             this.textBox_Dbx.Size = new System.Drawing.Size(60, 19);
             this.textBox_Dbx.TabIndex = 26;
-            this.textBox_Dbx.Text = "0";
+            this.textBox_Dbx.Text = "-950";
             this.textBox_Dbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Dby
@@ -636,7 +636,7 @@ namespace Focusing2D_Rev
             this.textBox_Ddz.Name = "textBox_Ddz";
             this.textBox_Ddz.Size = new System.Drawing.Size(60, 19);
             this.textBox_Ddz.TabIndex = 25;
-            this.textBox_Ddz.Text = "10e-9";
+            this.textBox_Ddz.Text = "250e-6";
             this.textBox_Ddz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox2
@@ -1070,7 +1070,7 @@ namespace Focusing2D_Rev
             this.groupBox_Err.Controls.Add(this.label62);
             this.groupBox_Err.Controls.Add(this.textBox2);
             this.groupBox_Err.Controls.Add(this.textBox1);
-            this.groupBox_Err.Controls.Add(this.textBox_Err_Fig);
+            this.groupBox_Err.Controls.Add(this.textBox_Err_FigXY);
             this.groupBox_Err.Controls.Add(this.label9);
             this.groupBox_Err.Controls.Add(this.label8);
             this.groupBox_Err.Controls.Add(this.label47);
@@ -1179,13 +1179,13 @@ namespace Focusing2D_Rev
             this.textBox1.Size = new System.Drawing.Size(81, 19);
             this.textBox1.TabIndex = 52;
             // 
-            // textBox_Err_Fig
+            // textBox_Err_FigXY
             // 
-            this.textBox_Err_Fig.Location = new System.Drawing.Point(53, 20);
-            this.textBox_Err_Fig.Name = "textBox_Err_Fig";
-            this.textBox_Err_Fig.ReadOnly = true;
-            this.textBox_Err_Fig.Size = new System.Drawing.Size(81, 19);
-            this.textBox_Err_Fig.TabIndex = 52;
+            this.textBox_Err_FigXY.Location = new System.Drawing.Point(53, 20);
+            this.textBox_Err_FigXY.Name = "textBox_Err_FigXY";
+            this.textBox_Err_FigXY.ReadOnly = true;
+            this.textBox_Err_FigXY.Size = new System.Drawing.Size(81, 19);
+            this.textBox_Err_FigXY.TabIndex = 52;
             // 
             // label9
             // 
@@ -1323,7 +1323,7 @@ namespace Focusing2D_Rev
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 668);
+            this.ClientSize = new System.Drawing.Size(950, 616);
             this.Controls.Add(this.toolStrip2);
             this.Controls.Add(this.label_Progress);
             this.Controls.Add(this.progressBar);
@@ -1435,7 +1435,7 @@ namespace Focusing2D_Rev
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.TextBox textBox_Err_Rolling;
         private System.Windows.Forms.Label label62;
-        private System.Windows.Forms.TextBox textBox_Err_Fig;
+        private System.Windows.Forms.TextBox textBox_Err_FigXY;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Button button_Err_FigXY;
         private System.Windows.Forms.Label label37;
