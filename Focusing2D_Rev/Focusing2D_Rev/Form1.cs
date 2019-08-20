@@ -280,6 +280,12 @@ namespace Focusing2D_Rev
         private void button_TorusCalc_Click(object sender, EventArgs e)
         {
             m2d.torus(Convert.ToDouble(this.textBox_rx.Text) - Convert.ToDouble(this.textBox_ry.Text), Convert.ToDouble(this.textBox_ry.Text));
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+            
         }
 
 

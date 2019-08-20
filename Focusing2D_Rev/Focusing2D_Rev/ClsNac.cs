@@ -1,5 +1,6 @@
 ﻿
 
+#define kakuchou
 using System;
 using System.Text;
 using System.Threading.Tasks;
@@ -349,8 +350,8 @@ namespace ClsNac
                         m.y[i, j] = m.yc - MW / 2.0 + dy * i;
                         m.z[i, j] = -ell_b * Math.Sqrt(1 - (Math.Pow(m.x[i, j] / ell_a, 2.0) + Math.Pow(m.y[i, j] / ell_b, 2.0)));
                     }
-                    m.rx[j] = curv(m.x[0, j]);
-                    m.ry[j] = m.z[0, j];
+                    m.rx[j] = curv(m.x[divW / 2, j]);
+                    m.ry[j] = m.z[divW / 2, j];
                 }
                 );
                 #endregion

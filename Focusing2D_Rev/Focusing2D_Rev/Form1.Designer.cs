@@ -248,7 +248,7 @@ namespace Focusing2D_Rev
             this.textBox_DivMW.Name = "textBox_DivMW";
             this.textBox_DivMW.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivMW.TabIndex = 9;
-            this.textBox_DivMW.Text = "9000";
+            this.textBox_DivMW.Text = "181";
             this.textBox_DivMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_DivMW.Leave += new System.EventHandler(this.textBox_DivMW_Leave);
             // 
@@ -258,7 +258,7 @@ namespace Focusing2D_Rev
             this.textBox_DivML.Name = "textBox_DivML";
             this.textBox_DivML.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivML.TabIndex = 7;
-            this.textBox_DivML.Text = "3575";
+            this.textBox_DivML.Text = "2861";
             this.textBox_DivML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_DivML.Leave += new System.EventHandler(this.textBox_DivML_Leave);
             // 
@@ -990,7 +990,7 @@ namespace Focusing2D_Rev
             this.textBox_PitchML.Name = "textBox_PitchML";
             this.textBox_PitchML.Size = new System.Drawing.Size(60, 19);
             this.textBox_PitchML.TabIndex = 6;
-            this.textBox_PitchML.Text = "80e-6";
+            this.textBox_PitchML.Text = "0.1e-3";
             this.textBox_PitchML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_PitchML.Leave += new System.EventHandler(this.textBox_PitchML_Leave);
             // 
@@ -1000,7 +1000,7 @@ namespace Focusing2D_Rev
             this.textBox_PitchMW.Name = "textBox_PitchMW";
             this.textBox_PitchMW.Size = new System.Drawing.Size(60, 19);
             this.textBox_PitchMW.TabIndex = 8;
-            this.textBox_PitchMW.Text = "2e-6";
+            this.textBox_PitchMW.Text = "0.1e-3";
             this.textBox_PitchMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_PitchMW.Leave += new System.EventHandler(this.textBox_PitchMW_Leave);
             // 
