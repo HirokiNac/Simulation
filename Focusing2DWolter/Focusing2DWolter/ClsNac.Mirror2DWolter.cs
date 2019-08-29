@@ -151,10 +151,29 @@ namespace ClsNac
         {
             ellipse(_e_l, _e_nl, _e_w, _e_nw);
             hyperbola(_h_l, _h_nl, _h_w, _h_nw);
+            SetWolterPos();
         }
 
         public void SetWolterPos()
         {
+            x = new double[enw, enl + hnl];
+            y = new double[enw, enl + hnl];
+            z = new double[enw, enl + hnl];
+            for (int i = 0; i < enw; i++)
+            {
+                for (int j = 0; j < enl; j++)
+                {
+                    x[i, j] = ex[i, j];
+                    y[i, j] = ey[i, j];
+                    z[i, j] = ez[i, j];
+                }
+                for (int j = 0; j <hnl; j++)
+                {
+                    x[i, j + enl] = hx[i, j];
+                    y[i, j + enl] = hy[i, j];
+                    z[i, j + enl] = hz[i, j];
+                }
+            }
         }
 
         #region ellipse

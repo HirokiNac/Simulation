@@ -39,14 +39,21 @@ namespace Focusing2DWolter
 
             m2d.hyperbola(Convert.ToDouble(textBox_Fig_LengthMHL.Text), Convert.ToInt32(textBox_Fig_CountMHL.Text),
                 Convert.ToDouble(textBox_Fig_LengthMW.Text), Convert.ToInt32(textBox_Fig_CountMW.Text));
-
+            m2d.SetWolterPos();
             //表示
 
+
+
+            ClsNac.Graphic.Plot2dPlane p2p_e = new ClsNac.Graphic.Plot2dPlane(pictureBox_FigEllipse);
+            p2p_e.Draw(m2d.ez);
+            ClsNac.Graphic.Plot2dPlane p2p_h = new ClsNac.Graphic.Plot2dPlane(pictureBox_FigHyperbola);
+            p2p_h.Draw(m2d.hz);
         }
 
         private void Button_Fig_Output2D_Click(object sender, EventArgs e)
         {
-
+            if (fbd_FigOutput.ShowDialog() == DialogResult.OK)
+                ClsNac.FileIO.FileIO.writeFile(fbd_FigOutput.SelectedPath + "\\test.txt", m2d.z);
         }
 
         private CancellationTokenSource _cts = null;
@@ -126,9 +133,6 @@ namespace Focusing2DWolter
                     Convert.ToDouble(this.textBox_Fdy.Text), Convert.ToInt32(this.textBox_Fny.Text),
                     Convert.ToDouble(this.textBox_Fdz.Text), Convert.ToInt32(this.textBox_Fnz.Text),
                     Convert.ToDouble(textBox_Fbx.Text), Convert.ToDouble(textBox_Fby.Text), Convert.ToDouble(textBox_Fbz.Text));
-
-
-
                 }
                 
 
@@ -139,6 +143,23 @@ namespace Focusing2DWolter
                 }
                 #endregion
                 #endregion
+
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\sx.txt", sx);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\sy.txt", sy);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\sz.txt", sz);
+
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\ex.txt", m2d.ex);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\ey.txt", m2d.ey);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\ez.txt", m2d.ez);
+
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\hx.txt", m2d.hx);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\hy.txt", m2d.hy);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\hz.txt", m2d.hz);
+
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\fx.txt", fx[0]);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\fy.txt", fy[0]);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\fz.txt", fz[0]);
+
 
                 //全要素数計算
                 toolStripProgressBar.Value = 0;
@@ -170,6 +191,10 @@ namespace Focusing2DWolter
                 });
 
                 //表示
+                ClsNac.Graphic.Plot2dPlane p2p_e = new ClsNac.Graphic.Plot2dPlane(pictureBox_WoEllipse);
+                p2p_e.Draw(wME.Intensity);
+                ClsNac.Graphic.Plot2dPlane p2p_h = new ClsNac.Graphic.Plot2dPlane(pictureBox_WoHyperbola);
+                p2p_h.Draw(wMH.Intensity);
                 ClsNac.Graphic.Plot2dPlane myPlane = new ClsNac.Graphic.Plot2dPlane(this.pictureBox_Focus);
                 myPlane.Draw(wF[wF.Length / 2].Intensity);
                 //listbox追加

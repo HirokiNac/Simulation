@@ -145,12 +145,16 @@
             this.label38 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_MirrorFigure = new System.Windows.Forms.TabPage();
+            this.pictureBox_FigHyperbola = new System.Windows.Forms.PictureBox();
             this.pictureBox_FigEllipse = new System.Windows.Forms.PictureBox();
             this.tabPage_WaveOptical = new System.Windows.Forms.TabPage();
             this.pictureBox_Focus = new System.Windows.Forms.PictureBox();
-            this.pictureBox_FigHyperbola = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.fbd_FigOutput = new System.Windows.Forms.FolderBrowserDialog();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox_WoHyperbola = new System.Windows.Forms.PictureBox();
+            this.pictureBox_WoEllipse = new System.Windows.Forms.PictureBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -161,11 +165,14 @@
             this.groupBox_Err.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage_MirrorFigure.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigHyperbola)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigEllipse)).BeginInit();
             this.tabPage_WaveOptical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Focus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigHyperbola)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoHyperbola)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoEllipse)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -786,7 +793,7 @@
             this.textBox_Fdy.Name = "textBox_Fdy";
             this.textBox_Fdy.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fdy.TabIndex = 23;
-            this.textBox_Fdy.Text = "250e-6";
+            this.textBox_Fdy.Text = "100e-9";
             this.textBox_Fdy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label33
@@ -849,7 +856,7 @@
             this.textBox_Fbx.Name = "textBox_Fbx";
             this.textBox_Fbx.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fbx.TabIndex = 26;
-            this.textBox_Fbx.Text = "-950";
+            this.textBox_Fbx.Text = "0";
             this.textBox_Fbx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fby
@@ -903,7 +910,7 @@
             this.textBox_Fdz.Name = "textBox_Fdz";
             this.textBox_Fdz.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fdz.TabIndex = 25;
-            this.textBox_Fdz.Text = "250e-6";
+            this.textBox_Fdz.Text = "100e-9";
             this.textBox_Fdz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label63
@@ -1340,6 +1347,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage_MirrorFigure);
             this.tabControl1.Controls.Add(this.tabPage_WaveOptical);
+            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(604, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1357,6 +1365,14 @@
             this.tabPage_MirrorFigure.TabIndex = 0;
             this.tabPage_MirrorFigure.Text = "形状";
             this.tabPage_MirrorFigure.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox_FigHyperbola
+            // 
+            this.pictureBox_FigHyperbola.Location = new System.Drawing.Point(183, 0);
+            this.pictureBox_FigHyperbola.Name = "pictureBox_FigHyperbola";
+            this.pictureBox_FigHyperbola.Size = new System.Drawing.Size(177, 360);
+            this.pictureBox_FigHyperbola.TabIndex = 85;
+            this.pictureBox_FigHyperbola.TabStop = false;
             // 
             // pictureBox_FigEllipse
             // 
@@ -1385,14 +1401,6 @@
             this.pictureBox_Focus.TabIndex = 85;
             this.pictureBox_Focus.TabStop = false;
             // 
-            // pictureBox_FigHyperbola
-            // 
-            this.pictureBox_FigHyperbola.Location = new System.Drawing.Point(183, 0);
-            this.pictureBox_FigHyperbola.Name = "pictureBox_FigHyperbola";
-            this.pictureBox_FigHyperbola.Size = new System.Drawing.Size(177, 360);
-            this.pictureBox_FigHyperbola.TabIndex = 85;
-            this.pictureBox_FigHyperbola.TabStop = false;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1407,6 +1415,34 @@
             // 
             this.toolStripProgressBar.Name = "toolStripProgressBar";
             this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.pictureBox_WoHyperbola);
+            this.tabPage1.Controls.Add(this.pictureBox_WoEllipse);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(368, 360);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox_WoHyperbola
+            // 
+            this.pictureBox_WoHyperbola.Location = new System.Drawing.Point(183, 0);
+            this.pictureBox_WoHyperbola.Name = "pictureBox_WoHyperbola";
+            this.pictureBox_WoHyperbola.Size = new System.Drawing.Size(177, 360);
+            this.pictureBox_WoHyperbola.TabIndex = 86;
+            this.pictureBox_WoHyperbola.TabStop = false;
+            // 
+            // pictureBox_WoEllipse
+            // 
+            this.pictureBox_WoEllipse.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox_WoEllipse.Name = "pictureBox_WoEllipse";
+            this.pictureBox_WoEllipse.Size = new System.Drawing.Size(177, 360);
+            this.pictureBox_WoEllipse.TabIndex = 87;
+            this.pictureBox_WoEllipse.TabStop = false;
             // 
             // Form1
             // 
@@ -1437,12 +1473,15 @@
             this.groupBox_Err.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage_MirrorFigure.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigHyperbola)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigEllipse)).EndInit();
             this.tabPage_WaveOptical.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Focus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigHyperbola)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoHyperbola)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoEllipse)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1573,6 +1612,10 @@
         private System.Windows.Forms.PictureBox pictureBox_FigHyperbola;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
+        private System.Windows.Forms.FolderBrowserDialog fbd_FigOutput;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.PictureBox pictureBox_WoHyperbola;
+        private System.Windows.Forms.PictureBox pictureBox_WoEllipse;
     }
 }
 
