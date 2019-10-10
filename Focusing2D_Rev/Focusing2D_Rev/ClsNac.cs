@@ -3361,7 +3361,6 @@ namespace ClsNac
                 StreamReader sr = new StreamReader(filePath);
                 subStr = sr.ReadToEnd();
                 subStrArrColumn = subStr.Split(sepCol, StringSplitOptions.RemoveEmptyEntries);
-
                 readData = new double[subStrArrColumn[0].Split(sep, StringSplitOptions.RemoveEmptyEntries).Length, subStrArrColumn.Length];
 
                 //'08/11/11追記

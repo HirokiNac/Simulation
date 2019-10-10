@@ -258,7 +258,7 @@ namespace Focusing2D_Rev
             this.textBox_DivML.Name = "textBox_DivML";
             this.textBox_DivML.Size = new System.Drawing.Size(60, 19);
             this.textBox_DivML.TabIndex = 7;
-            this.textBox_DivML.Text = "3575";
+            this.textBox_DivML.Text = "4767";
             this.textBox_DivML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_DivML.Leave += new System.EventHandler(this.textBox_DivML_Leave);
             // 
@@ -427,7 +427,7 @@ namespace Focusing2D_Rev
             this.textBox_Dny.Name = "textBox_Dny";
             this.textBox_Dny.Size = new System.Drawing.Size(60, 19);
             this.textBox_Dny.TabIndex = 22;
-            this.textBox_Dny.Text = "101";
+            this.textBox_Dny.Text = "251";
             this.textBox_Dny.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label28
@@ -445,7 +445,7 @@ namespace Focusing2D_Rev
             this.textBox_Dnz.Name = "textBox_Dnz";
             this.textBox_Dnz.Size = new System.Drawing.Size(60, 19);
             this.textBox_Dnz.TabIndex = 24;
-            this.textBox_Dnz.Text = "101";
+            this.textBox_Dnz.Text = "251";
             this.textBox_Dnz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
@@ -519,7 +519,7 @@ namespace Focusing2D_Rev
             this.textBox_Ddy.Name = "textBox_Ddy";
             this.textBox_Ddy.Size = new System.Drawing.Size(60, 19);
             this.textBox_Ddy.TabIndex = 23;
-            this.textBox_Ddy.Text = "250e-6";
+            this.textBox_Ddy.Text = "100e-6";
             this.textBox_Ddy.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label33
@@ -636,7 +636,7 @@ namespace Focusing2D_Rev
             this.textBox_Ddz.Name = "textBox_Ddz";
             this.textBox_Ddz.Size = new System.Drawing.Size(60, 19);
             this.textBox_Ddz.TabIndex = 25;
-            this.textBox_Ddz.Text = "250e-6";
+            this.textBox_Ddz.Text = "100e-6";
             this.textBox_Ddz.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox2
@@ -990,7 +990,7 @@ namespace Focusing2D_Rev
             this.textBox_PitchML.Name = "textBox_PitchML";
             this.textBox_PitchML.Size = new System.Drawing.Size(60, 19);
             this.textBox_PitchML.TabIndex = 6;
-            this.textBox_PitchML.Text = "80e-6";
+            this.textBox_PitchML.Text = "60e-6";
             this.textBox_PitchML.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.textBox_PitchML.Leave += new System.EventHandler(this.textBox_PitchML_Leave);
             // 
