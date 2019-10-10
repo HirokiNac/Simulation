@@ -138,6 +138,7 @@ namespace ClsNac
             theta5 = Asin((l2 - l3) * Sin(theta3) / l4);
             h_a = (l2 - l3 - l4) / 2.0;
             h_b = Sqrt(Pow((l2 - l3) * Cos(theta3) - l4 * Cos(theta5), 2.0) / 4.0 - h_a * h_a);
+            h_f = Sqrt(h_a * h_a + h_b * h_b);
             //theta4 = 0.5 * Asin(2.0 * Sqrt(h_a * h_a + h_b * h_b) * Sin(theta3) / l4);
 
             h_xc = e_f - l4 * Cos(theta5) - 2.0 * Sqrt(h_a * h_a + h_b * h_b);
@@ -232,6 +233,7 @@ namespace ClsNac
 
             double dx = _l / (_nl - 1);
             double dy = _w / (_nw - 1);
+            if (_nw == 1) dy = 0;
 
             for (int iw = 0; iw < _nw; iw++)
             {
@@ -351,6 +353,7 @@ namespace ClsNac
 
             double dx = _l / (_nl - 1);
             double dy = _w / (_nw - 1);
+            if (_nw == 1) dy = 0;
 
             for (int iw = 0; iw < _nw; iw++)
             {
@@ -768,7 +771,7 @@ namespace ClsNac
 
                 #region 微小領域をかけた場合の計算
                 //伝播元の微小長さの計算
-                if (u_back.x.Length != 1)
+                if (u_back.x.Length > 1 && u_back.divW > 1)
                 {
                     for (int m = 1; m < u_back.divW; m++)
                     {
@@ -784,10 +787,17 @@ namespace ClsNac
                         ds[0 + n * u_back.divW] = ds[1 + n * u_back.divW];
                     }
                 }
-                else
+                else if (u_back.divL > 1 && u_back.divW == 1)
                 {
-                    ds[0] = 1;
+                    for (int n = 1; n < u_back.divL; n++)
+                    {
+                        ds[n] = Math.Sqrt(Pow(u_back.zv[n] - u_back.zv[n - 1], 2.0) + Pow(u_back.xv[n] - u_back.xv[n - 1], 2.0));
+                    }
+
+                    ds[0] = ds[1];
                 }
+                else
+                    ds[0] = 1.0;
 
                 #endregion
 

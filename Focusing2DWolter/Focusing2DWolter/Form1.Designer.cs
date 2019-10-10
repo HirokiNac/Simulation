@@ -149,12 +149,12 @@
             this.pictureBox_FigEllipse = new System.Windows.Forms.PictureBox();
             this.tabPage_WaveOptical = new System.Windows.Forms.TabPage();
             this.pictureBox_Focus = new System.Windows.Forms.PictureBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.fbd_FigOutput = new System.Windows.Forms.FolderBrowserDialog();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pictureBox_WoHyperbola = new System.Windows.Forms.PictureBox();
             this.pictureBox_WoEllipse = new System.Windows.Forms.PictureBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.fbd_FigOutput = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -169,10 +169,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigEllipse)).BeginInit();
             this.tabPage_WaveOptical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Focus)).BeginInit();
-            this.statusStrip1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoHyperbola)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoEllipse)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox3
@@ -1129,6 +1129,7 @@
             this.button_DetectorOutput.TabIndex = 86;
             this.button_DetectorOutput.Text = "結果出力";
             this.button_DetectorOutput.UseVisualStyleBackColor = true;
+            this.button_DetectorOutput.Click += new System.EventHandler(this.Button_DetectorOutput_Click);
             // 
             // groupBox_Err
             // 
@@ -1401,21 +1402,6 @@
             this.pictureBox_Focus.TabIndex = 85;
             this.pictureBox_Focus.TabStop = false;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripProgressBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 547);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(992, 22);
-            this.statusStrip1.TabIndex = 92;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripProgressBar
-            // 
-            this.toolStripProgressBar.Name = "toolStripProgressBar";
-            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.pictureBox_WoHyperbola);
@@ -1443,6 +1429,21 @@
             this.pictureBox_WoEllipse.Size = new System.Drawing.Size(177, 360);
             this.pictureBox_WoEllipse.TabIndex = 87;
             this.pictureBox_WoEllipse.TabStop = false;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 547);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(992, 22);
+            this.statusStrip1.TabIndex = 92;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // Form1
             // 
@@ -1477,11 +1478,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_FigEllipse)).EndInit();
             this.tabPage_WaveOptical.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Focus)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoHyperbola)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_WoEllipse)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

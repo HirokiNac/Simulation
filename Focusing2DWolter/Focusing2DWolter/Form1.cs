@@ -200,6 +200,10 @@ namespace Focusing2DWolter
                 //listbox追加
                 //listBox1.Items.Clear();
 
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\intensity_e.txt", wME.Intensity);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\intensity_h.txt", wMH.Intensity);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\intensity_f.txt", wF[wF.Length / 2].Intensity);
+
                 //
             }
             catch (Exception ex)
@@ -217,5 +221,9 @@ namespace Focusing2DWolter
 
         }
 
+        private void Button_DetectorOutput_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
