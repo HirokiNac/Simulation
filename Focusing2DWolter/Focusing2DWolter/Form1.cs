@@ -75,8 +75,6 @@ namespace Focusing2DWolter
             }
             #endregion
 
-
-
             try
             {
                 button_WaveOptCalc.Enabled = false;
@@ -174,18 +172,20 @@ namespace Focusing2DWolter
                 {
                     //伝播計算
 
-                    //BeginInvoke((Action)(() => { ProgressReport(0, "Source->Mirror"); }));
+                    BeginInvoke((Action)(() => { ProgressReport(0, "Source->Mirror"); }));
 
                     wME.ForwardPropagation2(wS);
+                    BeginInvoke((Action)(() => { ProgressReport(progress_sme, "Mirror->Focus0"); }));
+
                     wMH.ForwardPropagation2(wME);
 
-                    //BeginInvoke((Action)(() => { ProgressReport(progress_sm, "Mirror->Focus0"); }));
+                    BeginInvoke((Action)(() => { ProgressReport(progress_memh, "Mirror->Focus0"); }));
 
                     for (int i = 0; i < wF.Length; i++)
                     {
                         wF[i].ForwardPropagation2(wMH);
 
-                        //BeginInvoke((Action)(() => { ProgressReport(progress_mf, string.Format("Mirror->Focus{0}", i + 1)); }));
+                        BeginInvoke((Action)(() => { ProgressReport(progress_mhf, string.Format("Mirror->Focus{0}", i + 1)); }));
                     }
                     //
                 });
@@ -219,6 +219,13 @@ namespace Focusing2DWolter
                 button_WaveOptCalc.Enabled = true;
             }
 
+        }
+
+
+        private void ProgressReport(int _progressValue, string _message)
+        {
+            toolStripProgressBar.Value += _progressValue;
+            toolStripStatusLabel1.Text = _message;
         }
 
         private void Button_DetectorOutput_Click(object sender, EventArgs e)
