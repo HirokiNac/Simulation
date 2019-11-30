@@ -2,7 +2,7 @@
 //
 #define SIMD
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "WaveOpticsCpp.h"
 #include <math.h>
 
