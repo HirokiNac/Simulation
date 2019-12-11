@@ -483,6 +483,21 @@ namespace ClsNac
             return data;
         }
 
+        public static double[,] Multiply(double[,]_data1,double _data2)
+        {
+            int nx = _data1.GetLength(0);
+            int ny = _data1.GetLength(1);
+            double[,] outdata = new double[nx, ny];
+            for(int i=0;i<nx;i++)
+            {
+                for(int j=0;j<ny;j++)
+                {
+                    outdata[i, j] = _data1[i, j] * _data2;
+                }
+            }
+            return outdata;
+        }
+
         public static Complex[,] Multiply(Complex[,] _data1, Complex[,] _data2)
         {
             if (_data1.GetLength(1) != _data2.GetLength(0))

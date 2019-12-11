@@ -37,6 +37,7 @@
             this.textBox_ofd_fig = new System.Windows.Forms.TextBox();
             this.button_ofd_spot = new System.Windows.Forms.Button();
             this.textBox_ofd_spot = new System.Windows.Forms.TextBox();
+            this.textBox_damp = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +60,7 @@
             // 
             // button_Calc
             // 
-            this.button_Calc.Location = new System.Drawing.Point(192, 70);
+            this.button_Calc.Location = new System.Drawing.Point(192, 116);
             this.button_Calc.Name = "button_Calc";
             this.button_Calc.Size = new System.Drawing.Size(75, 23);
             this.button_Calc.TabIndex = 11;
@@ -121,11 +122,20 @@
             this.textBox_ofd_spot.Size = new System.Drawing.Size(150, 19);
             this.textBox_ofd_spot.TabIndex = 6;
             // 
+            // textBox_damp
+            // 
+            this.textBox_damp.Location = new System.Drawing.Point(167, 70);
+            this.textBox_damp.Name = "textBox_damp";
+            this.textBox_damp.Size = new System.Drawing.Size(100, 19);
+            this.textBox_damp.TabIndex = 12;
+            this.textBox_damp.Text = "5000";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox_damp);
             this.Controls.Add(this.button_Calc);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -155,6 +165,7 @@
         private System.Windows.Forms.TextBox textBox_ofd_fig;
         private System.Windows.Forms.Button button_ofd_spot;
         private System.Windows.Forms.TextBox textBox_ofd_spot;
+        private System.Windows.Forms.TextBox textBox_damp;
     }
 }
 
