@@ -250,6 +250,141 @@ namespace csNCCalc
 
         }
 
+        /// <summary>
+        /// 初期速度の決定
+        /// </summary>
+        /// <param name="_spot"></param>
+        /// <param name="_figure_pre"></param>
+        /// <param name="_vel"></param>
+        /// <param name="_saikou"></param>
+        void DeconvolutionVelocityPre(double[,] _spot, double[,] _figure_pre, out double[,] _vel, double _saikou)
+        {
+            int nx_Spot = _spot.GetLength(0);
+            int ny_Spot = _spot.GetLength(1);
+
+            int nx_Figure = _figure_pre.GetLength(0);
+            int ny_Figure = _figure_pre.GetLength(1);
+
+            //滞在時間幅はfigよりspot幅分だけ狭くなる
+            int nx_StayTime = nx_Figure - nx_Spot + 1;
+            int ny_StayTime = ny_Figure - ny_Spot + 1;
+
+            _vel = new double[nx_StayTime, ny_StayTime];
+
+            for (int ix_StayTime = 0; ix_StayTime < nx_StayTime; ix_StayTime++)
+            {
+                for (int iy_StayTime = 0; iy_StayTime < ny_StayTime; iy_StayTime++)
+                {
+                    _vel[ix_StayTime, iy_StayTime] = _saikou;
+                }
+            }
+        }
+
+
+        void DeconvolutionVelocity(double[,] _spot, double[,] _figure_pre, double _damp,
+            out double[,] _figure_aft, ref double[,] _vel, out double _RMS, out double _PV)
+        {
+            int nx_Spot = _spot.GetLength(0);
+            int ny_Spot = _spot.GetLength(1);
+
+            int nx_Figure = _figure_pre.GetLength(0);
+            int ny_Figure = _figure_pre.GetLength(1);
+
+            //滞在時間幅はfigよりspot幅分だけ狭くなる
+            int nx_StayTime = nx_Figure - nx_Spot + 1;
+            int ny_StayTime = ny_Figure - ny_Spot + 1;
+
+            _figure_aft = new double[nx_Figure, ny_Figure];
+            double[,] _velTmp = new double[nx_StayTime, ny_StayTime];
+
+            double spotvol = Math.Abs(ClsNac.ArrayManipulate.Sum(_spot));
+
+            double[,] figure_aft = new double[nx_Figure, ny_Figure];
+            Array.Copy(_figure_pre, figure_aft, _figure_pre.Length);
+            double[,] volTmp = new double[nx_Figure, ny_Figure];
+
+            int nx_Para = nx_StayTime / nx_Spot + 1;
+            int ny_Para = ny_StayTime / ny_Spot + 1;
+
+            //Volume
+            for (int ix_Move = 0; ix_Move < nx_Spot; ix_Move++)
+            {
+                for (int iy_Move = 0; iy_Move < ny_Spot; iy_Move++)
+                {
+#if PARALLEL
+                    //
+                    Parallel.For(0, nx_Para, ix_Para =>
+                    //ここで並列化
+#else
+                    for (int ix_Para = 0; ix_Para < nx_Para; ix_Para++)
+#endif
+                    {
+                        //範囲超える場合break
+                        int ix = ix_Move + ix_Para * nx_Spot;
+                        if (ix < nx_StayTime)
+                        {
+                            for (int iy_Para = 0; iy_Para < ny_Para; iy_Para++)
+                            {
+                                //範囲超える場合break
+                                int iy = iy_Move + iy_Para * ny_Spot;
+                                if (iy < ny_StayTime)
+                                {
+                                    //Spot Loop
+                                    for (int ix_Spot = 0; ix_Spot < nx_Spot; ix_Spot++)
+                                    {
+                                        for (int iy_Spot = 0; iy_Spot < ny_Spot; iy_Spot++)
+                                        {
+                                            //スポット/速度から加工量計算
+                                            volTmp[ix + ix_Spot, iy + iy_Spot] += _spot[ix_Spot, iy_Spot] / _velTmp[ix, iy];
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+#if PARALLEL
+                    );
+#endif
+                }
+            }
+
+            //Pre形状に足し算してAft形状だす
+            //PARALLELできる
+            for (int ix_Figure = 0; ix_Figure < nx_Figure; ix_Figure++)
+            {
+                for (int iy_Figure = 0; iy_Figure < ny_StayTime; iy_Figure++)
+                {
+                    figure_aft[ix_Figure, iy_Figure] += volTmp[ix_Figure, iy_Figure];
+                }
+            }
+
+
+
+
+            //for (int iy_StayTime = 0; iy_StayTime < ny_StayTime; iy_StayTime++)
+            //{
+            //    for (int ix_StayTime = 0; ix_StayTime < nx_StayTime; ix_StayTime++)
+            //    {
+            //        //決定した滞在時間分のスポット形状を引き算
+            //        for (int ix_Spot = 0; ix_Spot < nx_Spot; ix_Spot++)
+            //        {
+            //            for (int iy_Spot = 0; iy_Spot < ny_Spot; iy_Spot++)
+            //            {
+            //                figure_aft[ix_StayTime + ix_Spot, iy_StayTime + iy_Spot] = _figure_pre[ix_StayTime + ix_Spot, iy_StayTime + iy_Spot] + (_timeTmp[ix_StayTime, iy_StayTime] * _spot[ix_Spot, iy_Spot]);
+            //            }
+            //        }
+            //    }
+            //}
+            _vel = _velTmp;
+            _figure_aft = figure_aft;
+            //RMS,PV
+            (_RMS, _PV) = RMSPV(_figure_aft);
+
+        }
+
+
+
+
         double[,] PreFigure(double[,] _fig, int _windownx, int _windowny)
         {
             int fignx = _fig.GetLength(0);
@@ -381,17 +516,6 @@ namespace csNCCalc
         }
 
 
-        const double pitch = 0.05;
-
-
-        void DeconvolutionF()
-        {
-
-
-
-
-        }
-
         void daikakoukon(out double[,] _dai, int _ndaix, int _ndaiy, double[,] _zsp, int _nspx, int _nspy, double _eemdt, double _okudt, out double _daivol)
         {
             _dai = new double[_ndaix, _ndaiy];
@@ -410,32 +534,6 @@ namespace csNCCalc
                             _daivol += _zsp[k, m];
                         }
                     }
-                }
-            }
-        }
-
-        /// <summary>
-        /// velをsokuに補完してるだけ
-        /// </summary>
-        /// <param name="_vel"></param>
-        /// <param name="_soku"></param>
-        /// <param name="_nokux"></param>
-        /// <param name="_nokuy"></param>
-        /// <param name="_nsokux"></param>
-        /// <param name="_nsokuy"></param>
-        /// <param name="_okudt"></param>
-        /// <param name="_eemdt"></param>
-        void bunkatusokudo(double[,] _vel,double[,] _soku,int _nokux,int _nokuy,int _nsokux,int _nsokuy,double _okudt,double _eemdt)
-        {
-            
-            for(int i=0;i<_nsokux;i++)
-            {
-                for (int j = 0; j < _nsokuy; j++)
-                {
-                    double ax, ay, bx, by, cx, cy, dx, dy;
-                    double p = _eemdt * i / _okudt;
-                    double q = _eemdt * j / _okudt;
-
                 }
             }
         }

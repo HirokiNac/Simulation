@@ -6,10 +6,13 @@
 int main()
 {
     std::cout << "Hello World!\n";
-	return 2;
+	
 }
 
-
+void volume(double* _vel,double* _spot, double* _vol)
+{
+	
+}
 
 
 
