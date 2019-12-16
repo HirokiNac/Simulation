@@ -281,30 +281,52 @@ namespace csNCCalc
         }
 
 
-        void DeconvolutionVelocity(double[,] _spot, double[,] _figure_pre, double _damp,
-            out double[,] _figure_aft, ref double[,] _vel, out double _RMS, out double _PV)
+        void Deconvolution_Velocity2Figure(
+            double[,] _spot, double _damp,
+            double[,] _figure_pre, out double[,] _figure_sub, out double[,] _figure_aft, 
+            double[,] _vel_pre,out double[,] _vel_sub,out double[,] _vel_aft,
+            out double _RMS, out double _PV)
         {
+            //_vel_preから_spotをコンボリューションして_figure_subだす
+            //_figure_aft=_figure_pre+_figure_subしてデコンボリューション後形状だす
+            //_figure_aftに_spotデコンボリューション_dampかけて次の_vel_subだす
+            //_vel_subが規定超えてないか調べる
+            //_vel_aft=_vel_pre+_vel_subして新しい速度だす
+            
+
+
             int nx_Spot = _spot.GetLength(0);
             int ny_Spot = _spot.GetLength(1);
 
             int nx_Figure = _figure_pre.GetLength(0);
             int ny_Figure = _figure_pre.GetLength(1);
-
-            //滞在時間幅はfigよりspot幅分だけ狭くなる
-            int nx_StayTime = nx_Figure - nx_Spot + 1;
-            int ny_StayTime = ny_Figure - ny_Spot + 1;
-
             _figure_aft = new double[nx_Figure, ny_Figure];
-            double[,] _velTmp = new double[nx_StayTime, ny_StayTime];
+            
+
+            //速度データ数はfigよりspot幅分だけ狭くなる
+            int nx_Velocity = nx_Figure - nx_Spot + 1;
+            int ny_Velocity = ny_Figure - ny_Spot + 1;
+
 
             double spotvol = Math.Abs(ClsNac.ArrayManipulate.Sum(_spot));
 
             double[,] figure_aft = new double[nx_Figure, ny_Figure];
-            Array.Copy(_figure_pre, figure_aft, _figure_pre.Length);
-            double[,] volTmp = new double[nx_Figure, ny_Figure];
+            double[,] figure_sub = new double[nx_Figure, ny_Figure];
 
-            int nx_Para = nx_StayTime / nx_Spot + 1;
-            int ny_Para = ny_StayTime / ny_Spot + 1;
+            int nx_Para = nx_Velocity / nx_Spot + 1;
+            int ny_Para = ny_Velocity / ny_Spot + 1;
+
+            //いまのPreからVelocityだす
+            for (int ix_Velocity = 0; ix_Velocity < nx_Velocity; ix_Velocity++)
+            {
+                for (int iy_Velocity = 0; iy_Velocity < ny_Velocity; iy_Velocity++)
+                {
+
+
+                }
+
+            }
+
 
             //Volume
             for (int ix_Move = 0; ix_Move < nx_Spot; ix_Move++)
@@ -321,13 +343,13 @@ namespace csNCCalc
                     {
                         //範囲超える場合break
                         int ix = ix_Move + ix_Para * nx_Spot;
-                        if (ix < nx_StayTime)
+                        if (ix < nx_Velocity)
                         {
                             for (int iy_Para = 0; iy_Para < ny_Para; iy_Para++)
                             {
                                 //範囲超える場合break
                                 int iy = iy_Move + iy_Para * ny_Spot;
-                                if (iy < ny_StayTime)
+                                if (iy < ny_Velocity)
                                 {
                                     //Spot Loop
                                     for (int ix_Spot = 0; ix_Spot < nx_Spot; ix_Spot++)
@@ -335,7 +357,7 @@ namespace csNCCalc
                                         for (int iy_Spot = 0; iy_Spot < ny_Spot; iy_Spot++)
                                         {
                                             //スポット/速度から加工量計算
-                                            volTmp[ix + ix_Spot, iy + iy_Spot] += _spot[ix_Spot, iy_Spot] / _velTmp[ix, iy];
+                                            figure_sub[ix + ix_Spot, iy + iy_Spot] += _spot[ix_Spot, iy_Spot] / _vel_pre[ix, iy];
                                         }
                                     }
                                 }
@@ -348,40 +370,22 @@ namespace csNCCalc
                 }
             }
 
-            //Pre形状に足し算してAft形状だす
+            //Pre形状にSubを足し算してAft形状だす
             //PARALLELできる
             for (int ix_Figure = 0; ix_Figure < nx_Figure; ix_Figure++)
             {
-                for (int iy_Figure = 0; iy_Figure < ny_StayTime; iy_Figure++)
+                for (int iy_Figure = 0; iy_Figure < ny_Velocity; iy_Figure++)
                 {
-                    figure_aft[ix_Figure, iy_Figure] += volTmp[ix_Figure, iy_Figure];
+                    figure_aft[ix_Figure, iy_Figure] = _figure_pre[ix_Figure, iy_Figure] + figure_sub[ix_Figure, iy_Figure];
                 }
             }
 
-
-
-
-            //for (int iy_StayTime = 0; iy_StayTime < ny_StayTime; iy_StayTime++)
-            //{
-            //    for (int ix_StayTime = 0; ix_StayTime < nx_StayTime; ix_StayTime++)
-            //    {
-            //        //決定した滞在時間分のスポット形状を引き算
-            //        for (int ix_Spot = 0; ix_Spot < nx_Spot; ix_Spot++)
-            //        {
-            //            for (int iy_Spot = 0; iy_Spot < ny_Spot; iy_Spot++)
-            //            {
-            //                figure_aft[ix_StayTime + ix_Spot, iy_StayTime + iy_Spot] = _figure_pre[ix_StayTime + ix_Spot, iy_StayTime + iy_Spot] + (_timeTmp[ix_StayTime, iy_StayTime] * _spot[ix_Spot, iy_Spot]);
-            //            }
-            //        }
-            //    }
-            //}
-            _vel = _velTmp;
             _figure_aft = figure_aft;
+            _figure_sub = figure_sub;
             //RMS,PV
             (_RMS, _PV) = RMSPV(_figure_aft);
 
         }
-
 
 
 
