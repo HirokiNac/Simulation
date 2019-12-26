@@ -38,6 +38,7 @@
             this.button_ofd_spot = new System.Windows.Forms.Button();
             this.textBox_ofd_spot = new System.Windows.Forms.TextBox();
             this.textBox_damp = new System.Windows.Forms.TextBox();
+            this.button_Calc2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -130,12 +131,23 @@
             this.textBox_damp.TabIndex = 12;
             this.textBox_damp.Text = "5000";
             // 
+            // button_Calc2
+            // 
+            this.button_Calc2.Location = new System.Drawing.Point(192, 145);
+            this.button_Calc2.Name = "button_Calc2";
+            this.button_Calc2.Size = new System.Drawing.Size(75, 23);
+            this.button_Calc2.TabIndex = 11;
+            this.button_Calc2.Text = "計算開始";
+            this.button_Calc2.UseVisualStyleBackColor = true;
+            this.button_Calc2.Click += new System.EventHandler(this.button_Calc2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.textBox_damp);
+            this.Controls.Add(this.button_Calc2);
             this.Controls.Add(this.button_Calc);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -166,6 +178,7 @@
         private System.Windows.Forms.Button button_ofd_spot;
         private System.Windows.Forms.TextBox textBox_ofd_spot;
         private System.Windows.Forms.TextBox textBox_damp;
+        private System.Windows.Forms.Button button_Calc2;
     }
 }
 
