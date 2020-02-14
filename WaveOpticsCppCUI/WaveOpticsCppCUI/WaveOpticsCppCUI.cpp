@@ -1,5 +1,6 @@
 ﻿// WaveOpticsCppCUI.cpp : このファイルには 'main' 関数が含まれています。プログラム実行の開始と終了がそこで行われます。
 //
+#include<string>
 
 #include <iostream>
 #include <string>
@@ -7,6 +8,38 @@
 #include <sstream>
 #include <vector>
 #include "WaveOpticsCpp.h"
+#include "WaveOpticsCppCUI.h"
+
+using namespace std;
+
+vector<vector<double>>GetData(string _fileName)
+{
+	ifstream ifs;
+	ifs.open(_fileName, ios::in);
+
+	string str_buf;
+
+	double num;
+	char comma;
+
+	vector<vector<double>> data;
+
+	while (getline(ifs, str_buf))
+	{
+		if (str_buf.size() == 0)break;
+		vector<double>tmp;
+		istringstream iss(str_buf);
+
+		while (iss >> num)
+		{
+			tmp.push_back(num);
+			iss >> comma;
+		}
+		data.push_back(tmp);
+	}
+
+	return data;
+}
 
 int main()
 {
@@ -22,8 +55,19 @@ int main()
 	double* source_z = new double[SOURCE_N];
 	double* source_re = new double[SOURCE_N];
 	double* source_im = new double[SOURCE_N];
-	printf("source\r");
-	read("\sourcex.txt", SOURCE_N, source_x);
+	printf("source\r\n");
+	vector<vector<double>> data = GetData("D:\\Source\\Repos\\Simulation\\WaveOpticsCppCUI\\x64\\Debug\\source_x.txt");
+
+	for (size_t row = 0; row < data.size(); row++)
+	{
+		for (size_t col = 0; col < data[row].size(); col++)
+		{
+			cout << data[row][col] << " ";
+		}
+		
+	}
+	cout << endl;
+
 	//read("", SOURCE_N, source_y);
 	//read("", SOURCE_N, source_z);
 	//read("", SOURCE_N, source_re);
@@ -34,7 +78,7 @@ int main()
 	double* mirror_z = new double[MIRROR_N];
 	double* mirror_re = new double[MIRROR_N];
 	double* mirror_im = new double[MIRROR_N];
-	printf("mirror\r");
+	printf("mirror\r\n");
 	//read("", MIRROR_N, mirror_x);
 	//read("", MIRROR_N, mirror_y);
 	//read("", MIRROR_N, mirror_z);
@@ -54,19 +98,9 @@ int main()
 		100, mirror_x, mirror_y, mirror_z, mirror_re, mirror_im);
 }
 
-static void read(std::string _fileName,int _nData,double* _data)
-{
-	std::ifstream ifs(_fileName);
-	double a;
-	int i = 0;
-	while (ifs >> a)
-	{
-		_data[i] = a;
-		i++;
-	}
-	ifs.close();
 
-}
+
+
 
 // プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー
 // プログラムのデバッグ: F5 または [デバッグ] > [デバッグの開始] メニュー
