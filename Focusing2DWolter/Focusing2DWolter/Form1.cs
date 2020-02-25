@@ -200,6 +200,8 @@ namespace Focusing2DWolter
                 //listbox追加
                 //listBox1.Items.Clear();
 
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\re_e.txt", wME.Re);
+                ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\im_e.txt", wME.Im);
                 ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\intensity_e.txt", wME.Intensity);
                 ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\intensity_h.txt", wMH.Intensity);
                 ClsNac.FileIO.FileIO.writeFile(Application.StartupPath + "\\intensity_f.txt", wF[wF.Length / 2].Intensity);

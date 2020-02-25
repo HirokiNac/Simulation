@@ -18,5 +18,8 @@ extern "C" {
 		__declspec(dllexport) static void __cdecl Prop2D(const double _lambda, const int _dir,
 			const int _n1, const double* _x1, const double* _y1, const double* _z1, const double* _u1re, const double* _u1im, const double* _ds1,
 			const int _n2, const  double* _x2, const double* _y2, const double* _z2, double* _u2re, double* _u2im);
+
+		__declspec(dllexport) static void __cdecl CalcSpace(const int _nCol, const int _nRow,
+			const double* _x1, const double* _y1, const double* z1, double* _ds);
 	};
 }
