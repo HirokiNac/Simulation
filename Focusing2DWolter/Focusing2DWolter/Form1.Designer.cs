@@ -354,7 +354,7 @@
             this.textBox_Fig_CountMEL.Name = "textBox_Fig_CountMEL";
             this.textBox_Fig_CountMEL.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_CountMEL.TabIndex = 7;
-            this.textBox_Fig_CountMEL.Text = "2811";
+            this.textBox_Fig_CountMEL.Text = "2691";
             this.textBox_Fig_CountMEL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fig_PitchMEL
