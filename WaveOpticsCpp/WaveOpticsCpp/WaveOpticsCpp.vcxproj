@@ -136,19 +136,24 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;WAVEOPTICSCPP_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <OpenMPSupport>
       </OpenMPSupport>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <Parallelization>true</Parallelization>
-      <EnableEnhancedInstructionSet>NoExtensions</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <OpenMP>None</OpenMP>
       <UseProcessorExtensions>AVX2</UseProcessorExtensions>
-      <Optimization>MaxSpeedHighLevel</Optimization>
+      <Optimization>Full</Optimization>
+      <OptimizeForWindowsApplication>true</OptimizeForWindowsApplication>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <RecognizeRestrictKeyword>true</RecognizeRestrictKeyword>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
