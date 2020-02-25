@@ -1,5 +1,6 @@
 // WaveOpticsCpp.cpp : DLL アプリケーション用にエクスポートされる関数を定義します。
 //
+#define SIMD
 
 #include "stdafx.h"
 #include "WaveOpticsCpp.h"
