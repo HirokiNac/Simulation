@@ -154,8 +154,8 @@
             this.pictureBox_WoEllipse = new System.Windows.Forms.PictureBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.fbd_FigOutput = new System.Windows.Forms.FolderBrowserDialog();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.fbd_FigOutput = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -235,7 +235,7 @@
             this.textBox_Fig_LengthMHL.Name = "textBox_Fig_LengthMHL";
             this.textBox_Fig_LengthMHL.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_LengthMHL.TabIndex = 3;
-            this.textBox_Fig_LengthMHL.Text = "100e-3";
+            this.textBox_Fig_LengthMHL.Text = "281e-3";
             this.textBox_Fig_LengthMHL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fig_CountMHL
@@ -244,7 +244,7 @@
             this.textBox_Fig_CountMHL.Name = "textBox_Fig_CountMHL";
             this.textBox_Fig_CountMHL.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_CountMHL.TabIndex = 7;
-            this.textBox_Fig_CountMHL.Text = "1001";
+            this.textBox_Fig_CountMHL.Text = "2811";
             this.textBox_Fig_CountMHL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fig_PitchMHL
@@ -298,7 +298,7 @@
             this.textBox_theta_Hyp.Name = "textBox_theta_Hyp";
             this.textBox_theta_Hyp.Size = new System.Drawing.Size(60, 19);
             this.textBox_theta_Hyp.TabIndex = 5;
-            this.textBox_theta_Hyp.Text = "20.94e-3";
+            this.textBox_theta_Hyp.Text = "4.5e-3";
             this.textBox_theta_Hyp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label10
@@ -344,7 +344,7 @@
             this.textBox_Fig_LengthMEL.Name = "textBox_Fig_LengthMEL";
             this.textBox_Fig_LengthMEL.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_LengthMEL.TabIndex = 3;
-            this.textBox_Fig_LengthMEL.Text = "100e-3";
+            this.textBox_Fig_LengthMEL.Text = "319e-3";
             this.textBox_Fig_LengthMEL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fig_CountMEL
@@ -353,7 +353,7 @@
             this.textBox_Fig_CountMEL.Name = "textBox_Fig_CountMEL";
             this.textBox_Fig_CountMEL.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_CountMEL.TabIndex = 7;
-            this.textBox_Fig_CountMEL.Text = "1001";
+            this.textBox_Fig_CountMEL.Text = "3191";
             this.textBox_Fig_CountMEL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fig_PitchMEL
@@ -407,7 +407,7 @@
             this.textBox_theta_Ell.Name = "textBox_theta_Ell";
             this.textBox_theta_Ell.Size = new System.Drawing.Size(60, 19);
             this.textBox_theta_Ell.TabIndex = 5;
-            this.textBox_theta_Ell.Text = "20.94e-3";
+            this.textBox_theta_Ell.Text = "4.5e-3";
             this.textBox_theta_Ell.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label122
@@ -434,7 +434,7 @@
             this.textBox_L1.Name = "textBox_L1";
             this.textBox_L1.Size = new System.Drawing.Size(60, 19);
             this.textBox_L1.TabIndex = 1;
-            this.textBox_L1.Text = "13.4";
+            this.textBox_L1.Text = "65.8";
             this.textBox_L1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
@@ -480,7 +480,7 @@
             this.textBox_L4.Name = "textBox_L4";
             this.textBox_L4.Size = new System.Drawing.Size(60, 19);
             this.textBox_L4.TabIndex = 2;
-            this.textBox_L4.Text = "0.3";
+            this.textBox_L4.Text = "1";
             this.textBox_L4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_L3
@@ -489,7 +489,7 @@
             this.textBox_L3.Name = "textBox_L3";
             this.textBox_L3.Size = new System.Drawing.Size(60, 19);
             this.textBox_L3.TabIndex = 2;
-            this.textBox_L3.Text = "100e-3";
+            this.textBox_L3.Text = "319e-3";
             this.textBox_L3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button_Fig_Output2D
@@ -554,7 +554,7 @@
             this.textBox_Fig_LengthMW.Name = "textBox_Fig_LengthMW";
             this.textBox_Fig_LengthMW.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_LengthMW.TabIndex = 4;
-            this.textBox_Fig_LengthMW.Text = "10e-3";
+            this.textBox_Fig_LengthMW.Text = "3e-3";
             this.textBox_Fig_LengthMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label120
@@ -635,7 +635,7 @@
             this.textBox_Fig_CountMW.Name = "textBox_Fig_CountMW";
             this.textBox_Fig_CountMW.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_CountMW.TabIndex = 9;
-            this.textBox_Fig_CountMW.Text = "101";
+            this.textBox_Fig_CountMW.Text = "31";
             this.textBox_Fig_CountMW.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox_F1

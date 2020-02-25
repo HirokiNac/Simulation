@@ -172,20 +172,20 @@ namespace Focusing2DWolter
                 {
                     //伝播計算
 
-                    BeginInvoke((Action)(() => { ProgressReport(0, "Source->Mirror"); }));
+                    //BeginInvoke((Action)(() => { ProgressReport(0, "Source->Mirror"); }));
 
                     wME.ForwardPropagation2(wS);
-                    BeginInvoke((Action)(() => { ProgressReport(progress_sme, "Mirror->Focus0"); }));
+                    //BeginInvoke((Action)(() => { ProgressReport(progress_sme, "Mirror->Focus0"); }));
 
                     wMH.ForwardPropagation2(wME);
 
-                    BeginInvoke((Action)(() => { ProgressReport(progress_memh, "Mirror->Focus0"); }));
+                    //BeginInvoke((Action)(() => { ProgressReport(progress_memh, "Mirror->Focus0"); }));
 
                     for (int i = 0; i < wF.Length; i++)
                     {
                         wF[i].ForwardPropagation2(wMH);
 
-                        BeginInvoke((Action)(() => { ProgressReport(progress_mhf, string.Format("Mirror->Focus{0}", i + 1)); }));
+                        //BeginInvoke((Action)(() => { ProgressReport(progress_mhf, string.Format("Mirror->Focus{0}", i + 1)); }));
                     }
                     //
                 });
@@ -214,7 +214,7 @@ namespace Focusing2DWolter
             {
                 sw.Stop();
                 //progressBar.Value = 100;
-                //label_Progress.Text = "Finish  " + sw.Elapsed.ToString(@"hh\:mm\:ss");
+                toolStripStatusLabel1.Text = "Finish  " + sw.Elapsed.ToString(@"hh\:mm\:ss\.fff");
                 this._cts = null;
                 button_WaveOptCalc.Enabled = true;
             }

@@ -1,5 +1,6 @@
 // WaveOpticsCpp.cpp : DLL アプリケーション用にエクスポートされる関数を定義します。
 //
+#define SIMD
 
 #include "stdafx.h"
 #include "WaveOpticsCpp.h"
@@ -15,8 +16,11 @@ void WaveOpticsCpp::Prop1D(const double _lambda, const int _dir,
 	double tr, ti;
 	double tur, tui;
 	double ur = 0.0, ui = 0.0;
-
-#pragma omp parallel for schedule(static)// num_threads(N)
+#ifdef SIMD
+#pragma omp parallel for simd //schedule(static)// num_threads(N)
+#else
+#pragma omp parallel for schedule(static)
+#endif
 	for (int i = 0; i < _n2; i++)
 	{
 		for (int j = 0; j < _n1; j++)
@@ -47,7 +51,11 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 	double k = 2.0*PI / _lambda;
 
 
-#pragma omp parallel for schedule(static) // num_threads(N)
+#ifdef SIMD
+#pragma omp parallel for simd //schedule(static)// num_threads(N)
+#else
+#pragma omp parallel for schedule(static)
+#endif
 	for (int i = 0; i < _n2; i++)
 	{
 
@@ -87,7 +95,11 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 	double k = 2.0*PI / _lambda;
 
 
-#pragma omp parallel for schedule(static)// num_threads(N)
+#ifdef SIMD
+#pragma omp parallel for simd //schedule(static)// num_threads(N)
+#else
+#pragma omp parallel for schedule(static)
+#endif
 	for (int i = 0; i < _n2; i++)
 	{
 
