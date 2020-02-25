@@ -216,3 +216,8 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+*.dflgadvixe
+*.infoadvixe
+/WaveOpticsCppCUI/WaveOpticsCppCUI/VTune Profiler Results/WaveOpticsCppCUI
+/WaveOpticsCppCUI/WaveOpticsCppCUI/My Inspector Results - WaveOpticsCppCUI
+/WaveOpticsCppCUI/WaveOpticsCppCUI/My Advisor Results - WaveOpticsCppCUI

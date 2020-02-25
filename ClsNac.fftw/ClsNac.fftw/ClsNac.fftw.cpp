@@ -123,58 +123,89 @@ void ClsNac::fftw::Execute2D(array<Complex, 2>^ _in, array<Complex, 2>^ _out, in
 	fftw_plan p = fftw_plan_dft_2d(len1, len2, in_fftw, out_fftw, _dir, FFTW_ESTIMATE);
 	fftw_execute(p);
 
+	double len_2 = 1.0 / (len1 * len2);
 
-	if (_dir == FFTW_BACKWARD)
+	if (_shift)
 	{
-		//BACKWARD
-		double len_2 = 1.0 / Math::Sqrt(len1*len2);
-
-		for (int i = 0; i < len1 / 2; i++)
-			for (int j = 0; j < len2 / 2; j++)
+		for (int i = 0; i < len1; i++)
+		{
+			for (int j = 0; j < len2; j++)
 			{
-				if (_shift)
-				{
-					//shift‚ ‚è
-					_out[i, j] = Complex(out_fftw[i + len1 / 2, j + len2 / 2][0] * len_2, out_fftw[i + len1 / 2, j + len2 / 2][1]);
-					_out[i + len1 / 2, j] = Complex(out_fftw[i, j + len2 / 2][0] * len_2, out_fftw[i, j + len2 / 2][1]);
-					_out[i, j + len2 / 2] = Complex(out_fftw[i + len1 / 2, j][0] * len_2, out_fftw[i + len1 / 2, j][1] );
-					_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[i, j][0] * len_2, out_fftw[i, j][1] );
-				}
+				if (i < len1 / 2 && j < len2 / 2)
+					_out[i, j] = Complex(out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][1] * len_2);
+				else if (i < len1 / 2 && j >= len2 / 2)
+					_out[i, j] = Complex(out_fftw[(i + len1 / 2) * len2 + j - len2 / 2][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j - len2 / 2][1] * len_2);
+				else if (i >= len1 / 2 && j < len2 / 2)
+					_out[i, j] = Complex(out_fftw[(i - len1 / 2) * len2 + j + len2 / 2][0] * len_2, out_fftw[(i - len1 / 2) * len2 + j + len2 / 2][1] * len_2);
 				else
-				{
-					//shift‚È‚µ
-					_out[i, j] = Complex(out_fftw[i*len2 + j][0] * len_2, out_fftw[i*len2 + j][1]);
-					_out[i + len1 / 2, j] = Complex(out_fftw[(i + len1 / 2)*len2 + j][0] * len_2, out_fftw[(i + len1 / 2)*len2 + j][1]);
-					_out[i, j + len2 / 2] = Complex(out_fftw[i*len2 + j + len2 / 2][0] * len_2, out_fftw[i*len2 + j + len2 / 2][1]);
-					_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[(i + len1 / 2)*len2 + j + len2 / 2][0] * len_2, out_fftw[(i + len1 / 2)*len2 + j + len2 / 2][1]);
-				}
+					_out[i, j] = Complex(out_fftw[(i - len1 / 2) * len2 + j - len2 / 2][0] * len_2, out_fftw[(i - len1 / 2) * len2 + j - len2 / 2][1] * len_2);
 			}
+
+		}
 	}
 	else
 	{
-		//FORWARD
-		for (int i = 0; i < len1 / 2; i++)
-			for (int j = 0; j < len2 / 2; j++)
+		for (int i = 0; i < len1; i++)
+		{
+			for (int j = 0; j < len2; j++)
 			{
-				if (_shift)
-				{
-					//shift‚ ‚è
-					_out[i, j] = Complex(out_fftw[i + len1 / 2, j + len2 / 2][0], out_fftw[i + len1 / 2, j + len2 / 2][1]);
-					_out[i + len1 / 2, j] = Complex(out_fftw[i, j + len2 / 2][0], out_fftw[i, j + len2 / 2][1]);
-					_out[i, j + len2 / 2] = Complex(out_fftw[i + len1 / 2, j][0], out_fftw[i + len1 / 2, j][1]);
-					_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[i, j][0], out_fftw[i, j][1]);
-				}
-				else
-				{
-					//shift‚È‚µ
-					_out[i, j] = Complex(out_fftw[i*len2 + j][0], out_fftw[i*len2 + j][1]);
-					_out[i + len1 / 2, j] = Complex(out_fftw[(i + len1 / 2)*len2 + j][0], out_fftw[(i + len1 / 2)*len2 + j][1]);
-					_out[i, j + len2 / 2] = Complex(out_fftw[i*len2 + j + len2 / 2][0], out_fftw[i*len2 + j + len2 / 2][1]);
-					_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[(i + len1 / 2)*len2 + j + len2 / 2][0], out_fftw[(i + len1 / 2)*len2 + j + len2 / 2][1]);
-				}
+				_out[i, j] = Complex(out_fftw[i * len2 + j][0] * len_2, out_fftw[i * len2 + j][1] * len_2);
 			}
+		}
 	}
 
+	//if (_dir == FFTW_BACKWARD)
+	//{
+	//	//BACKWARD
+	//	for (int i = 0; i < len1 / 2; i++)
+	//	{
+	//		for (int j = 0; j < len2 / 2; j++)
+	//		{
+	//			if (_shift)
+	//			{
+	//				//shift‚ ‚è
+	//				_out[i, j] = Complex(out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][1] * len_2);
+	//				_out[i + len1 / 2, j] = Complex(out_fftw[i * len2 + j + len2 / 2][0] * len_2, out_fftw[i * len2 + j + len2 / 2][1] * len_2);
+	//				_out[i, j + len2 / 2] = Complex(out_fftw[(i + len1 / 2) * len2 + j][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j][1] * len_2);
+	//				_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[i * len2 + j][0] * len_2, out_fftw[i * len2 + j][1] * len_2);
+	//			}
+	//			else
+	//			{
+	//				//shift‚È‚µ
+	//				_out[i, j] = Complex(out_fftw[i * len2 + j][0] * len_2, out_fftw[i * len2 + j][1] * len_2);
+	//				_out[i + len1 / 2, j] = Complex(out_fftw[(i + len1 / 2) * len2 + j][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j][1] * len_2);
+	//				_out[i, j + len2 / 2] = Complex(out_fftw[i * len2 + j + len2 / 2][0] * len_2, out_fftw[i * len2 + j + len2 / 2][1] * len_2);
+	//				_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][1] * len_2);
+	//			}
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	//	//FORWARD
+	//	for (int i = 0; i < len1 / 2; i++)
+	//	{
+	//		for (int j = 0; j < len2 / 2; j++)
+	//		{
+	//			if (_shift)
+	//			{
+	//				//shift‚ ‚è
+	//				_out[i, j] = Complex(out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][1] * len_2);
+	//				_out[i + len1 / 2, j] = Complex(out_fftw[i * len2 + j + len2 / 2][0] * len_2, out_fftw[i * len2 + j + len2 / 2][1] * len_2);
+	//				_out[i, j + len2 / 2] = Complex(out_fftw[(i + len1 / 2) * len2 + j][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j][1] * len_2);
+	//				_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[i * len2 + j][0] * len_2, out_fftw[i * len2 + j][1] * len_2);
+	//			}
+	//			else
+	//			{
+	//				//shift‚È‚µ
+	//				_out[i, j] = Complex(out_fftw[i * len2 + j][0] * len_2, out_fftw[i * len2 + j][1] * len_2);
+	//				_out[i + len1 / 2, j] = Complex(out_fftw[(i + len1 / 2) * len2 + j][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j][1] * len_2);
+	//				_out[i, j + len2 / 2] = Complex(out_fftw[i * len2 + j + len2 / 2][0] * len_2, out_fftw[i * len2 + j + len2 / 2][1] * len_2);
+	//				_out[i + len1 / 2, j + len2 / 2] = Complex(out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][0] * len_2, out_fftw[(i + len1 / 2) * len2 + j + len2 / 2][1] * len_2);
+	//			}
+	//		}
+	//	}
+	//}
 }
 
 

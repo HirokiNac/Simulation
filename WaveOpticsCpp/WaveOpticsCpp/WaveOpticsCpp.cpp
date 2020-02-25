@@ -16,11 +16,7 @@ void WaveOpticsCpp::Prop1D(const double _lambda, const int _dir,
 	double tr, ti;
 	double tur, tui;
 	double ur = 0.0, ui = 0.0;
-#ifdef SIMD
-#pragma omp parallel for simd //schedule(static)// num_threads(N)
-#else
-#pragma omp parallel for schedule(static)
-#endif
+
 	for (int i = 0; i < _n2; i++)
 	{
 		for (int j = 0; j < _n1; j++)
@@ -42,6 +38,7 @@ void WaveOpticsCpp::Prop1D(const double _lambda, const int _dir,
 		_u2re[i] = ur;
 		_u2im[i] = ui;
 	}
+
 }
 
 void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
@@ -51,11 +48,7 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 	double k = 2.0*PI / _lambda;
 
 
-#ifdef SIMD
-#pragma omp parallel for simd //schedule(static)// num_threads(N)
-#else
-#pragma omp parallel for schedule(static)
-#endif
+#pragma ivdep loop count min(1024)
 	for (int i = 0; i < _n2; i++)
 	{
 
@@ -85,21 +78,16 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 		_u2im[i] = ui;
 	}
 
-
 }
 
 void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir, 
 	const int _n1, const double * _x1, const double * _y1, const double * _z1, const double * _u1re, const double * _u1im,const double * _ds1, 
 	const int _n2, const double * _x2, const double * _y2, const double * _z2, double * _u2re, double * _u2im)
 {
-	double k = 2.0*PI / _lambda;
+	double k = 2.0 * PI / _lambda;
 
 
-#ifdef SIMD
-#pragma omp parallel for simd //schedule(static)// num_threads(N)
-#else
-#pragma omp parallel for schedule(static)
-#endif
+
 	for (int i = 0; i < _n2; i++)
 	{
 
@@ -129,7 +117,25 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 		_u2im[i] = ui;
 	}
 
+
 }
 
+void WaveOpticsCpp::CalcSpace(const int _nCol, const int _nRow,
+	const double* _x1, const double* _y1, const double* _z1, double* _ds)
+{
+	for (int i = 1; i < _nCol-1; i++)
+	{
+		for (int j = 1; j < _nRow - 1; j++)
+		{
+			double dx = _x1[i * _nRow + j + 1] - _x1[i * _nRow + j - 1];
+			double dzx = _z1[i * _nRow + j + 1] - _z1[i * _nRow + j - 1];
 
+			double dy = _y1[(i + 1) * _nRow + j] - _y1[(i - 1) * _nRow + j];
+			double dzy = _z1[(i + 1) * _nRow + j] - _z1[(i - 1) * _nRow + j];
+
+			_ds[i] = sqrt(pow(dx, 2.0) + pow(dzx, 2.0)) * sqrt(pow(dy, 2.0) + pow(dzy, 2.0));
+		}
+	}
+
+}
 

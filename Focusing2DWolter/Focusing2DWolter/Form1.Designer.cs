@@ -75,6 +75,7 @@
             this.textBox_Fig_PitchMW = new System.Windows.Forms.TextBox();
             this.textBox_Fig_CountMW = new System.Windows.Forms.TextBox();
             this.groupBox_F1 = new System.Windows.Forms.GroupBox();
+            this.label_Progress = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.textBox_Fnx = new System.Windows.Forms.TextBox();
             this.textBox_Fny = new System.Windows.Forms.TextBox();
@@ -344,7 +345,7 @@
             this.textBox_Fig_LengthMEL.Name = "textBox_Fig_LengthMEL";
             this.textBox_Fig_LengthMEL.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_LengthMEL.TabIndex = 3;
-            this.textBox_Fig_LengthMEL.Text = "319e-3";
+            this.textBox_Fig_LengthMEL.Text = "281e-3";
             this.textBox_Fig_LengthMEL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fig_CountMEL
@@ -353,7 +354,7 @@
             this.textBox_Fig_CountMEL.Name = "textBox_Fig_CountMEL";
             this.textBox_Fig_CountMEL.Size = new System.Drawing.Size(60, 19);
             this.textBox_Fig_CountMEL.TabIndex = 7;
-            this.textBox_Fig_CountMEL.Text = "3191";
+            this.textBox_Fig_CountMEL.Text = "2811";
             this.textBox_Fig_CountMEL.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // textBox_Fig_PitchMEL
@@ -640,6 +641,7 @@
             // 
             // groupBox_F1
             // 
+            this.groupBox_F1.Controls.Add(this.label_Progress);
             this.groupBox_F1.Controls.Add(this.groupBox4);
             this.groupBox_F1.Controls.Add(this.label63);
             this.groupBox_F1.Controls.Add(this.groupBox5);
@@ -652,6 +654,15 @@
             this.groupBox_F1.TabIndex = 89;
             this.groupBox_F1.TabStop = false;
             this.groupBox_F1.Text = "波動光学計算";
+            // 
+            // label_Progress
+            // 
+            this.label_Progress.AutoSize = true;
+            this.label_Progress.Location = new System.Drawing.Point(6, 503);
+            this.label_Progress.Name = "label_Progress";
+            this.label_Progress.Size = new System.Drawing.Size(41, 12);
+            this.label_Progress.TabIndex = 89;
+            this.label_Progress.Text = "label24";
             // 
             // groupBox4
             // 
@@ -1626,6 +1637,7 @@
         private System.Windows.Forms.PictureBox pictureBox_WoHyperbola;
         private System.Windows.Forms.PictureBox pictureBox_WoEllipse;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Label label_Progress;
     }
 }
 

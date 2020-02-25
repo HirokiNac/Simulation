@@ -257,7 +257,7 @@ namespace ClsNac.FileIO
             for (int j = 0; j < writeData.GetLength(1); j++)
             {
                 for (int i = 0; i < writeData.GetLength(0) - 1; i++)
-                    sbData.Append(Convert.ToString(writeData[i, j])).Append(" ");
+                    sbData.Append(Convert.ToString(writeData[i, j])).Append(",");
                 sbData.AppendLine(Convert.ToString(writeData[writeData.GetLength(0) - 1, j]));
             }
 

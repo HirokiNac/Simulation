@@ -24,8 +24,8 @@ namespace ClsNac
         {
             int div { get; set; }
 
-            public double[] x { get; set; }
-            public double[] y { get; set; }
+            public double[] x;// { get; set; }
+            public double[] y;// { get; set; }
 
             public double xc { get { return x[div / 2]; } }
             public double yc { get { return y[div / 2]; } }
@@ -67,10 +67,10 @@ namespace ClsNac
 
 
             public Complex[] u { get; set; }
-            public double[] real
-            { get; set; }
-            public double[] imag
-            { get; set; }
+            public double[] real;
+            //{ get; set; }
+            public double[] imag;
+            //{ get; set; }
 
             public double[] Intensity;
             public double[] Phase;
@@ -731,14 +731,15 @@ namespace ClsNac
 #if CLI
                 double[] _ur = new double[Opt2.u.Length];
                 double[] _ui = new double[Opt2.u.Length];
-                ClsNac.cliWaveOptics wo = new cliWaveOptics(lambda);
-                wo.Propagate1D(-1, Opt1.x, Opt1.y, Opt1.real, Opt1.imag, Opt2.x, Opt2.y, ref _ur, ref _ui);
+                //ClsNac.cliWaveOptics wo = new cliWaveOptics(lambda);
+                //wo.Propagate1D(-1, Opt1.x, Opt1.y, Opt1.real, Opt1.imag, Opt2.x, Opt2.y, ref _ur, ref _ui);
+                ClsNac.WaveOpticsCpp_Wrapper.Prop1D(lambda, -1, Opt1.x.Length, Opt1.x, Opt1.y, Opt1.real, Opt1.imag, Opt2.x.Length, Opt2.x, Opt2.y, _ur, _ui);
                 Opt2.real = _ur;
                 Opt2.imag = _ui;
                 InP(_ur, _ui, out Opt2.Intensity, out Opt2.Phase);
                 _ur = null;
                 _ui = null;
-                wo.Dispose();
+                //wo.Dispose();
 #else
                 Complex[] _u = new Complex[Opt2.x.Length];
                 //ForwardPropagation(Opt1.x, Opt1.y, Opt1.u, Opt2.x, Opt2.y, out _u);
