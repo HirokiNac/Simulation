@@ -47,7 +47,6 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 {
 	double k = 2.0*PI / _lambda;
 
-
 #pragma ivdep loop count min(1024)
 	for (int i = 0; i < _n2; i++)
 	{
@@ -88,6 +87,7 @@ void WaveOpticsCpp::Prop2D(const double _lambda, const int _dir,
 
 
 
+#pragma ivdep loop count min(1024)
 	for (int i = 0; i < _n2; i++)
 	{
 
