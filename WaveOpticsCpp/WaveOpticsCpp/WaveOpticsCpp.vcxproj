@@ -147,13 +147,14 @@
       </OpenMPSupport>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <Parallelization>true</Parallelization>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <OpenMP>None</OpenMP>
       <UseProcessorExtensions>AVX2</UseProcessorExtensions>
-      <Optimization>Full</Optimization>
+      <Optimization>MaxSpeedHighLevel</Optimization>
       <OptimizeForWindowsApplication>true</OptimizeForWindowsApplication>
-      <FloatingPointModel>Fast</FloatingPointModel>
+      <FloatingPointModel>Fast2</FloatingPointModel>
       <RecognizeRestrictKeyword>true</RecognizeRestrictKeyword>
+      <GenerateAlternateCodePaths>AVX2</GenerateAlternateCodePaths>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
